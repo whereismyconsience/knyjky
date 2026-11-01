@@ -204,13 +204,13 @@
     state.formCover=b.cover||'';
     return dialogWrap(dialogHeading(edit?'Edit book':'Add a new book',edit?'Update the details of your collection':'Fill the basics now; you can edit everything later.'),
       `<form id="book-form">
-        <div class="form-block"><h3>Quick add with ISBN</h3><div class="isbn-quick"><div class="field"><label for="form-isbn">ISBN-10 / ISBN-13</label><input id="form-isbn" name="isbn" inputmode="numeric" placeholder="e.g. 9780735211292" value="${val('isbn',prefill)}"></div><button class="btn btn-secondary" type="button" data-action="isbn-lookup">${icon('search')} Look up</button><button class="btn btn-secondary" type="button" data-action="open-scan">${icon('camera')} Scan</button></div><p class="form-hint" id="lookup-status">Optional — lookup uses Open Library and requires internet.</p></div>
+        <div class="form-block"><h3>Quick add with ISBN</h3><div class="isbn-quick"><div class="field"><label for="form-isbn">ISBN-10 / ISBN-13</label><input id="form-isbn" name="isbn" inputmode="numeric" placeholder="e.g. 9780735211292" value="${val('isbn',prefill)}"></div><button class="btn btn-secondary" type="button" data-action="isbn-lookup">${icon('search')} Look up</button><button class="btn btn-secondary" type="button" data-action="open-scan">${icon('camera')} Scan</button></div><p class="form-hint" id="lookup-status">Optional — searches multiple public catalogues and needs internet.</p><div id="lookup-external-links" class="form-hint" hidden></div></div>
         <div class="form-block"><h3>Book details</h3><div class="form-grid">
          <div class="field full"><label for="form-title">Title <span aria-label="required">*</span></label><input id="form-title" name="title" required maxlength="200" placeholder="Book title" value="${val('title')}"></div>
          <div class="field full"><label for="form-subtitle">Subtitle</label><input id="form-subtitle" name="subtitle" maxlength="240" placeholder="Optional subtitle" value="${val('subtitle')}"></div>
          <div class="field full"><label for="form-author">Author</label><input id="form-author" name="author" maxlength="200" placeholder="Author name" value="${val('author')}"></div>
          <div class="field mobile-full"><label for="form-publisher">Publisher</label><input id="form-publisher" name="publisher" maxlength="160" placeholder="Publisher" value="${val('publisher')}"></div>
-         <div class="field mobile-full"><label for="form-language">Language</label><input id="form-language" name="language" maxlength="60" placeholder="English, French, Ukrainian…" value="${val('language')}"></div>
+         <div class="field mobile-full"><label for="form-language">Language</label><input id="form-language" name="language" maxlength="60" placeholder="e.g. English, French, Spanish" value="${val('language')}"></div>
          <div class="field"><label for="form-year">Publication year</label><input id="form-year" name="year" inputmode="numeric" type="number" min="0" max="2200" placeholder="2026" value="${val('year')}"></div>
          <div class="field"><label for="form-pages">Number of pages</label><input id="form-pages" name="pages" inputmode="numeric" type="number" min="0" max="999999" value="${val('pages')}"></div>
          <div class="field mobile-full"><label for="form-genre">Genre</label><input id="form-genre" name="genre" list="genre-options" placeholder="e.g. Fantasy" value="${val('genre')}"><datalist id="genre-options">${genreList.map(g=>`<option value="${h(g)}"></option>`).join('')}</datalist></div>
@@ -371,26 +371,266 @@
     try{await FolioDB.replaceAll(books,shelves,tombs);state.books=books;state.shelves=shelves;state.tombstones=tombs;state.pendingImport=null;closeDialog();clearFilters();navigate('library');toast(`${books.length} books safely imported`)}
     catch(err){saveError(err)}finally{if(btn?.isConnected)btn.disabled=false}
   }
+  /* Multi-catalogue ISBN lookup. Each source is public and is requested directly
+     from the browser; unavailable/CORS-blocked sources fail independently.
+     We accept edition-level ISBN matches only: never substitute a similar title.
+     Personal library records and notes are never sent to the catalogues. */
+  const isbnDigits = value => plain(value).replace(/[\s-]/g,'').toUpperCase();
+  const isbn10From13 = isbn => {
+    if (!/^978\d{10}$/.test(isbn)) return '';
+    const nine = isbn.slice(3, 12);
+    const check = (11 - [...nine].reduce((sum, digit, i) => sum + (10 - i) * Number(digit), 0) % 11) % 11;
+    return nine + (check === 10 ? 'X' : check);
+  };
+  const isbn13From10 = isbn => {
+    if (!/^\d{9}[\dX]$/.test(isbn)) return '';
+    const twelve = '978' + isbn.slice(0,9);
+    const sum = [...twelve].reduce((total, digit, i) => total + Number(digit) * (i % 2 ? 3 : 1), 0);
+    return twelve + ((10 - sum % 10) % 10);
+  };
+  const isbnVariants = isbn => new Set([isbn, isbn10From13(isbn), isbn13From10(isbn)].filter(Boolean));
+  const isMatchingIdentifier = (value, isbn) => isbnVariants(isbn).has(isbnDigits(value));
+  const textValue = value => {
+    if (typeof value === 'string' || typeof value === 'number') return String(value).trim();
+    if (Array.isArray(value)) return value.map(textValue).filter(Boolean).join(', ');
+    if (value && typeof value === 'object') {
+      if (typeof value.value === 'string') return value.value.trim();
+      if (typeof value.name === 'string') return value.name.trim();
+      if (typeof value.label === 'string') return value.label.trim();
+      if (typeof value.mainTitle === 'string') return value.mainTitle.trim();
+      return textValue(value.en || value.fr || value.de || value.uk || '');
+    }
+    return '';
+  };
+  const firstYear = value => textValue(value).match(/(?:1[5-9]|20|21)\d{2}/)?.[0] || '';
+  const secureCover = value => {
+    const u = textValue(value);
+    if (!u || !/^https?:\/\//i.test(u)) return '';
+    return u.replace(/^http:\/\//i, 'https://');
+  };
+  const isbnFields = data => {
+    if (!data || typeof data !== 'object') return null;
+    const fields = {
+      title: textValue(data.title),
+      subtitle: textValue(data.subtitle),
+      author: textValue(data.author),
+      publisher: textValue(data.publisher),
+      year: firstYear(data.year),
+      pages: (Number(data.pages) > 0 ? Math.floor(Number(data.pages)) : (textValue(data.pages).match(/\b(\d{1,5})\s*(?:p(?:ages)?|s(?:eiten)?)\b/i)?.[1] || '')),
+      description: textValue(data.description),
+      language: textValue(data.language),
+      genre: textValue(data.genre),
+      cover: secureCover(data.cover)
+    };
+    return fields.title ? fields : null;
+  };
+  const jsonFrom = async (url, signal) => {
+    const response = await fetch(url, {signal, credentials:'omit'});
+    if (!response.ok) throw Error(`HTTP ${response.status}`);
+    return response.json();
+  };
+  const textFrom = async (url, signal) => {
+    const response = await fetch(url, {signal, credentials:'omit'});
+    if (!response.ok) throw Error(`HTTP ${response.status}`);
+    return response.text();
+  };
+  const openLibraryLookup = async (isbn, signal) => {
+    const result = await jsonFrom(`https://openlibrary.org/api/books?bibkeys=ISBN:${encodeURIComponent(isbn)}&format=json&jscmd=data`, signal);
+    const data = result[`ISBN:${isbn}`];
+    if (!data) return null;
+    return isbnFields({
+      title:data.title, subtitle:data.subtitle,
+      author:(data.authors || []).map(a => a.name || '').filter(Boolean).join(', '),
+      year:data.publish_date,
+      publisher:(data.publishers || []).map(p => p.name || '').filter(Boolean).join(', '),
+      pages:data.number_of_pages,
+      description:typeof data.notes === 'string' ? data.notes : data.notes?.value,
+      cover:data.cover?.large || data.cover?.medium || data.cover?.small
+    });
+  };
+  const googleBooksLookup = async (isbn, signal) => {
+    const json = await jsonFrom(`https://www.googleapis.com/books/v1/volumes?q=isbn:${encodeURIComponent(isbn)}&maxResults=10`, signal);
+    // Google Books sometimes responds with loosely related volumes. Check the ISBN.
+    const volume = (json.items || []).map(v => v.volumeInfo).find(v => (v?.industryIdentifiers || []).some(id => isMatchingIdentifier(id.identifier, isbn)));
+    if (!volume) return null;
+    return isbnFields({
+      title:volume.title, subtitle:volume.subtitle,
+      author:volume.authors, publisher:volume.publisher, year:volume.publishedDate,
+      pages:volume.pageCount, description:volume.description, language:volume.language,
+      genre:volume.categories?.[0],
+      cover:volume.imageLinks?.extraLarge || volume.imageLinks?.large || volume.imageLinks?.medium || volume.imageLinks?.thumbnail
+    });
+  };
+  const inventaireLookup = async (isbn, signal) => {
+    // Inventaire publishes anonymous ISBN facts and edition entity endpoints.
+    // Try facts first, then an edition entity when facts are incomplete.
+    let data;
+    try { data = await jsonFrom(`https://inventaire.io/api/data/isbn?isbn=${encodeURIComponent(isbn)}`, signal); }
+    catch (err) { if (signal.aborted) throw err; }
+    const parseEntity = input => {
+      const entity = input?.entity || input?.edition || input;
+      const claims = entity?.claims || {};
+      const claim = key => textValue((claims[key] || [])[0]);
+      return isbnFields({
+        title:entity?.title || entity?.labels || input?.title || claim('wdt:P1476'),
+        subtitle:entity?.subtitle || input?.subtitle,
+        author:entity?.author || entity?.authors || input?.authors,
+        publisher:entity?.publisher || input?.publisher || claim('wdt:P123'),
+        year:entity?.year || input?.year || claim('wdt:P577'),
+        pages:entity?.pages || input?.pages || claim('wdt:P1104'),
+        description:entity?.description || input?.description || entity?.descriptions,
+        language:entity?.language || input?.language,
+        cover:entity?.cover || input?.cover || entity?.image || entity?.images?.[0]
+      });
+    };
+    const basic = parseEntity(data);
+    if (basic) return basic;
+    const details = await jsonFrom(`https://inventaire.io/api/entities?action=by-uris&uris=${encodeURIComponent('isbn:' + isbn)}`, signal);
+    return parseEntity(details?.entities?.['isbn:' + isbn]);
+  };
+  const lobidLookup = async (isbn, signal) => {
+    const json = await jsonFrom(`https://lobid.org/resources/search?q=${encodeURIComponent(`isbn:${isbn}`)}&format=json&size=5`, signal);
+    const member = (json.member || []).find(item => {
+      const listedISBNs = [item.isbn].flat().filter(Boolean);
+      // Query is ISBN-specific; if a dedicated ISBN field exists, verify it.
+      return !listedISBNs.length || listedISBNs.some(v => isMatchingIdentifier(v, isbn));
+    });
+    if (!member) return null;
+    const contributors = (member.contribution || []).map(c => textValue(c.agent || c)).filter(Boolean).join(', ');
+    return isbnFields({
+      title:member.title?.mainTitle || member.title || member.name,
+      subtitle:member.title?.subtitle || member.subtitle,
+      author:contributors || member.creator || member.author || member.responsibilityStatement,
+      publisher:member.publication?.[0]?.publishedBy || member.publisher || member.publishedBy,
+      year:member.publication?.[0]?.startDate || member.issued || member.datePublished || member.publication?.[0]?.date,
+      pages:member.extent?.[0]?.label || member.numberOfPages,
+      language:member.language?.[0]?.label || member.language,
+      description:member.abstract || member.description,
+      cover:member.image || member.cover
+    });
+  };
+  const bnfLookup = async (isbn, signal) => {
+    const query = `bib.isbn all "${isbn}"`;
+    const url = `https://catalogue.bnf.fr/api/SRU?version=1.2&operation=searchRetrieve&query=${encodeURIComponent(query)}&recordSchema=dc&maximumRecords=3&startRecord=1`;
+    const xmlText = await textFrom(url, signal);
+    const xml = new DOMParser().parseFromString(xmlText, 'application/xml');
+    if (xml.querySelector('parsererror')) throw Error('Invalid BnF XML');
+    const record = xml.getElementsByTagNameNS('*','recordData')[0];
+    if (!record) return null;
+    const dc = name => [...record.getElementsByTagNameNS('http://purl.org/dc/elements/1.1/', name)].map(node => node.textContent.trim()).filter(Boolean);
+    // bib.isbn is edition-specific; verify where an identifier was included.
+    const ids = dc('identifier').filter(value => /(?:97[89]\d|\d{9}[\dX])/i.test(value.replace(/[-\s]/g,'')));
+    if (ids.length && !ids.some(value => [...isbnVariants(isbn)].some(v => value.replace(/[-\s]/g,'').includes(v)))) return null;
+    return isbnFields({
+      title:dc('title')[0], author:dc('creator').join(', '),
+      publisher:dc('publisher').join(', '), year:dc('date')[0],
+      description:dc('description').join(' '), language:dc('language')[0],
+      genre:dc('subject')[0]
+    });
+  };
+  const wikidataLookup = async (isbn, signal) => {
+    const isbn10 = isbn10From13(isbn);
+    const parts = [`{ ?book wdt:P212 "${isbn}". }`, ...(isbn10 ? [`{ ?book wdt:P957 "${isbn10}". }`] : [])];
+    const query = `SELECT ?bookLabel ?authorLabel ?publisherLabel ?date ?pages ?image WHERE {
+      ${parts.join(' UNION ')}
+      OPTIONAL { ?book wdt:P50 ?author. }
+      OPTIONAL { ?book wdt:P123 ?publisher. }
+      OPTIONAL { ?book wdt:P577 ?date. }
+      OPTIONAL { ?book wdt:P1104 ?pages. }
+      OPTIONAL { ?book wdt:P18 ?image. }
+      SERVICE wikibase:label { bd:serviceParam wikibase:language "fr,en,de,uk". }
+    } LIMIT 4`;
+    const json = await jsonFrom(`https://query.wikidata.org/sparql?format=json&query=${encodeURIComponent(query)}`, signal);
+    const row = json.results?.bindings?.[0];
+    if (!row || /^Q\d+$/.test(row.bookLabel?.value || '')) return null;
+    return isbnFields({
+      title:row.bookLabel?.value, author:row.authorLabel?.value,
+      publisher:row.publisherLabel?.value, year:row.date?.value,
+      pages:row.pages?.value, cover:row.image?.value
+    });
+  };
+  const ISBN_SERVICES = [
+    ['Open Library', openLibraryLookup],
+    ['Google Books', googleBooksLookup],
+    ['BnF (France)', bnfLookup],
+    ['Inventaire', inventaireLookup],
+    ['lobid (Germany)', lobidLookup],
+    ['Wikidata', wikidataLookup]
+  ];
+  function showISBNExternalLinks(isbn){
+    const target = document.getElementById('lookup-external-links');
+    if (!target) return;
+    target.hidden = false;
+    // These are manual catalogue searches. ISBNsearch.org does not offer
+    // a public browser API, so we never scrape or pretend to auto-import it.
+    target.innerHTML = `<span>Search manually: </span>
+      <a href="https://isbnsearch.org/isbn/${encodeURIComponent(isbn)}" target="_blank" rel="noopener noreferrer">ISBNsearch.org ↗</a>
+      · <a href="https://www.google.com/search?q=${encodeURIComponent('"' + isbn + '" book')}" target="_blank" rel="noopener noreferrer">Web search ↗</a>`;
+  }
   async function lookupISBN(){
-    const isbn=plain(document.getElementById('form-isbn')?.value).replace(/[\s-]/g,'').toUpperCase();const s=document.getElementById('lookup-status');if(!s)return;
-    if(!validISBN(isbn)){s.textContent='Invalid ISBN checksum. Please check all digits.';return}
-    s.textContent='Looking up book metadata…';
-    const already=state.books.find(b=>b.isbn===isbn && b.id!==state.dialog?.bookId);if(already)s.textContent=`Already in library: ${already.title}. Looking up details…`;
-    const ctl=new AbortController();const timer=setTimeout(()=>ctl.abort(),10000);
-    try {
-      let fields={};
-      try {const res=await fetch(`https://openlibrary.org/api/books?bibkeys=ISBN:${encodeURIComponent(isbn)}&format=json&jscmd=data`,{signal:ctl.signal});if(!res.ok)throw Error('Open Library unavailable');const json=await res.json();const data=json[`ISBN:${isbn}`];if(data)fields={title:data.title||'',subtitle:data.subtitle||'',author:(data.authors||[]).map(a=>a.name).join(', '),year:(data.publish_date||'').match(/\d{4}/)?.[0]||'',publisher:(data.publishers||[]).map(p=>p.name).join(', '),pages:data.number_of_pages||'',description:typeof data.notes==='string'?data.notes:'',cover:data.cover?.large||data.cover?.medium||''};}
-      catch(err){if(err.name==='AbortError')throw err;}
-      if(!fields.title){const res=await fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${encodeURIComponent(isbn)}&maxResults=1`,{signal:ctl.signal});if(!res.ok)throw Error('Lookup services unavailable');const json=await res.json();const data=json.items?.[0]?.volumeInfo;if(data)fields={title:data.title||'',subtitle:data.subtitle||'',author:(data.authors||[]).join(', '),year:(data.publishedDate||'').match(/\d{4}/)?.[0]||'',publisher:data.publisher||'',pages:data.pageCount||'',description:data.description||'',language:data.language||'',cover:data.imageLinks?.thumbnail?.replace(/^http:/,'https:')||''};}
-      if(!fields.title){s.textContent='No book found. You can enter the details manually.';return}
-      for(const [k,v] of Object.entries(fields)){
-        if(k==='cover'){if(v&&!state.formCover){state.formCover=v;document.getElementById('form-cover').value=v;document.getElementById('form-cover-preview').src=v}continue}
-        const target=document.querySelector(`#book-form [name="${k}"]`);
-        if(target && v && !target.value)target.value=v;
+    const isbn = isbnDigits(document.getElementById('form-isbn')?.value);
+    const status = document.getElementById('lookup-status');
+    if (!status) return;
+    if (!validISBN(isbn)) { status.textContent = 'Invalid ISBN checksum. Please check all digits.'; return; }
+    state.lookupController?.abort();
+    const ctl = new AbortController();
+    state.lookupController = ctl;
+    const btn = document.querySelector('[data-action="isbn-lookup"]');
+    if (btn) btn.disabled = true;
+    const already = state.books.find(b => b.isbn === isbn && b.id !== state.dialog?.bookId);
+    showISBNExternalLinks(isbn);
+    status.textContent = `Searching ${ISBN_SERVICES.length} catalogues for ${isbn}…`;
+    const timer = setTimeout(() => ctl.abort(), 8500);
+    let responded = 0;
+    const results = await Promise.allSettled(ISBN_SERVICES.map(async ([name, lookup]) => {
+      try {
+        const fields = await lookup(isbn, ctl.signal);
+        return {name, fields};
+      } finally {
+        responded++;
+        if (!ctl.signal.aborted && status.isConnected) status.textContent = `Searching book catalogues… ${responded}/${ISBN_SERVICES.length} checked`;
       }
-      s.textContent=`Found “${fields.title}”. Check the information before saving.${already?' Note: this ISBN is already in your library.':''}`;toast('ISBN details found');
-    }catch(err){s.textContent=err.name==='AbortError'?'Lookup timed out. Enter details manually or retry.':'Lookup unavailable. You can enter details manually.'}
-    finally{clearTimeout(timer)}
+    }));
+    clearTimeout(timer);
+    if (state.lookupController !== ctl) return;
+    state.lookupController = null;
+    if (btn?.isConnected) btn.disabled = false;
+    if (ctl.signal.aborted && !results.some(r => r.status === 'fulfilled' && r.value.fields)) {
+      status.textContent = 'Search timed out or was cancelled. Retry, or use the external search links.';
+      return;
+    }
+    const matches = results.filter(r => r.status === 'fulfilled' && r.value.fields).map(r => r.value);
+    const failures = results.filter(r => r.status === 'rejected').length;
+    if (!matches.length) {
+      status.textContent = failures
+        ? `No record retrieved (${failures} catalogues unavailable or blocked by the browser). Try external search or manual entry.`
+        : 'No catalogue returned this ISBN. Try external search or manual entry.';
+      return;
+    }
+    // Metadata is merged only when missing: source priority follows the
+    // ISBN_SERVICES array, and anything the user already typed wins.
+    const merged = {};
+    for (const {fields} of matches) for (const [key, value] of Object.entries(fields)) {
+      if (value !== '' && value != null && !merged[key]) merged[key] = value;
+    }
+    const form = document.getElementById('book-form');
+    if (!form || !status.isConnected) return;
+    for (const [key, value] of Object.entries(merged)) {
+      if (key === 'cover') {
+        if (value && !state.formCover) {
+          state.formCover = value;
+          const coverInput = document.getElementById('form-cover');
+          const coverPreview = document.getElementById('form-cover-preview');
+          if (coverInput) coverInput.value = value;
+          if (coverPreview) coverPreview.src = value;
+        }
+        continue;
+      }
+      const input = form.elements.namedItem(key);
+      if (input && !input.value && value) input.value = value;
+    }
+    status.textContent = `Found “${merged.title}” via ${matches.map(r => r.name).join(', ')}. Review edition details before saving.${already ? ` Already in library: ${already.title}.` : ''}${failures ? ` ${failures} source(s) unavailable.` : ''}`;
+    toast('Book details found');
   }
   async function compressImage(file){return new Promise((resolve,reject)=>{if(file.size>12*1024*1024){reject(Error('Image exceeds 12 MB.'));return}const reader=new FileReader();reader.onerror=()=>reject(Error('Could not read the image'));reader.onload=()=>{const img=new Image();img.onerror=()=>reject(Error('Unsupported image'));img.onload=()=>{const scale=Math.min(1,440/Math.max(img.width,img.height));const canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(img.width*scale));canvas.height=Math.max(1,Math.round(img.height*scale));canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);resolve(canvas.toDataURL('image/jpeg',.75))};img.src=reader.result};reader.readAsDataURL(file)})}
   function stopScan(){if(state.scanLoop){clearTimeout(state.scanLoop);state.scanLoop=null}if(state.scanner){state.scanner.getTracks().forEach(t=>t.stop());state.scanner=null}}

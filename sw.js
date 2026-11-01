@@ -1,5 +1,5 @@
 /* Offline app-shell cache: only same-origin static assets, never ISBN lookup requests. */
-const CACHE='folio-shell-v2.1';
+const CACHE='folio-shell-v2.2';
 const BASE=self.registration.scope;
 const SHELL=['./','./index.html','./styles.css','./app.js','./db.js','./barcode.js','./manifest.webmanifest','./assets/icons/folio-192.png','./assets/icons/folio-512.png'];
 self.addEventListener('install',event=>{

@@ -287,8 +287,7 @@ html[data-accent]:not([data-accent="forest"]) .mobile-nav .mobile-add{box-shadow
   const id = () => (globalThis.crypto?.randomUUID?.() || `book-${Date.now()}-${Math.floor(Math.random()*1e8)}`);
   const money = n => new Intl.NumberFormat('en-BE',{style:'currency',currency:'EUR',maximumFractionDigits:2}).format(Number(n)||0);
   const formatDate = d => {const t=new Date(d);return Number.isNaN(t.getTime())?'Unknown date':t.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})};
-  const INLINE_COVERS = {"1984":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyODAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMjgwIDQwMCI+PHJlY3Qgd2lkdGg9IjI4MCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiMxODI3MzgiLz48cmVjdCB4PSI4IiB5PSI4IiB3aWR0aD0iMjY0IiBoZWlnaHQ9IjM4NCIgcng9IjEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZjBkNSIgc3Ryb2tlLW9wYWNpdHk9Ii4xOCIvPjxwYXRoIGQ9Ik0xOCAxOFYzODIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4yMiIgc3Ryb2tlLXdpZHRoPSIzIi8+PGVsbGlwc2UgY3g9IjE0MCIgY3k9IjIyMyIgcng9Ijk0IiByeT0iNTciIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2U4NmY1NCIgc3Ryb2tlLXdpZHRoPSI4Ii8+PGNpcmNsZSBjeD0iMTQwIiBjeT0iMjIzIiByPSIzNiIgZmlsbD0iI2U4NmY1NCIvPjxjaXJjbGUgY3g9IjE0MCIgY3k9IjIyMyIgcj0iMTMiIGZpbGw9IiNmZmYwZDUiLz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMjgwIiBoZWlnaHQ9IjEyNiIgZmlsbD0iIzE4MjczOCIgZmlsbC1vcGFjaXR5PSIuOTIiLz48dGV4dCB4PSIxNDAiIHk9Ijc1IiBmaWxsPSIjZmZmMGQ1IiBmb250LXNpemU9IjMxIiBmb250LXdlaWdodD0iODAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgbGV0dGVyLXNwYWNpbmc9IjIiPk5JTkVURUVOPC90ZXh0Pjx0ZXh0IHg9IjE0MCIgeT0iMTEyIiBmaWxsPSIjZmZmMGQ1IiBmb250LXNpemU9IjMxIiBmb250LXdlaWdodD0iODAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgbGV0dGVyLXNwYWNpbmc9IjIiPkVJR0hUWS1GT1VSPC90ZXh0PjxyZWN0IHg9IjI4IiB5PSIzMzkiIHdpZHRoPSIyMjQiIGhlaWdodD0iMSIgZmlsbD0iI2ZmZjBkNSIgb3BhY2l0eT0iLjUiLz48dGV4dCB4PSIxNDAiIHk9IjM2MyIgZmlsbD0iI2ZmZjBkNSIgZm9udC1zaXplPSIxMyIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIyIj5HRU9SR0UgT1JXRUxMPC90ZXh0Pjx0ZXh0IHg9IjE0MCIgeT0iMzgzIiBmaWxsPSIjZmZmMGQ1IiBvcGFjaXR5PSIuNSIgZm9udC1zaXplPSI4IiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgbGV0dGVyLXNwYWNpbmc9IjIiPlBFUlNPTkFMIExJQlJBUlkgRURJVElPTjwvdGV4dD48L3N2Zz4=","atomic-habits":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyODAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMjgwIDQwMCI+PHJlY3Qgd2lkdGg9IjI4MCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNlZWUzY2IiLz48cmVjdCB4PSI4IiB5PSI4IiB3aWR0aD0iMjY0IiBoZWlnaHQ9IjM4NCIgcng9IjEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzI4M2QzMyIgc3Ryb2tlLW9wYWNpdHk9Ii4xOCIvPjxwYXRoIGQ9Ik0xOCAxOFYzODIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4yMiIgc3Ryb2tlLXdpZHRoPSIzIi8+PGNpcmNsZSBjeD0iMTQwIiBjeT0iMjAzIiByPSI4NCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYjA4YzUyIiBzdHJva2Utd2lkdGg9IjMiIG9wYWNpdHk9Ii44Ii8+PGVsbGlwc2UgY3g9IjE0MCIgY3k9IjIwMyIgcng9IjkyIiByeT0iMzgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2IwOGM1MiIgc3Ryb2tlLXdpZHRoPSIzIiB0cmFuc2Zvcm09InJvdGF0ZSgtMzggMTQwIDIwMykiLz48ZWxsaXBzZSBjeD0iMTQwIiBjeT0iMjAzIiByeD0iOTIiIHJ5PSIzOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYjA4YzUyIiBzdHJva2Utd2lkdGg9IjMiIHRyYW5zZm9ybT0icm90YXRlKDM4IDE0MCAyMDMpIi8+PGNpcmNsZSBjeD0iMTQwIiBjeT0iMjAzIiByPSIxMCIgZmlsbD0iI2IwOGM1MiIvPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIyODAiIGhlaWdodD0iMTI2IiBmaWxsPSIjZWVlM2NiIiBmaWxsLW9wYWNpdHk9Ii45MiIvPjx0ZXh0IHg9IjE0MCIgeT0iNzUiIGZpbGw9IiMyODNkMzMiIGZvbnQtc2l6ZT0iMzEiIGZvbnQtd2VpZ2h0PSI4MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBsZXR0ZXItc3BhY2luZz0iMiI+QVRPTUlDPC90ZXh0Pjx0ZXh0IHg9IjE0MCIgeT0iMTEyIiBmaWxsPSIjMjgzZDMzIiBmb250LXNpemU9IjMxIiBmb250LXdlaWdodD0iODAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgbGV0dGVyLXNwYWNpbmc9IjIiPkhBQklUUzwvdGV4dD48cmVjdCB4PSIyOCIgeT0iMzM5IiB3aWR0aD0iMjI0IiBoZWlnaHQ9IjEiIGZpbGw9IiMyODNkMzMiIG9wYWNpdHk9Ii41Ii8+PHRleHQgeD0iMTQwIiB5PSIzNjMiIGZpbGw9IiMyODNkMzMiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXdlaWdodD0iNzAwIiBsZXR0ZXItc3BhY2luZz0iMiI+SkFNRVMgQ0xFQVI8L3RleHQ+PHRleHQgeD0iMTQwIiB5PSIzODMiIGZpbGw9IiMyODNkMzMiIG9wYWNpdHk9Ii41IiBmb250LXNpemU9IjgiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBsZXR0ZXItc3BhY2luZz0iMiI+UEVSU09OQUwgTElCUkFSWSBFRElUSU9OPC90ZXh0Pjwvc3ZnPg==","clean-code":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyODAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMjgwIDQwMCI+PHJlY3Qgd2lkdGg9IjI4MCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNkZWVlZTAiLz48cmVjdCB4PSI4IiB5PSI4IiB3aWR0aD0iMjY0IiBoZWlnaHQ9IjM4NCIgcng9IjEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzI0NWU0ZiIgc3Ryb2tlLW9wYWNpdHk9Ii4xOCIvPjxwYXRoIGQ9Ik0xOCAxOFYzODIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4yMiIgc3Ryb2tlLXdpZHRoPSIzIi8+PHRleHQgeD0iMTQwIiB5PSIyNDYiIGZvbnQtc2l6ZT0iMTAzIiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjN2RiNmE0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj4mIzEyMzsgJiMxMjU7PC90ZXh0PjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIyODAiIGhlaWdodD0iMTI2IiBmaWxsPSIjZGVlZWUwIiBmaWxsLW9wYWNpdHk9Ii45MiIvPjx0ZXh0IHg9IjE0MCIgeT0iNzUiIGZpbGw9IiMyNDVlNGYiIGZvbnQtc2l6ZT0iMzEiIGZvbnQtd2VpZ2h0PSI4MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBsZXR0ZXItc3BhY2luZz0iMiI+Q0xFQU48L3RleHQ+PHRleHQgeD0iMTQwIiB5PSIxMTIiIGZpbGw9IiMyNDVlNGYiIGZvbnQtc2l6ZT0iMzEiIGZvbnQtd2VpZ2h0PSI4MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBsZXR0ZXItc3BhY2luZz0iMiI+Q09ERTwvdGV4dD48cmVjdCB4PSIyOCIgeT0iMzM5IiB3aWR0aD0iMjI0IiBoZWlnaHQ9IjEiIGZpbGw9IiMyNDVlNGYiIG9wYWNpdHk9Ii41Ii8+PHRleHQgeD0iMTQwIiB5PSIzNjMiIGZpbGw9IiMyNDVlNGYiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXdlaWdodD0iNzAwIiBsZXR0ZXItc3BhY2luZz0iMiI+Uk9CRVJUIEMuIE1BUlRJTjwvdGV4dD48dGV4dCB4PSIxNDAiIHk9IjM4MyIgZmlsbD0iIzI0NWU0ZiIgb3BhY2l0eT0iLjUiIGZvbnQtc2l6ZT0iOCIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5QRVJTT05BTCBMSUJSQVJZIEVESVRJT048L3RleHQ+PC9zdmc+","deep-work":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyODAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMjgwIDQwMCI+PHJlY3Qgd2lkdGg9IjI4MCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiMxYjQwNjQiLz48cmVjdCB4PSI4IiB5PSI4IiB3aWR0aD0iMjY0IiBoZWlnaHQ9IjM4NCIgcng9IjEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2YzZTZkNiIgc3Ryb2tlLW9wYWNpdHk9Ii4xOCIvPjxwYXRoIGQ9Ik0xOCAxOFYzODIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4yMiIgc3Ryb2tlLXdpZHRoPSIzIi8+PHBhdGggZD0iTTU1IDEzNFYyOTUgTTM1IDE1MEgyNDUiIHN0cm9rZT0iIzhmYWVjMyIgc3Ryb2tlLXdpZHRoPSIxIiBvcGFjaXR5PSIuNCIvPjxwYXRoIGQ9Ik05NSAxMzRWMjk1IE0zNSAxODVIMjQ1IiBzdHJva2U9IiM4ZmFlYzMiIHN0cm9rZS13aWR0aD0iMSIgb3BhY2l0eT0iLjQiLz48cGF0aCBkPSJNMTM1IDEzNFYyOTUgTTM1IDIyMEgyNDUiIHN0cm9rZT0iIzhmYWVjMyIgc3Ryb2tlLXdpZHRoPSIxIiBvcGFjaXR5PSIuNCIvPjxwYXRoIGQ9Ik0xNzUgMTM0VjI5NSBNMzUgMjU1SDI0NSIgc3Ryb2tlPSIjOGZhZWMzIiBzdHJva2Utd2lkdGg9IjEiIG9wYWNpdHk9Ii40Ii8+PHBhdGggZD0iTTIxNSAxMzRWMjk1IE0zNSAyODVIMjQ1IiBzdHJva2U9IiM4ZmFlYzMiIHN0cm9rZS13aWR0aD0iMSIgb3BhY2l0eT0iLjQiLz48cmVjdCB4PSI5MSIgeT0iMTg0IiB3aWR0aD0iOTkiIGhlaWdodD0iODYiIGZpbGw9IiNlMWEyNWIiIG9wYWNpdHk9Ii44Ii8+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjI4MCIgaGVpZ2h0PSIxMjYiIGZpbGw9IiMxYjQwNjQiIGZpbGwtb3BhY2l0eT0iLjkyIi8+PHRleHQgeD0iMTQwIiB5PSI3NSIgZmlsbD0iI2YzZTZkNiIgZm9udC1zaXplPSIzMSIgZm9udC13ZWlnaHQ9IjgwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGxldHRlci1zcGFjaW5nPSIyIj5ERUVQPC90ZXh0Pjx0ZXh0IHg9IjE0MCIgeT0iMTEyIiBmaWxsPSIjZjNlNmQ2IiBmb250LXNpemU9IjMxIiBmb250LXdlaWdodD0iODAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgbGV0dGVyLXNwYWNpbmc9IjIiPldPUks8L3RleHQ+PHJlY3QgeD0iMjgiIHk9IjMzOSIgd2lkdGg9IjIyNCIgaGVpZ2h0PSIxIiBmaWxsPSIjZjNlNmQ2IiBvcGFjaXR5PSIuNSIvPjx0ZXh0IHg9IjE0MCIgeT0iMzYzIiBmaWxsPSIjZjNlNmQ2IiBmb250LXNpemU9IjEzIiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC13ZWlnaHQ9IjcwMCIgbGV0dGVyLXNwYWNpbmc9IjIiPkNBTCBORVdQT1JUPC90ZXh0Pjx0ZXh0IHg9IjE0MCIgeT0iMzgzIiBmaWxsPSIjZjNlNmQ2IiBvcGFjaXR5PSIuNSIgZm9udC1zaXplPSI4IiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgbGV0dGVyLXNwYWNpbmc9IjIiPlBFUlNPTkFMIExJQlJBUlkgRURJVElPTjwvdGV4dD48L3N2Zz4=","design-everyday":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyODAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMjgwIDQwMCI+PHJlY3Qgd2lkdGg9IjI4MCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNkZjY4NGYiLz48cmVjdCB4PSI4IiB5PSI4IiB3aWR0aD0iMjY0IiBoZWlnaHQ9IjM4NCIgcng9IjEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZjBkNyIgc3Ryb2tlLW9wYWNpdHk9Ii4xOCIvPjxwYXRoIGQ9Ik0xOCAxOFYzODIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4yMiIgc3Ryb2tlLXdpZHRoPSIzIi8+PGNpcmNsZSBjeD0iMTQwIiBjeT0iMjE0IiByPSI4NSIgZmlsbD0iI2Y1YWQ3MiIvPjxjaXJjbGUgY3g9IjE0MCIgY3k9IjIxNCIgcj0iNDgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZjBkNyIgc3Ryb2tlLXdpZHRoPSIxMSIgb3BhY2l0eT0iLjciLz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMjgwIiBoZWlnaHQ9IjEyNiIgZmlsbD0iI2RmNjg0ZiIgZmlsbC1vcGFjaXR5PSIuOTIiLz48dGV4dCB4PSIxNDAiIHk9Ijc1IiBmaWxsPSIjZmZmMGQ3IiBmb250LXNpemU9IjMxIiBmb250LXdlaWdodD0iODAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgbGV0dGVyLXNwYWNpbmc9IjEiPlRIRSBERVNJR048L3RleHQ+PHRleHQgeD0iMTQwIiB5PSIxMTIiIGZpbGw9IiNmZmYwZDciIGZvbnQtc2l6ZT0iMzEiIGZvbnQtd2VpZ2h0PSI4MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBsZXR0ZXItc3BhY2luZz0iMSI+T0YgRVZFUllEQVk8L3RleHQ+PHRleHQgeD0iMTQwIiB5PSIxNDkiIGZpbGw9IiNmZmYwZDciIGZvbnQtc2l6ZT0iMzEiIGZvbnQtd2VpZ2h0PSI4MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBsZXR0ZXItc3BhY2luZz0iMSI+VEhJTkdTPC90ZXh0PjxyZWN0IHg9IjI4IiB5PSIzMzkiIHdpZHRoPSIyMjQiIGhlaWdodD0iMSIgZmlsbD0iI2ZmZjBkNyIgb3BhY2l0eT0iLjUiLz48dGV4dCB4PSIxNDAiIHk9IjM2MyIgZmlsbD0iI2ZmZjBkNyIgZm9udC1zaXplPSIxMyIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIyIj5ET04gTk9STUFOPC90ZXh0Pjx0ZXh0IHg9IjE0MCIgeT0iMzgzIiBmaWxsPSIjZmZmMGQ3IiBvcGFjaXR5PSIuNSIgZm9udC1zaXplPSI4IiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgbGV0dGVyLXNwYWNpbmc9IjIiPlBFUlNPTkFMIExJQlJBUlkgRURJVElPTjwvdGV4dD48L3N2Zz4=","dune":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyODAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMjgwIDQwMCI+PHJlY3Qgd2lkdGg9IjI4MCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNiODVlM2IiLz48cmVjdCB4PSI4IiB5PSI4IiB3aWR0aD0iMjY0IiBoZWlnaHQ9IjM4NCIgcng9IjEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZjNkYiIgc3Ryb2tlLW9wYWNpdHk9Ii4xOCIvPjxwYXRoIGQ9Ik0xOCAxOFYzODIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4yMiIgc3Ryb2tlLXdpZHRoPSIzIi8+PGNpcmNsZSBjeD0iMjAyIiBjeT0iMTM4IiByPSI2MiIgZmlsbD0iI2U5YWU2NiIgb3BhY2l0eT0iLjU1Ii8+PHBhdGggZD0iTTAgMjY1IFE2NSAxOTAgMTMyIDI1MiBUMjgwIDIzOCBWNDAwIEgwIFoiIGZpbGw9IiNlOGE3NmQiLz48cGF0aCBkPSJNMCAzMDQgUTExNCAyMjUgMTk1IDI5NCBUMjgwIDI4MyBWNDAwIEgwIFoiIGZpbGw9IiM4NzNkMzIiIG9wYWNpdHk9Ii42NSIvPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIyODAiIGhlaWdodD0iMTI2IiBmaWxsPSIjYjg1ZTNiIiBmaWxsLW9wYWNpdHk9Ii45MiIvPjx0ZXh0IHg9IjE0MCIgeT0iNzUiIGZpbGw9IiNmZmYzZGIiIGZvbnQtc2l6ZT0iMzEiIGZvbnQtd2VpZ2h0PSI4MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBsZXR0ZXItc3BhY2luZz0iMiI+RFVORTwvdGV4dD48cmVjdCB4PSIyOCIgeT0iMzM5IiB3aWR0aD0iMjI0IiBoZWlnaHQ9IjEiIGZpbGw9IiNmZmYzZGIiIG9wYWNpdHk9Ii41Ii8+PHRleHQgeD0iMTQwIiB5PSIzNjMiIGZpbGw9IiNmZmYzZGIiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXdlaWdodD0iNzAwIiBsZXR0ZXItc3BhY2luZz0iMiI+RlJBTksgSEVSQkVSVDwvdGV4dD48dGV4dCB4PSIxNDAiIHk9IjM4MyIgZmlsbD0iI2ZmZjNkYiIgb3BhY2l0eT0iLjUiIGZvbnQtc2l6ZT0iOCIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5QRVJTT05BTCBMSUJSQVJZIEVESVRJT048L3RleHQ+PC9zdmc+","educated":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyODAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMjgwIDQwMCI+PHJlY3Qgd2lkdGg9IjI4MCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNjM2FmYTYiLz48cmVjdCB4PSI4IiB5PSI4IiB3aWR0aD0iMjY0IiBoZWlnaHQ9IjM4NCIgcng9IjEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzM4MmQyYiIgc3Ryb2tlLW9wYWNpdHk9Ii4xOCIvPjxwYXRoIGQ9Ik0xOCAxOFYzODIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4yMiIgc3Ryb2tlLXdpZHRoPSIzIi8+PHBhdGggZD0iTTAgMzA3TDgzIDE1NEwxMzIgMjU0TDE3OSAxODBMMjgwIDMxMFY0MDBIMFoiIGZpbGw9IiNlZmUzZGIiLz48cGF0aCBkPSJNMCAzNTBMMTI0IDIxM0wyODAgMzQ3VjQwMEgwWiIgZmlsbD0iIzM4MmQyYiIgb3BhY2l0eT0iLjMzIi8+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjI4MCIgaGVpZ2h0PSIxMjYiIGZpbGw9IiNjM2FmYTYiIGZpbGwtb3BhY2l0eT0iLjkyIi8+PHRleHQgeD0iMTQwIiB5PSI3NSIgZmlsbD0iIzM4MmQyYiIgZm9udC1zaXplPSIzMSIgZm9udC13ZWlnaHQ9IjgwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGxldHRlci1zcGFjaW5nPSIyIj5FRFVDQVRFRDwvdGV4dD48cmVjdCB4PSIyOCIgeT0iMzM5IiB3aWR0aD0iMjI0IiBoZWlnaHQ9IjEiIGZpbGw9IiMzODJkMmIiIG9wYWNpdHk9Ii41Ii8+PHRleHQgeD0iMTQwIiB5PSIzNjMiIGZpbGw9IiMzODJkMmIiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXdlaWdodD0iNzAwIiBsZXR0ZXItc3BhY2luZz0iMiI+VEFSQSBXRVNUT1ZFUjwvdGV4dD48dGV4dCB4PSIxNDAiIHk9IjM4MyIgZmlsbD0iIzM4MmQyYiIgb3BhY2l0eT0iLjUiIGZvbnQtc2l6ZT0iOCIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5QRVJTT05BTCBMSUJSQVJZIEVESVRJT048L3RleHQ+PC9zdmc+","midnight-library":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyODAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMjgwIDQwMCI+PHJlY3Qgd2lkdGg9IjI4MCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiMyMTU3NjMiLz48cmVjdCB4PSI4IiB5PSI4IiB3aWR0aD0iMjY0IiBoZWlnaHQ9IjM4NCIgcng9IjEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2YzZTlkOCIgc3Ryb2tlLW9wYWNpdHk9Ii4xOCIvPjxwYXRoIGQ9Ik0xOCAxOFYzODIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4yMiIgc3Ryb2tlLXdpZHRoPSIzIi8+PHJlY3QgeD0iNTIiIHk9IjE1NiIgd2lkdGg9IjIyIiBoZWlnaHQ9IjEzOCIgcng9IjMiIGZpbGw9IiM5M2FjYTQiIG9wYWNpdHk9Ii44NSIvPjxyZWN0IHg9Ijc5IiB5PSIxNjYiIHdpZHRoPSIyMiIgaGVpZ2h0PSIxMjgiIHJ4PSIzIiBmaWxsPSIjZjNlOWQ4IiBvcGFjaXR5PSIuODUiLz48cmVjdCB4PSIxMDYiIHk9IjE3NiIgd2lkdGg9IjIyIiBoZWlnaHQ9IjExOCIgcng9IjMiIGZpbGw9IiNiNmM1YWUiIG9wYWNpdHk9Ii44NSIvPjxyZWN0IHg9IjEzMyIgeT0iMTU2IiB3aWR0aD0iMjIiIGhlaWdodD0iMTM4IiByeD0iMyIgZmlsbD0iI2Q4YjQ4OSIgb3BhY2l0eT0iLjg1Ii8+PHJlY3QgeD0iMTYwIiB5PSIxNjYiIHdpZHRoPSIyMiIgaGVpZ2h0PSIxMjgiIHJ4PSIzIiBmaWxsPSIjOTNhY2E0IiBvcGFjaXR5PSIuODUiLz48cmVjdCB4PSIxODciIHk9IjE3NiIgd2lkdGg9IjIyIiBoZWlnaHQ9IjExOCIgcng9IjMiIGZpbGw9IiNmM2U5ZDgiIG9wYWNpdHk9Ii44NSIvPjxyZWN0IHg9IjIxNCIgeT0iMTU2IiB3aWR0aD0iMjIiIGhlaWdodD0iMTM4IiByeD0iMyIgZmlsbD0iI2I2YzVhZSIgb3BhY2l0eT0iLjg1Ii8+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjI4MCIgaGVpZ2h0PSIxMjYiIGZpbGw9IiMyMTU3NjMiIGZpbGwtb3BhY2l0eT0iLjkyIi8+PHRleHQgeD0iMTQwIiB5PSI3NSIgZmlsbD0iI2YzZTlkOCIgZm9udC1zaXplPSIzMSIgZm9udC13ZWlnaHQ9IjgwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGxldHRlci1zcGFjaW5nPSIyIj5USEUgTUlETklHSFQ8L3RleHQ+PHRleHQgeD0iMTQwIiB5PSIxMTIiIGZpbGw9IiNmM2U5ZDgiIGZvbnQtc2l6ZT0iMzEiIGZvbnQtd2VpZ2h0PSI4MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBsZXR0ZXItc3BhY2luZz0iMiI+TElCUkFSWTwvdGV4dD48cmVjdCB4PSIyOCIgeT0iMzM5IiB3aWR0aD0iMjI0IiBoZWlnaHQ9IjEiIGZpbGw9IiNmM2U5ZDgiIG9wYWNpdHk9Ii41Ii8+PHRleHQgeD0iMTQwIiB5PSIzNjMiIGZpbGw9IiNmM2U5ZDgiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXdlaWdodD0iNzAwIiBsZXR0ZXItc3BhY2luZz0iMiI+TUFUVCBIQUlHPC90ZXh0Pjx0ZXh0IHg9IjE0MCIgeT0iMzgzIiBmaWxsPSIjZjNlOWQ4IiBvcGFjaXR5PSIuNSIgZm9udC1zaXplPSI4IiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgbGV0dGVyLXNwYWNpbmc9IjIiPlBFUlNPTkFMIExJQlJBUlkgRURJVElPTjwvdGV4dD48L3N2Zz4=","pride-prejudice":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyODAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMjgwIDQwMCI+PHJlY3Qgd2lkdGg9IjI4MCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNlZWM5YzgiLz48cmVjdCB4PSI4IiB5PSI4IiB3aWR0aD0iMjY0IiBoZWlnaHQ9IjM4NCIgcng9IjEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ5MmMzYSIgc3Ryb2tlLW9wYWNpdHk9Ii4xOCIvPjxwYXRoIGQ9Ik0xOCAxOFYzODIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4yMiIgc3Ryb2tlLXdpZHRoPSIzIi8+PGNpcmNsZSBjeD0iMTgwIiBjeT0iMjIxIiByPSIzMyIgZmlsbD0iI2FkNzQ4MSIgb3BhY2l0eT0iLjciLz48Y2lyY2xlIGN4PSIxNjAiIGN5PSIyNTUiIHI9IjMzIiBmaWxsPSIjYWQ3NDgxIiBvcGFjaXR5PSIuNyIvPjxjaXJjbGUgY3g9IjEyMSIgY3k9IjI1NSIgcj0iMzMiIGZpbGw9IiNhZDc0ODEiIG9wYWNpdHk9Ii43Ii8+PGNpcmNsZSBjeD0iMTAxIiBjeT0iMjIxIiByPSIzMyIgZmlsbD0iI2FkNzQ4MSIgb3BhY2l0eT0iLjciLz48Y2lyY2xlIGN4PSIxMjAiIGN5PSIxODciIHI9IjMzIiBmaWxsPSIjYWQ3NDgxIiBvcGFjaXR5PSIuNyIvPjxjaXJjbGUgY3g9IjE1OSIgY3k9IjE4NyIgcj0iMzMiIGZpbGw9IiNhZDc0ODEiIG9wYWNpdHk9Ii43Ii8+PGNpcmNsZSBjeD0iMTQwIiBjeT0iMjIxIiByPSIyMCIgZmlsbD0iI2U5ZGZjNiIvPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIyODAiIGhlaWdodD0iMTI2IiBmaWxsPSIjZWVjOWM4IiBmaWxsLW9wYWNpdHk9Ii45MiIvPjx0ZXh0IHg9IjE0MCIgeT0iNzUiIGZpbGw9IiM0OTJjM2EiIGZvbnQtc2l6ZT0iMzEiIGZvbnQtd2VpZ2h0PSI4MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBsZXR0ZXItc3BhY2luZz0iMiI+UFJJREUgJmFtcDs8L3RleHQ+PHRleHQgeD0iMTQwIiB5PSIxMTIiIGZpbGw9IiM0OTJjM2EiIGZvbnQtc2l6ZT0iMzEiIGZvbnQtd2VpZ2h0PSI4MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBsZXR0ZXItc3BhY2luZz0iMiI+UFJFSlVESUNFPC90ZXh0PjxyZWN0IHg9IjI4IiB5PSIzMzkiIHdpZHRoPSIyMjQiIGhlaWdodD0iMSIgZmlsbD0iIzQ5MmMzYSIgb3BhY2l0eT0iLjUiLz48dGV4dCB4PSIxNDAiIHk9IjM2MyIgZmlsbD0iIzQ5MmMzYSIgZm9udC1zaXplPSIxMyIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIyIj5KQU5FIEFVU1RFTjwvdGV4dD48dGV4dCB4PSIxNDAiIHk9IjM4MyIgZmlsbD0iIzQ5MmMzYSIgb3BhY2l0eT0iLjUiIGZvbnQtc2l6ZT0iOCIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5QRVJTT05BTCBMSUJSQVJZIEVESVRJT048L3RleHQ+PC9zdmc+","project-hail-mary":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyODAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMjgwIDQwMCI+PHJlY3Qgd2lkdGg9IjI4MCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiMxNjI5NDIiLz48cmVjdCB4PSI4IiB5PSI4IiB3aWR0aD0iMjY0IiBoZWlnaHQ9IjM4NCIgcng9IjEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2Y2ZjFlOCIgc3Ryb2tlLW9wYWNpdHk9Ii4xOCIvPjxwYXRoIGQ9Ik0xOCAxOFYzODIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4yMiIgc3Ryb2tlLXdpZHRoPSIzIi8+PGNpcmNsZSBjeD0iNDAiIGN5PSIxMzgiIHI9IjIiIGZpbGw9IiNkYWEyNjQiIG9wYWNpdHk9Ii45Ii8+PGNpcmNsZSBjeD0iMjMwIiBjeT0iMTczIiByPSIzIiBmaWxsPSIjZGFhMjY0IiBvcGFjaXR5PSIuOSIvPjxjaXJjbGUgY3g9IjE4NCIgY3k9IjI2MyIgcj0iMiIgZmlsbD0iI2RhYTI2NCIgb3BhY2l0eT0iLjkiLz48Y2lyY2xlIGN4PSI3NSIgY3k9IjI4OCIgcj0iMiIgZmlsbD0iI2RhYTI2NCIgb3BhY2l0eT0iLjkiLz48Y2lyY2xlIGN4PSIxNDQiIGN5PSIxOTIiIHI9IjMiIGZpbGw9IiNkYWEyNjQiIG9wYWNpdHk9Ii45Ii8+PGNpcmNsZSBjeD0iMjM4IiBjeT0iMzA2IiByPSIxLjgiIGZpbGw9IiNkYWEyNjQiIG9wYWNpdHk9Ii45Ii8+PGNpcmNsZSBjeD0iMTQwIiBjeT0iMjI0IiByPSI2NSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZGFhMjY0IiBzdHJva2Utd2lkdGg9IjMiLz48cGF0aCBkPSJNNzggMjUwUTE0MiAxODEgMjA2IDIzNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZGFhMjY0IiBzdHJva2Utd2lkdGg9IjMiLz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMjgwIiBoZWlnaHQ9IjEyNiIgZmlsbD0iIzE2Mjk0MiIgZmlsbC1vcGFjaXR5PSIuOTIiLz48dGV4dCB4PSIxNDAiIHk9Ijc1IiBmaWxsPSIjZjZmMWU4IiBmb250LXNpemU9IjMxIiBmb250LXdlaWdodD0iODAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgbGV0dGVyLXNwYWNpbmc9IjIiPlBST0pFQ1Q8L3RleHQ+PHRleHQgeD0iMTQwIiB5PSIxMTIiIGZpbGw9IiNmNmYxZTgiIGZvbnQtc2l6ZT0iMzEiIGZvbnQtd2VpZ2h0PSI4MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBsZXR0ZXItc3BhY2luZz0iMiI+SEFJTCBNQVJZPC90ZXh0PjxyZWN0IHg9IjI4IiB5PSIzMzkiIHdpZHRoPSIyMjQiIGhlaWdodD0iMSIgZmlsbD0iI2Y2ZjFlOCIgb3BhY2l0eT0iLjUiLz48dGV4dCB4PSIxNDAiIHk9IjM2MyIgZmlsbD0iI2Y2ZjFlOCIgZm9udC1zaXplPSIxMyIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIyIj5BTkRZIFdFSVI8L3RleHQ+PHRleHQgeD0iMTQwIiB5PSIzODMiIGZpbGw9IiNmNmYxZTgiIG9wYWNpdHk9Ii41IiBmb250LXNpemU9IjgiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBsZXR0ZXItc3BhY2luZz0iMiI+UEVSU09OQUwgTElCUkFSWSBFRElUSU9OPC90ZXh0Pjwvc3ZnPg==","psychology-of-money":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyODAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMjgwIDQwMCI+PHJlY3Qgd2lkdGg9IjI4MCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiMxOTNlMzMiLz48cmVjdCB4PSI4IiB5PSI4IiB3aWR0aD0iMjY0IiBoZWlnaHQ9IjM4NCIgcng9IjEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZjZjFkYyIgc3Ryb2tlLW9wYWNpdHk9Ii4xOCIvPjxwYXRoIGQ9Ik0xOCAxOFYzODIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4yMiIgc3Ryb2tlLXdpZHRoPSIzIi8+PGNpcmNsZSBjeD0iMTQwIiBjeT0iMjIwIiByPSI4OCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZDNhZDY2IiBzdHJva2Utd2lkdGg9IjMiIG9wYWNpdHk9IjAuODUiLz48Y2lyY2xlIGN4PSIxNDAiIGN5PSIyMjAiIHI9IjY3IiBmaWxsPSJub25lIiBzdHJva2U9IiNkM2FkNjYiIHN0cm9rZS13aWR0aD0iMyIgb3BhY2l0eT0iMC43NCIvPjxjaXJjbGUgY3g9IjE0MCIgY3k9IjIyMCIgcj0iNDYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2QzYWQ2NiIgc3Ryb2tlLXdpZHRoPSIzIiBvcGFjaXR5PSIwLjYzIi8+PGNpcmNsZSBjeD0iMTQwIiBjeT0iMjIwIiByPSIyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZDNhZDY2IiBzdHJva2Utd2lkdGg9IjMiIG9wYWNpdHk9IjAuNTIiLz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMjgwIiBoZWlnaHQ9IjEyNiIgZmlsbD0iIzE5M2UzMyIgZmlsbC1vcGFjaXR5PSIuOTIiLz48dGV4dCB4PSIxNDAiIHk9Ijc1IiBmaWxsPSIjZmNmMWRjIiBmb250LXNpemU9IjIzIiBmb250LXdlaWdodD0iODAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgbGV0dGVyLXNwYWNpbmc9IjIiPlRIRSBQU1lDSE9MT0dZPC90ZXh0Pjx0ZXh0IHg9IjE0MCIgeT0iMTEyIiBmaWxsPSIjZmNmMWRjIiBmb250LXNpemU9IjIzIiBmb250LXdlaWdodD0iODAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgbGV0dGVyLXNwYWNpbmc9IjIiPk9GIE1PTkVZPC90ZXh0PjxyZWN0IHg9IjI4IiB5PSIzMzkiIHdpZHRoPSIyMjQiIGhlaWdodD0iMSIgZmlsbD0iI2ZjZjFkYyIgb3BhY2l0eT0iLjUiLz48dGV4dCB4PSIxNDAiIHk9IjM2MyIgZmlsbD0iI2ZjZjFkYyIgZm9udC1zaXplPSIxMyIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIyIj5NT1JHQU4gSE9VU0VMPC90ZXh0Pjx0ZXh0IHg9IjE0MCIgeT0iMzgzIiBmaWxsPSIjZmNmMWRjIiBvcGFjaXR5PSIuNSIgZm9udC1zaXplPSI4IiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgbGV0dGVyLXNwYWNpbmc9IjIiPlBFUlNPTkFMIExJQlJBUlkgRURJVElPTjwvdGV4dD48L3N2Zz4=","sapiens":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyODAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMjgwIDQwMCI+PHJlY3Qgd2lkdGg9IjI4MCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNlOWRkYzYiLz48cmVjdCB4PSI4IiB5PSI4IiB3aWR0aD0iMjY0IiBoZWlnaHQ9IjM4NCIgcng9IjEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzI4MzcyYyIgc3Ryb2tlLW9wYWNpdHk9Ii4xOCIvPjxwYXRoIGQ9Ik0xOCAxOFYzODIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4yMiIgc3Ryb2tlLXdpZHRoPSIzIi8+PGNpcmNsZSBjeD0iMTQwIiBjeT0iMjIwIiByPSI4OCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOTU3YjYyIiBzdHJva2Utd2lkdGg9IjEuNyIgb3BhY2l0eT0iMC44NSIvPjxjaXJjbGUgY3g9IjE0MCIgY3k9IjIyMCIgcj0iNjciIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzk1N2I2MiIgc3Ryb2tlLXdpZHRoPSIxLjciIG9wYWNpdHk9IjAuNzQiLz48Y2lyY2xlIGN4PSIxNDAiIGN5PSIyMjAiIHI9IjQ2IiBmaWxsPSJub25lIiBzdHJva2U9IiM5NTdiNjIiIHN0cm9rZS13aWR0aD0iMS43IiBvcGFjaXR5PSIwLjYzIi8+PGNpcmNsZSBjeD0iMTQwIiBjeT0iMjIwIiByPSIyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOTU3YjYyIiBzdHJva2Utd2lkdGg9IjEuNyIgb3BhY2l0eT0iMC41MiIvPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIyODAiIGhlaWdodD0iMTI2IiBmaWxsPSIjZTlkZGM2IiBmaWxsLW9wYWNpdHk9Ii45MiIvPjx0ZXh0IHg9IjE0MCIgeT0iNzUiIGZpbGw9IiMyODM3MmMiIGZvbnQtc2l6ZT0iMzEiIGZvbnQtd2VpZ2h0PSI4MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBsZXR0ZXItc3BhY2luZz0iMiI+U0FQSUVOUzwvdGV4dD48cmVjdCB4PSIyOCIgeT0iMzM5IiB3aWR0aD0iMjI0IiBoZWlnaHQ9IjEiIGZpbGw9IiMyODM3MmMiIG9wYWNpdHk9Ii41Ii8+PHRleHQgeD0iMTQwIiB5PSIzNjMiIGZpbGw9IiMyODM3MmMiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXdlaWdodD0iNzAwIiBsZXR0ZXItc3BhY2luZz0iMiI+WVVWQUwgTk9BSCBIQVJBUkk8L3RleHQ+PHRleHQgeD0iMTQwIiB5PSIzODMiIGZpbGw9IiMyODM3MmMiIG9wYWNpdHk9Ii41IiBmb250LXNpemU9IjgiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBsZXR0ZXItc3BhY2luZz0iMiI+UEVSU09OQUwgTElCUkFSWSBFRElUSU9OPC90ZXh0Pjwvc3ZnPg==","the-hobbit":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyODAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMjgwIDQwMCI+PHJlY3Qgd2lkdGg9IjI4MCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiM1NjcxNGMiLz48cmVjdCB4PSI4IiB5PSI4IiB3aWR0aD0iMjY0IiBoZWlnaHQ9IjM4NCIgcng9IjEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2Y4ZWNjYiIgc3Ryb2tlLW9wYWNpdHk9Ii4xOCIvPjxwYXRoIGQ9Ik0xOCAxOFYzODIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4yMiIgc3Ryb2tlLXdpZHRoPSIzIi8+PGNpcmNsZSBjeD0iMTQ1IiBjeT0iMjA0IiByPSI5NCIgZmlsbD0iI2M1YTY2ZiIgb3BhY2l0eT0iLjUiLz48cGF0aCBkPSJNMCAyNzJRNjcgMTk5IDE0MSAyNjVUMjgwIDI1MFY0MDBIMFoiIGZpbGw9IiMyNDNjMzAiLz48cGF0aCBkPSJNOTIgMzE2IFYyNDdBNDggNDggMCAwIDEgMTg4IDI0N1YzMTZaIiBmaWxsPSIjZjhlY2NiIiBvcGFjaXR5PSIuNyIvPjxjaXJjbGUgY3g9IjE3NCIgY3k9IjI3NSIgcj0iNCIgZmlsbD0iI2M1YTY2ZiIvPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIyODAiIGhlaWdodD0iMTI2IiBmaWxsPSIjNTY3MTRjIiBmaWxsLW9wYWNpdHk9Ii45MiIvPjx0ZXh0IHg9IjE0MCIgeT0iNzUiIGZpbGw9IiNmOGVjY2IiIGZvbnQtc2l6ZT0iMzEiIGZvbnQtd2VpZ2h0PSI4MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBsZXR0ZXItc3BhY2luZz0iMiI+VEhFPC90ZXh0Pjx0ZXh0IHg9IjE0MCIgeT0iMTEyIiBmaWxsPSIjZjhlY2NiIiBmb250LXNpemU9IjMxIiBmb250LXdlaWdodD0iODAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgbGV0dGVyLXNwYWNpbmc9IjIiPkhPQkJJVDwvdGV4dD48cmVjdCB4PSIyOCIgeT0iMzM5IiB3aWR0aD0iMjI0IiBoZWlnaHQ9IjEiIGZpbGw9IiNmOGVjY2IiIG9wYWNpdHk9Ii41Ii8+PHRleHQgeD0iMTQwIiB5PSIzNjMiIGZpbGw9IiNmOGVjY2IiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXdlaWdodD0iNzAwIiBsZXR0ZXItc3BhY2luZz0iMiI+Si5SLlIuIFRPTEtJRU48L3RleHQ+PHRleHQgeD0iMTQwIiB5PSIzODMiIGZpbGw9IiNmOGVjY2IiIG9wYWNpdHk9Ii41IiBmb250LXNpemU9IjgiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBsZXR0ZXItc3BhY2luZz0iMiI+UEVSU09OQUwgTElCUkFSWSBFRElUSU9OPC90ZXh0Pjwvc3ZnPg==","thinking-fast-slow":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyODAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMjgwIDQwMCI+PHJlY3Qgd2lkdGg9IjI4MCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNlY2U4ZGQiLz48cmVjdCB4PSI4IiB5PSI4IiB3aWR0aD0iMjY0IiBoZWlnaHQ9IjM4NCIgcng9IjEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJkMzMzMCIgc3Ryb2tlLW9wYWNpdHk9Ii4xOCIvPjxwYXRoIGQ9Ik0xOCAxOFYzODIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4yMiIgc3Ryb2tlLXdpZHRoPSIzIi8+PHJlY3QgeD0iMjgiIHk9IjE0MiIgd2lkdGg9IjIxIiBoZWlnaHQ9IjE0NyIgZmlsbD0iI2RkODc2NCIgb3BhY2l0eT0iMC44NSIvPjxyZWN0IHg9IjY0IiB5PSIxNDIiIHdpZHRoPSIyMSIgaGVpZ2h0PSIxNDciIGZpbGw9IiNkZDg3NjQiIG9wYWNpdHk9IjAuNzYiLz48cmVjdCB4PSIxMDAiIHk9IjE0MiIgd2lkdGg9IjIxIiBoZWlnaHQ9IjE0NyIgZmlsbD0iI2RkODc2NCIgb3BhY2l0eT0iMC42Njk5OTk5OTk5OTk5OTk5Ii8+PHJlY3QgeD0iMTM2IiB5PSIxNDIiIHdpZHRoPSIyMSIgaGVpZ2h0PSIxNDciIGZpbGw9IiNkZDg3NjQiIG9wYWNpdHk9IjAuNTgiLz48cmVjdCB4PSIxNzIiIHk9IjE0MiIgd2lkdGg9IjIxIiBoZWlnaHQ9IjE0NyIgZmlsbD0iI2RkODc2NCIgb3BhY2l0eT0iMC40OSIvPjxyZWN0IHg9IjIwOCIgeT0iMTQyIiB3aWR0aD0iMjEiIGhlaWdodD0iMTQ3IiBmaWxsPSIjZGQ4NzY0IiBvcGFjaXR5PSIwLjQiLz48cmVjdCB4PSIyNDQiIHk9IjE0MiIgd2lkdGg9IjIxIiBoZWlnaHQ9IjE0NyIgZmlsbD0iI2RkODc2NCIgb3BhY2l0eT0iMC4zMDk5OTk5OTk5OTk5OTk5NCIvPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIyODAiIGhlaWdodD0iMTI2IiBmaWxsPSIjZWNlOGRkIiBmaWxsLW9wYWNpdHk9Ii45MiIvPjx0ZXh0IHg9IjE0MCIgeT0iNzUiIGZpbGw9IiMyZDMzMzAiIGZvbnQtc2l6ZT0iMzEiIGZvbnQtd2VpZ2h0PSI4MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBsZXR0ZXItc3BhY2luZz0iMSI+VEhJTktJTkcsPC90ZXh0Pjx0ZXh0IHg9IjE0MCIgeT0iMTEyIiBmaWxsPSIjMmQzMzMwIiBmb250LXNpemU9IjMxIiBmb250LXdlaWdodD0iODAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgbGV0dGVyLXNwYWNpbmc9IjEiPkZBU1QgQU5EPC90ZXh0Pjx0ZXh0IHg9IjE0MCIgeT0iMTQ5IiBmaWxsPSIjMmQzMzMwIiBmb250LXNpemU9IjMxIiBmb250LXdlaWdodD0iODAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgbGV0dGVyLXNwYWNpbmc9IjEiPlNMT1c8L3RleHQ+PHJlY3QgeD0iMjgiIHk9IjMzOSIgd2lkdGg9IjIyNCIgaGVpZ2h0PSIxIiBmaWxsPSIjMmQzMzMwIiBvcGFjaXR5PSIuNSIvPjx0ZXh0IHg9IjE0MCIgeT0iMzYzIiBmaWxsPSIjMmQzMzMwIiBmb250LXNpemU9IjEzIiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC13ZWlnaHQ9IjcwMCIgbGV0dGVyLXNwYWNpbmc9IjIiPkRBTklFTCBLQUhORU1BTjwvdGV4dD48dGV4dCB4PSIxNDAiIHk9IjM4MyIgZmlsbD0iIzJkMzMzMCIgb3BhY2l0eT0iLjUiIGZvbnQtc2l6ZT0iOCIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5QRVJTT05BTCBMSUJSQVJZIEVESVRJT048L3RleHQ+PC9zdmc+"};
-  const bookCover = slug => INLINE_COVERS[slug] || `assets/covers/${slug}.svg`;
+  const bookCover = slug => `assets/covers/${slug}.svg`;
   const placeholderCover = title => {
     const words = String(title||'BOOK').split(/\s+/).slice(0,3).map(w=>w.slice(0,13));
     const body = words.map((w,i)=>`<text x="140" y="${140+i*32}" text-anchor="middle" font-family="Georgia,serif" fill="%23f7f9ef" font-size="25">${encodeURIComponent(w.replace(/[&<>]/g,''))}</text>`).join('');
@@ -363,7 +362,7 @@ html[data-accent]:not([data-accent="forest"]) .mobile-nav .mobile-add{box-shadow
       }
       render();
       if (state.storageMode==='fallback') toast('Limited storage mode: use JSON backups regularly.');
-      if (false && 'serviceWorker' in navigator && location.protocol!=='file:') {
+      if ('serviceWorker' in navigator && location.protocol!=='file:') {
         navigator.serviceWorker.register('./sw.js').catch(err=>console.warn('Offline cache unavailable:',err));
       }
       if (navigator.storage?.persist && location.protocol!=='file:') {
@@ -474,13 +473,13 @@ html[data-accent]:not([data-accent="forest"]) .mobile-nav .mobile-add{box-shadow
     state.formCover=b.cover||'';
     return dialogWrap(dialogHeading(edit?'Edit book':'Add a new book',edit?'Update the details of your collection':'Fill the basics now; you can edit everything later.'),
       `<form id="book-form">
-        <div class="form-block"><h3>Quick add with ISBN</h3><div class="isbn-quick"><div class="field"><label for="form-isbn">ISBN-10 / ISBN-13</label><input id="form-isbn" name="isbn" inputmode="numeric" placeholder="e.g. 9780735211292" value="${val('isbn',prefill)}"></div><button class="btn btn-secondary" type="button" data-action="isbn-lookup">${icon('search')} Look up</button><button class="btn btn-secondary" type="button" data-action="open-scan">${icon('camera')} Scan</button></div><p class="form-hint" id="lookup-status">Optional — lookup uses Open Library and requires internet.</p></div>
+        <div class="form-block"><h3>Quick add with ISBN</h3><div class="isbn-quick"><div class="field"><label for="form-isbn">ISBN-10 / ISBN-13</label><input id="form-isbn" name="isbn" inputmode="numeric" placeholder="e.g. 9780735211292" value="${val('isbn',prefill)}"></div><button class="btn btn-secondary" type="button" data-action="isbn-lookup">${icon('search')} Look up</button><button class="btn btn-secondary" type="button" data-action="open-scan">${icon('camera')} Scan</button></div><p class="form-hint" id="lookup-status">Optional — searches multiple public catalogues and needs internet.</p><div id="lookup-external-links" class="form-hint" hidden></div></div>
         <div class="form-block"><h3>Book details</h3><div class="form-grid">
          <div class="field full"><label for="form-title">Title <span aria-label="required">*</span></label><input id="form-title" name="title" required maxlength="200" placeholder="Book title" value="${val('title')}"></div>
          <div class="field full"><label for="form-subtitle">Subtitle</label><input id="form-subtitle" name="subtitle" maxlength="240" placeholder="Optional subtitle" value="${val('subtitle')}"></div>
          <div class="field full"><label for="form-author">Author</label><input id="form-author" name="author" maxlength="200" placeholder="Author name" value="${val('author')}"></div>
          <div class="field mobile-full"><label for="form-publisher">Publisher</label><input id="form-publisher" name="publisher" maxlength="160" placeholder="Publisher" value="${val('publisher')}"></div>
-         <div class="field mobile-full"><label for="form-language">Language</label><input id="form-language" name="language" maxlength="60" placeholder="English, French, Ukrainian…" value="${val('language')}"></div>
+         <div class="field mobile-full"><label for="form-language">Language</label><input id="form-language" name="language" maxlength="60" placeholder="e.g. English, French, Spanish" value="${val('language')}"></div>
          <div class="field"><label for="form-year">Publication year</label><input id="form-year" name="year" inputmode="numeric" type="number" min="0" max="2200" placeholder="2026" value="${val('year')}"></div>
          <div class="field"><label for="form-pages">Number of pages</label><input id="form-pages" name="pages" inputmode="numeric" type="number" min="0" max="999999" value="${val('pages')}"></div>
          <div class="field mobile-full"><label for="form-genre">Genre</label><input id="form-genre" name="genre" list="genre-options" placeholder="e.g. Fantasy" value="${val('genre')}"><datalist id="genre-options">${genreList.map(g=>`<option value="${h(g)}"></option>`).join('')}</datalist></div>
@@ -641,26 +640,266 @@ html[data-accent]:not([data-accent="forest"]) .mobile-nav .mobile-add{box-shadow
     try{await FolioDB.replaceAll(books,shelves,tombs);state.books=books;state.shelves=shelves;state.tombstones=tombs;state.pendingImport=null;closeDialog();clearFilters();navigate('library');toast(`${books.length} books safely imported`)}
     catch(err){saveError(err)}finally{if(btn?.isConnected)btn.disabled=false}
   }
+  /* Multi-catalogue ISBN lookup. Each source is public and is requested directly
+     from the browser; unavailable/CORS-blocked sources fail independently.
+     We accept edition-level ISBN matches only: never substitute a similar title.
+     Personal library records and notes are never sent to the catalogues. */
+  const isbnDigits = value => plain(value).replace(/[\s-]/g,'').toUpperCase();
+  const isbn10From13 = isbn => {
+    if (!/^978\d{10}$/.test(isbn)) return '';
+    const nine = isbn.slice(3, 12);
+    const check = (11 - [...nine].reduce((sum, digit, i) => sum + (10 - i) * Number(digit), 0) % 11) % 11;
+    return nine + (check === 10 ? 'X' : check);
+  };
+  const isbn13From10 = isbn => {
+    if (!/^\d{9}[\dX]$/.test(isbn)) return '';
+    const twelve = '978' + isbn.slice(0,9);
+    const sum = [...twelve].reduce((total, digit, i) => total + Number(digit) * (i % 2 ? 3 : 1), 0);
+    return twelve + ((10 - sum % 10) % 10);
+  };
+  const isbnVariants = isbn => new Set([isbn, isbn10From13(isbn), isbn13From10(isbn)].filter(Boolean));
+  const isMatchingIdentifier = (value, isbn) => isbnVariants(isbn).has(isbnDigits(value));
+  const textValue = value => {
+    if (typeof value === 'string' || typeof value === 'number') return String(value).trim();
+    if (Array.isArray(value)) return value.map(textValue).filter(Boolean).join(', ');
+    if (value && typeof value === 'object') {
+      if (typeof value.value === 'string') return value.value.trim();
+      if (typeof value.name === 'string') return value.name.trim();
+      if (typeof value.label === 'string') return value.label.trim();
+      if (typeof value.mainTitle === 'string') return value.mainTitle.trim();
+      return textValue(value.en || value.fr || value.de || value.uk || '');
+    }
+    return '';
+  };
+  const firstYear = value => textValue(value).match(/(?:1[5-9]|20|21)\d{2}/)?.[0] || '';
+  const secureCover = value => {
+    const u = textValue(value);
+    if (!u || !/^https?:\/\//i.test(u)) return '';
+    return u.replace(/^http:\/\//i, 'https://');
+  };
+  const isbnFields = data => {
+    if (!data || typeof data !== 'object') return null;
+    const fields = {
+      title: textValue(data.title),
+      subtitle: textValue(data.subtitle),
+      author: textValue(data.author),
+      publisher: textValue(data.publisher),
+      year: firstYear(data.year),
+      pages: (Number(data.pages) > 0 ? Math.floor(Number(data.pages)) : (textValue(data.pages).match(/\b(\d{1,5})\s*(?:p(?:ages)?|s(?:eiten)?)\b/i)?.[1] || '')),
+      description: textValue(data.description),
+      language: textValue(data.language),
+      genre: textValue(data.genre),
+      cover: secureCover(data.cover)
+    };
+    return fields.title ? fields : null;
+  };
+  const jsonFrom = async (url, signal) => {
+    const response = await fetch(url, {signal, credentials:'omit'});
+    if (!response.ok) throw Error(`HTTP ${response.status}`);
+    return response.json();
+  };
+  const textFrom = async (url, signal) => {
+    const response = await fetch(url, {signal, credentials:'omit'});
+    if (!response.ok) throw Error(`HTTP ${response.status}`);
+    return response.text();
+  };
+  const openLibraryLookup = async (isbn, signal) => {
+    const result = await jsonFrom(`https://openlibrary.org/api/books?bibkeys=ISBN:${encodeURIComponent(isbn)}&format=json&jscmd=data`, signal);
+    const data = result[`ISBN:${isbn}`];
+    if (!data) return null;
+    return isbnFields({
+      title:data.title, subtitle:data.subtitle,
+      author:(data.authors || []).map(a => a.name || '').filter(Boolean).join(', '),
+      year:data.publish_date,
+      publisher:(data.publishers || []).map(p => p.name || '').filter(Boolean).join(', '),
+      pages:data.number_of_pages,
+      description:typeof data.notes === 'string' ? data.notes : data.notes?.value,
+      cover:data.cover?.large || data.cover?.medium || data.cover?.small
+    });
+  };
+  const googleBooksLookup = async (isbn, signal) => {
+    const json = await jsonFrom(`https://www.googleapis.com/books/v1/volumes?q=isbn:${encodeURIComponent(isbn)}&maxResults=10`, signal);
+    // Google Books sometimes responds with loosely related volumes. Check the ISBN.
+    const volume = (json.items || []).map(v => v.volumeInfo).find(v => (v?.industryIdentifiers || []).some(id => isMatchingIdentifier(id.identifier, isbn)));
+    if (!volume) return null;
+    return isbnFields({
+      title:volume.title, subtitle:volume.subtitle,
+      author:volume.authors, publisher:volume.publisher, year:volume.publishedDate,
+      pages:volume.pageCount, description:volume.description, language:volume.language,
+      genre:volume.categories?.[0],
+      cover:volume.imageLinks?.extraLarge || volume.imageLinks?.large || volume.imageLinks?.medium || volume.imageLinks?.thumbnail
+    });
+  };
+  const inventaireLookup = async (isbn, signal) => {
+    // Inventaire publishes anonymous ISBN facts and edition entity endpoints.
+    // Try facts first, then an edition entity when facts are incomplete.
+    let data;
+    try { data = await jsonFrom(`https://inventaire.io/api/data/isbn?isbn=${encodeURIComponent(isbn)}`, signal); }
+    catch (err) { if (signal.aborted) throw err; }
+    const parseEntity = input => {
+      const entity = input?.entity || input?.edition || input;
+      const claims = entity?.claims || {};
+      const claim = key => textValue((claims[key] || [])[0]);
+      return isbnFields({
+        title:entity?.title || entity?.labels || input?.title || claim('wdt:P1476'),
+        subtitle:entity?.subtitle || input?.subtitle,
+        author:entity?.author || entity?.authors || input?.authors,
+        publisher:entity?.publisher || input?.publisher || claim('wdt:P123'),
+        year:entity?.year || input?.year || claim('wdt:P577'),
+        pages:entity?.pages || input?.pages || claim('wdt:P1104'),
+        description:entity?.description || input?.description || entity?.descriptions,
+        language:entity?.language || input?.language,
+        cover:entity?.cover || input?.cover || entity?.image || entity?.images?.[0]
+      });
+    };
+    const basic = parseEntity(data);
+    if (basic) return basic;
+    const details = await jsonFrom(`https://inventaire.io/api/entities?action=by-uris&uris=${encodeURIComponent('isbn:' + isbn)}`, signal);
+    return parseEntity(details?.entities?.['isbn:' + isbn]);
+  };
+  const lobidLookup = async (isbn, signal) => {
+    const json = await jsonFrom(`https://lobid.org/resources/search?q=${encodeURIComponent(`isbn:${isbn}`)}&format=json&size=5`, signal);
+    const member = (json.member || []).find(item => {
+      const listedISBNs = [item.isbn].flat().filter(Boolean);
+      // Query is ISBN-specific; if a dedicated ISBN field exists, verify it.
+      return !listedISBNs.length || listedISBNs.some(v => isMatchingIdentifier(v, isbn));
+    });
+    if (!member) return null;
+    const contributors = (member.contribution || []).map(c => textValue(c.agent || c)).filter(Boolean).join(', ');
+    return isbnFields({
+      title:member.title?.mainTitle || member.title || member.name,
+      subtitle:member.title?.subtitle || member.subtitle,
+      author:contributors || member.creator || member.author || member.responsibilityStatement,
+      publisher:member.publication?.[0]?.publishedBy || member.publisher || member.publishedBy,
+      year:member.publication?.[0]?.startDate || member.issued || member.datePublished || member.publication?.[0]?.date,
+      pages:member.extent?.[0]?.label || member.numberOfPages,
+      language:member.language?.[0]?.label || member.language,
+      description:member.abstract || member.description,
+      cover:member.image || member.cover
+    });
+  };
+  const bnfLookup = async (isbn, signal) => {
+    const query = `bib.isbn all "${isbn}"`;
+    const url = `https://catalogue.bnf.fr/api/SRU?version=1.2&operation=searchRetrieve&query=${encodeURIComponent(query)}&recordSchema=dc&maximumRecords=3&startRecord=1`;
+    const xmlText = await textFrom(url, signal);
+    const xml = new DOMParser().parseFromString(xmlText, 'application/xml');
+    if (xml.querySelector('parsererror')) throw Error('Invalid BnF XML');
+    const record = xml.getElementsByTagNameNS('*','recordData')[0];
+    if (!record) return null;
+    const dc = name => [...record.getElementsByTagNameNS('http://purl.org/dc/elements/1.1/', name)].map(node => node.textContent.trim()).filter(Boolean);
+    // bib.isbn is edition-specific; verify where an identifier was included.
+    const ids = dc('identifier').filter(value => /(?:97[89]\d|\d{9}[\dX])/i.test(value.replace(/[-\s]/g,'')));
+    if (ids.length && !ids.some(value => [...isbnVariants(isbn)].some(v => value.replace(/[-\s]/g,'').includes(v)))) return null;
+    return isbnFields({
+      title:dc('title')[0], author:dc('creator').join(', '),
+      publisher:dc('publisher').join(', '), year:dc('date')[0],
+      description:dc('description').join(' '), language:dc('language')[0],
+      genre:dc('subject')[0]
+    });
+  };
+  const wikidataLookup = async (isbn, signal) => {
+    const isbn10 = isbn10From13(isbn);
+    const parts = [`{ ?book wdt:P212 "${isbn}". }`, ...(isbn10 ? [`{ ?book wdt:P957 "${isbn10}". }`] : [])];
+    const query = `SELECT ?bookLabel ?authorLabel ?publisherLabel ?date ?pages ?image WHERE {
+      ${parts.join(' UNION ')}
+      OPTIONAL { ?book wdt:P50 ?author. }
+      OPTIONAL { ?book wdt:P123 ?publisher. }
+      OPTIONAL { ?book wdt:P577 ?date. }
+      OPTIONAL { ?book wdt:P1104 ?pages. }
+      OPTIONAL { ?book wdt:P18 ?image. }
+      SERVICE wikibase:label { bd:serviceParam wikibase:language "fr,en,de,uk". }
+    } LIMIT 4`;
+    const json = await jsonFrom(`https://query.wikidata.org/sparql?format=json&query=${encodeURIComponent(query)}`, signal);
+    const row = json.results?.bindings?.[0];
+    if (!row || /^Q\d+$/.test(row.bookLabel?.value || '')) return null;
+    return isbnFields({
+      title:row.bookLabel?.value, author:row.authorLabel?.value,
+      publisher:row.publisherLabel?.value, year:row.date?.value,
+      pages:row.pages?.value, cover:row.image?.value
+    });
+  };
+  const ISBN_SERVICES = [
+    ['Open Library', openLibraryLookup],
+    ['Google Books', googleBooksLookup],
+    ['BnF (France)', bnfLookup],
+    ['Inventaire', inventaireLookup],
+    ['lobid (Germany)', lobidLookup],
+    ['Wikidata', wikidataLookup]
+  ];
+  function showISBNExternalLinks(isbn){
+    const target = document.getElementById('lookup-external-links');
+    if (!target) return;
+    target.hidden = false;
+    // These are manual catalogue searches. ISBNsearch.org does not offer
+    // a public browser API, so we never scrape or pretend to auto-import it.
+    target.innerHTML = `<span>Search manually: </span>
+      <a href="https://isbnsearch.org/isbn/${encodeURIComponent(isbn)}" target="_blank" rel="noopener noreferrer">ISBNsearch.org ↗</a>
+      · <a href="https://www.google.com/search?q=${encodeURIComponent('"' + isbn + '" book')}" target="_blank" rel="noopener noreferrer">Web search ↗</a>`;
+  }
   async function lookupISBN(){
-    const isbn=plain(document.getElementById('form-isbn')?.value).replace(/[\s-]/g,'').toUpperCase();const s=document.getElementById('lookup-status');if(!s)return;
-    if(!validISBN(isbn)){s.textContent='Invalid ISBN checksum. Please check all digits.';return}
-    s.textContent='Looking up book metadata…';
-    const already=state.books.find(b=>b.isbn===isbn && b.id!==state.dialog?.bookId);if(already)s.textContent=`Already in library: ${already.title}. Looking up details…`;
-    const ctl=new AbortController();const timer=setTimeout(()=>ctl.abort(),10000);
-    try {
-      let fields={};
-      try {const res=await fetch(`https://openlibrary.org/api/books?bibkeys=ISBN:${encodeURIComponent(isbn)}&format=json&jscmd=data`,{signal:ctl.signal});if(!res.ok)throw Error('Open Library unavailable');const json=await res.json();const data=json[`ISBN:${isbn}`];if(data)fields={title:data.title||'',subtitle:data.subtitle||'',author:(data.authors||[]).map(a=>a.name).join(', '),year:(data.publish_date||'').match(/\d{4}/)?.[0]||'',publisher:(data.publishers||[]).map(p=>p.name).join(', '),pages:data.number_of_pages||'',description:typeof data.notes==='string'?data.notes:'',cover:data.cover?.large||data.cover?.medium||''};}
-      catch(err){if(err.name==='AbortError')throw err;}
-      if(!fields.title){const res=await fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${encodeURIComponent(isbn)}&maxResults=1`,{signal:ctl.signal});if(!res.ok)throw Error('Lookup services unavailable');const json=await res.json();const data=json.items?.[0]?.volumeInfo;if(data)fields={title:data.title||'',subtitle:data.subtitle||'',author:(data.authors||[]).join(', '),year:(data.publishedDate||'').match(/\d{4}/)?.[0]||'',publisher:data.publisher||'',pages:data.pageCount||'',description:data.description||'',language:data.language||'',cover:data.imageLinks?.thumbnail?.replace(/^http:/,'https:')||''};}
-      if(!fields.title){s.textContent='No book found. You can enter the details manually.';return}
-      for(const [k,v] of Object.entries(fields)){
-        if(k==='cover'){if(v&&!state.formCover){state.formCover=v;document.getElementById('form-cover').value=v;document.getElementById('form-cover-preview').src=v}continue}
-        const target=document.querySelector(`#book-form [name="${k}"]`);
-        if(target && v && !target.value)target.value=v;
+    const isbn = isbnDigits(document.getElementById('form-isbn')?.value);
+    const status = document.getElementById('lookup-status');
+    if (!status) return;
+    if (!validISBN(isbn)) { status.textContent = 'Invalid ISBN checksum. Please check all digits.'; return; }
+    state.lookupController?.abort();
+    const ctl = new AbortController();
+    state.lookupController = ctl;
+    const btn = document.querySelector('[data-action="isbn-lookup"]');
+    if (btn) btn.disabled = true;
+    const already = state.books.find(b => b.isbn === isbn && b.id !== state.dialog?.bookId);
+    showISBNExternalLinks(isbn);
+    status.textContent = `Searching ${ISBN_SERVICES.length} catalogues for ${isbn}…`;
+    const timer = setTimeout(() => ctl.abort(), 8500);
+    let responded = 0;
+    const results = await Promise.allSettled(ISBN_SERVICES.map(async ([name, lookup]) => {
+      try {
+        const fields = await lookup(isbn, ctl.signal);
+        return {name, fields};
+      } finally {
+        responded++;
+        if (!ctl.signal.aborted && status.isConnected) status.textContent = `Searching book catalogues… ${responded}/${ISBN_SERVICES.length} checked`;
       }
-      s.textContent=`Found “${fields.title}”. Check the information before saving.${already?' Note: this ISBN is already in your library.':''}`;toast('ISBN details found');
-    }catch(err){s.textContent=err.name==='AbortError'?'Lookup timed out. Enter details manually or retry.':'Lookup unavailable. You can enter details manually.'}
-    finally{clearTimeout(timer)}
+    }));
+    clearTimeout(timer);
+    if (state.lookupController !== ctl) return;
+    state.lookupController = null;
+    if (btn?.isConnected) btn.disabled = false;
+    if (ctl.signal.aborted && !results.some(r => r.status === 'fulfilled' && r.value.fields)) {
+      status.textContent = 'Search timed out or was cancelled. Retry, or use the external search links.';
+      return;
+    }
+    const matches = results.filter(r => r.status === 'fulfilled' && r.value.fields).map(r => r.value);
+    const failures = results.filter(r => r.status === 'rejected').length;
+    if (!matches.length) {
+      status.textContent = failures
+        ? `No record retrieved (${failures} catalogues unavailable or blocked by the browser). Try external search or manual entry.`
+        : 'No catalogue returned this ISBN. Try external search or manual entry.';
+      return;
+    }
+    // Metadata is merged only when missing: source priority follows the
+    // ISBN_SERVICES array, and anything the user already typed wins.
+    const merged = {};
+    for (const {fields} of matches) for (const [key, value] of Object.entries(fields)) {
+      if (value !== '' && value != null && !merged[key]) merged[key] = value;
+    }
+    const form = document.getElementById('book-form');
+    if (!form || !status.isConnected) return;
+    for (const [key, value] of Object.entries(merged)) {
+      if (key === 'cover') {
+        if (value && !state.formCover) {
+          state.formCover = value;
+          const coverInput = document.getElementById('form-cover');
+          const coverPreview = document.getElementById('form-cover-preview');
+          if (coverInput) coverInput.value = value;
+          if (coverPreview) coverPreview.src = value;
+        }
+        continue;
+      }
+      const input = form.elements.namedItem(key);
+      if (input && !input.value && value) input.value = value;
+    }
+    status.textContent = `Found “${merged.title}” via ${matches.map(r => r.name).join(', ')}. Review edition details before saving.${already ? ` Already in library: ${already.title}.` : ''}${failures ? ` ${failures} source(s) unavailable.` : ''}`;
+    toast('Book details found');
   }
   async function compressImage(file){return new Promise((resolve,reject)=>{if(file.size>12*1024*1024){reject(Error('Image exceeds 12 MB.'));return}const reader=new FileReader();reader.onerror=()=>reject(Error('Could not read the image'));reader.onload=()=>{const img=new Image();img.onerror=()=>reject(Error('Unsupported image'));img.onload=()=>{const scale=Math.min(1,440/Math.max(img.width,img.height));const canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(img.width*scale));canvas.height=Math.max(1,Math.round(img.height*scale));canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);resolve(canvas.toDataURL('image/jpeg',.75))};img.src=reader.result};reader.readAsDataURL(file)})}
   function stopScan(){if(state.scanLoop){clearTimeout(state.scanLoop);state.scanLoop=null}if(state.scanner){state.scanner.getTracks().forEach(t=>t.stop());state.scanner=null}}
