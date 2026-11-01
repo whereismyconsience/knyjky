@@ -1,0 +1,15 @@
+{
+  "name": "Folio — Personal Library",
+  "short_name": "Folio",
+  "description": "A private home for your book collection and reading notes.",
+  "id": "./index.html",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7f8f5",
+  "theme_color": "#245d47",
+  "icons": [
+    {"src":"assets/icons/folio-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
+    {"src":"assets/icons/folio-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  ]
+}

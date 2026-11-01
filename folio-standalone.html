@@ -1,0 +1,829 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f8f8f5">
+  <meta name="description" content="Folio, a calm home for your personal library.">
+  <title>Folio — Your Personal Library</title>
+  <style>
+:root{color-scheme:light;--bg:#f7f8f5;--surface:#fff;--surface-2:#f0f3ee;--surface-3:#e5ebe4;--text:#24332b;--muted:#77847a;--faint:#a6afa8;--line:#e4e9e3;--primary:#2a5646;--primary-hover:#1e4537;--primary-soft:#e4eee8;--accent:#c2e0c8;--sidebar:#1f3d32;--sidebar-text:#f7f7ef;--shadow:0 14px 42px rgba(23,43,30,.055);--radius:20px;--danger:#b54e45;--warning:#b17935;--input-bg:#f8faf7;--overlay:rgba(16,25,19,.52)}
+html[data-theme="dark"]{color-scheme:dark;--bg:#141c19;--surface:#1d2723;--surface-2:#26332d;--surface-3:#35443b;--text:#f0f5ed;--muted:#acbbb0;--faint:#84988b;--line:#34443a;--primary:#9ed2ae;--primary-hover:#b8e3c1;--primary-soft:#31483a;--accent:#80b997;--sidebar:#0f2018;--sidebar-text:#edf4eb;--shadow:0 15px 45px rgba(0,0,0,.17);--danger:#f2968e;--warning:#deb06e;--input-bg:#19231f;--overlay:rgba(0,0,0,.65)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased}button,input,textarea,select{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.5}a{color:inherit;text-decoration:none}input,textarea,select{color:var(--text)}:focus-visible{outline:3px solid #86bea0;outline-offset:3px}.icon-sprite{position:absolute;width:0;height:0;overflow:hidden}.icon{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}img{max-width:100%}.app-shell{min-height:100vh;display:flex}.sidebar{width:252px;flex:0 0 252px;background:var(--sidebar);color:var(--sidebar-text);padding:37px 23px 25px;display:flex;flex-direction:column;min-height:100vh;position:sticky;top:0;height:100vh}.brand{display:flex;align-items:center;gap:12px;padding:3px 6px}.brand-symbol,.topbar-mark{background:#dcefdc;color:#244a36;width:41px;height:41px;border-radius:13px;display:grid;place-items:center}.brand-symbol .icon{width:25px;height:25px}.brand strong{font-family:Georgia,serif;font-size:30px;font-weight:700;line-height:.86;letter-spacing:-1.5px}.brand-dot{color:#a2d2a9}.brand small{display:block;letter-spacing:2.15px;font-size:8px;margin-top:9px;color:#b1c6b7;font-weight:700}.side-caption{font-size:10px;letter-spacing:2.3px;color:#99b4a2;margin:57px 17px 14px;font-weight:700}.side-nav{display:grid;gap:8px}.nav-item{border:0;text-align:left;background:transparent;color:#b7cabe;display:flex;align-items:center;gap:15px;padding:13px 17px;border-radius:12px;font-weight:600;width:100%;transition:.15s}.nav-item .icon{height:20px;width:20px}.nav-item:hover{background:#2c4b3e;color:#fff}.nav-item.active{background:#3d6450;color:#fff}.sidebar-bottom{margin-top:auto}.sidebar-message{padding:18px;background:linear-gradient(130deg,#2b5946,#345544);border-radius:17px;position:relative;overflow:hidden}.sidebar-message>.icon{color:#b5d9b5}.sidebar-message p{font:20px/1.23 Georgia,serif;margin:10px 0 14px}.sidebar-message p em{font-weight:normal;color:#c9e2ce}.sidebar-message span{font-size:11px;color:#b7d2bf}.privacy-indicator{color:#a5bdae;display:flex;align-items:center;gap:8px;font-size:10px;margin:25px 2px 0}.privacy-indicator .icon{width:16px;height:16px}.main-pane{flex:1;min-width:0}.topbar{height:89px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:flex-end;padding:0 clamp(24px,4vw,68px);background:var(--bg)}.topbar-brand{display:none}.topbar-right{display:flex;align-items:center;gap:16px}.topbar-caption{font-size:12px;color:var(--muted)}.icon-btn{height:40px;width:40px;display:grid;place-items:center;border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:12px}.icon-btn:hover{background:var(--surface-2)}.avatar{height:38px;width:38px;border:0;border-radius:50%;background:#d3e6d6;color:#284d3d;font-weight:800;font-family:Georgia,serif}.main-content{width:min(1420px,100%);margin:0 auto;padding:36px clamp(24px,4vw,68px) 85px;min-height:calc(100vh - 89px)}.page-head{display:flex;justify-content:space-between;gap:20px;align-items:center;margin:0 0 30px}.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:2.1px;font-weight:800;color:var(--primary);margin:0 0 11px}.page-title{font-family:Georgia,"Times New Roman",serif;font-size:clamp(32px,3.4vw,45px);font-weight:500;line-height:1.13;letter-spacing:-1.1px;margin:0 0 8px}.page-subtitle{color:var(--muted);margin:0;font-size:14px}.serif{font-family:Georgia,serif}.muted{color:var(--muted)}.small{font-size:12px}.btn{border-radius:11px;border:1px solid transparent;min-height:43px;padding:10px 17px;display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:650;white-space:nowrap;transition:background .15s,transform .15s,box-shadow .15s}.btn .icon{height:17px;width:17px}.btn:hover:not(:disabled){transform:translateY(-1px)}.btn-primary{background:var(--primary);color:var(--bg)}html:not([data-theme=dark]) .btn-primary{color:white}.btn-primary:hover{background:var(--primary-hover)}.btn-secondary{background:var(--surface);color:var(--text);border-color:var(--line)}.btn-secondary:hover{background:var(--surface-2)}.btn-ghost{background:transparent;color:var(--text)}.btn-ghost:hover{background:var(--surface-2)}.btn-danger{color:var(--danger);background:transparent;border-color:var(--line)}.btn-danger:hover{background:var(--surface-2)}.btn-soft{background:var(--primary-soft);color:var(--primary)}.btn-block{width:100%}.divider{height:1px;background:var(--line);margin:20px 0}.section-heading{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:32px 0 17px}.section-heading h2{font:normal 24px Georgia,serif;letter-spacing:-.5px;margin:0}.section-heading p{margin:3px 0 0;color:var(--muted);font-size:12px}.text-link{border:0;background:none;color:var(--primary);display:inline-flex;align-items:center;gap:6px;font-weight:700;padding:7px 0}.text-link .icon{width:15px;height:15px}.stats-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}.stat-card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:21px 23px;display:flex;align-items:center;gap:18px}.stat-icon{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:var(--primary-soft);color:var(--primary)}.stat-icon.alt{background:#fff3e3;color:#a7753d}.stat-icon.blue{background:#e6eff2;color:#4b8190}html[data-theme=dark] .stat-icon.alt{background:#433724;color:#f0c88c}html[data-theme=dark] .stat-icon.blue{background:#294248;color:#a0c6d2}.stat-icon .icon{width:23px;height:23px}.stat-label{font-size:12px;color:var(--muted)}.stat-value{font-size:27px;line-height:1.25;font-weight:750;letter-spacing:-.8px;margin-top:1px}.dashboard-main{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(260px,.7fr);gap:18px;margin-top:20px}.feature-panel{background:#254a3a;color:#f5f8f1;border-radius:22px;overflow:hidden;position:relative;min-height:262px;display:flex;align-items:center;padding:30px 28px}.feature-panel:before{content:"";position:absolute;width:320px;height:320px;border:1px solid #ffffff20;border-radius:50%;right:-80px;top:-120px;box-shadow:0 0 0 38px #ffffff08,0 0 0 90px #ffffff07}.feature-copy{position:relative;z-index:1;max-width:50%}.feature-kicker{font-size:10px;color:#b9d8c5;letter-spacing:2px;text-transform:uppercase;font-weight:800}.feature-title{font:normal 29px/1.12 Georgia,serif;margin:12px 0}.feature-panel p{font-size:12px;color:#cce1d1;max-width:230px;margin:0 0 19px}.feature-panel .btn{background:#f4f8f0;color:#2a513b;font-size:12px;min-height:37px;padding:8px 13px}.feature-books{position:absolute;right:48px;top:29px;bottom:27px;width:185px;display:flex;align-items:center}.feature-books img{width:117px;height:176px;object-fit:cover;box-shadow:8px 15px 20px #101d1547;transform:rotate(8deg);border-radius:3px}.feature-books img+img{position:absolute;width:106px;height:158px;object-fit:cover;right:0;transform:rotate(-10deg);z-index:0;top:46px}.feature-books img:first-child{position:relative;z-index:2}.reading-panel{background:var(--surface);border:1px solid var(--line);border-radius:21px;padding:22px}.reading-panel-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}.reading-panel-head h3{margin:0;font-size:14px}.reading-inline{display:flex;gap:14px;align-items:center}.reading-inline img{height:116px;width:78px;border-radius:4px;object-fit:cover;box-shadow:0 6px 20px #00000014}.reading-inline h3{font-size:15px;line-height:1.3;margin:0 0 4px}.reading-inline p{font-size:11px;margin:0 0 12px;color:var(--muted)}.progress-track{height:7px;background:var(--surface-3);border-radius:20px;overflow:hidden}.progress-track>span{display:block;height:100%;background:#81ba93;border-radius:20px}.progress-caption{display:flex;justify-content:space-between;gap:10px;margin-top:7px;font-size:11px;color:var(--muted)}.books-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px}.book-card{min-width:0;cursor:pointer;position:relative}.book-cover-wrap{position:relative;aspect-ratio:7/10;border-radius:8px;overflow:hidden;background:var(--surface-3);box-shadow:0 8px 22px #1c34201a}.book-card .book-cover{display:block;height:100%;width:100%;object-fit:cover;transition:transform .22s}.book-card:hover .book-cover{transform:scale(1.045)}.book-card .book-title{margin:11px 0 3px;font-size:13px;font-weight:750;line-height:1.32;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.book-card .book-author{font-size:11px;color:var(--muted);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}.book-card .book-bottom{display:flex;justify-content:space-between;align-items:center;gap:5px;margin-top:8px}.book-price{font-size:11px;font-weight:700;color:var(--text)}.status-chip{display:inline-block;font-size:10px;padding:4px 8px;border-radius:20px;background:var(--surface-2);color:var(--muted);font-weight:750;white-space:nowrap}.status-chip.reading{background:#e3f1e4;color:#3f7851}.status-chip.completed{background:#e6edf7;color:#547496}.status-chip.to-read{background:#fff0dc;color:#ae7f3b}.status-chip.paused{background:#f2e7dc;color:#9c7150}.status-chip.abandoned{background:#f4e1e0;color:#a96060}html[data-theme=dark] .status-chip.reading{background:#294b35;color:#b2ddbc}html[data-theme=dark] .status-chip.completed{background:#263f50;color:#a7c7eb}html[data-theme=dark] .status-chip.to-read{background:#4e3c25;color:#e5c385}html[data-theme=dark] .status-chip.paused{background:#44392a;color:#dcb793}html[data-theme=dark] .status-chip.abandoned{background:#4d3433;color:#e5aaa6}.book-list{display:grid;gap:11px}.book-list .book-card{display:flex;gap:17px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:11px 16px}.book-list .book-cover-wrap{width:66px;aspect-ratio:7/10;flex:none}.book-list .book-card-body{flex:1;min-width:0}.book-list .book-title{margin:0 0 5px;font-size:14px}.book-list .book-bottom{justify-content:flex-start;gap:15px;margin-top:7px}.book-list .book-price{margin-left:auto}.book-list .book-author{font-size:12px}.library-controls{background:var(--surface);border:1px solid var(--line);border-radius:17px;padding:14px;display:flex;gap:10px;align-items:center}.search-field{display:flex;gap:10px;align-items:center;flex:1;min-width:0;background:var(--input-bg);border:1px solid var(--line);border-radius:11px;padding:0 14px;height:46px;color:var(--muted)}.search-field .icon{width:19px;height:19px}.search-field input{outline:0;border:0;background:transparent;width:100%;min-width:0;font-size:13px;color:var(--text)}.search-field input::placeholder{color:var(--faint)}.search-field:focus-within{border-color:#76a588;box-shadow:0 0 0 3px #75af8b1f}.control-square{border:1px solid var(--line);background:var(--surface);border-radius:11px;height:46px;width:46px;display:grid;place-items:center;color:var(--text);flex:none}.control-square.active{color:var(--primary);background:var(--primary-soft);border-color:transparent}.sort-select{height:46px;border:1px solid var(--line);background:var(--surface);border-radius:11px;padding:0 10px;color:var(--text);max-width:172px;font-size:12px}.chip-row{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}.filter-chip{border:1px solid var(--line);border-radius:100px;background:var(--surface);color:var(--muted);padding:8px 15px;font-size:12px;font-weight:650}.filter-chip.active{background:var(--primary);border-color:var(--primary);color:var(--bg)}html:not([data-theme=dark]) .filter-chip.active{color:white}.library-statusline{display:flex;align-items:center;justify-content:space-between;margin:15px 0 19px;color:var(--muted);font-size:12px}.library-statusline strong{color:var(--text)}.library-view-toggle{display:flex;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:3px;gap:3px}.library-view-toggle button{border:0;background:transparent;color:var(--muted);border-radius:7px;width:31px;height:29px;display:grid;place-items:center}.library-view-toggle button.active{background:var(--primary-soft);color:var(--primary)}.library-view-toggle .icon{width:16px;height:16px}.empty-state{background:var(--surface);border:1px dashed var(--line);padding:52px 24px;text-align:center;border-radius:19px;display:grid;justify-items:center}.empty-state .empty-icon{width:64px;height:64px;border-radius:20px;background:var(--surface-2);display:grid;place-items:center;color:var(--primary);margin-bottom:12px}.empty-state h3{font:normal 25px Georgia,serif;margin:0 0 5px}.empty-state p{max-width:320px;color:var(--muted);font-size:13px;margin:0 0 19px}.shelf-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}.shelf-card{border:1px solid var(--line);border-radius:20px;background:var(--surface);padding:22px;text-align:left;color:var(--text);transition:transform .2s,border-color .2s}.shelf-card:hover{transform:translateY(-3px);border-color:#89a994}.shelf-graphic{height:110px;border-radius:13px;background:var(--surface-2);position:relative;overflow:hidden;margin-bottom:17px;display:flex;align-items:end;justify-content:center;gap:0;padding-top:8px}.shelf-graphic img{height:95px;width:65px;object-fit:cover;box-shadow:-5px 2px 10px #00000012;transform:translateY(12px) rotate(-6deg);border-radius:3px}.shelf-graphic img:nth-child(2){transform:translateY(3px) rotate(2deg);z-index:2}.shelf-graphic img:nth-child(3){transform:translateY(12px) rotate(8deg)}.shelf-card h3{font:normal 21px Georgia,serif;margin:0 0 4px}.shelf-card p{font-size:12px;color:var(--muted);margin:0}.settings-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}.settings-panel{border-radius:19px;background:var(--surface);border:1px solid var(--line);padding:24px}.settings-panel h2{font:normal 23px Georgia,serif;margin:0 0 8px}.settings-panel p{font-size:13px;color:var(--muted);margin:0 0 22px;line-height:1.7}.settings-panel .btn{margin:3px 7px 3px 0}.theme-options{display:flex;gap:9px;flex-wrap:wrap}.theme-option{min-width:110px;flex:1;display:flex;align-items:center;justify-content:center;gap:8px;background:var(--surface-2);color:var(--text);border:1px solid var(--line);border-radius:12px;padding:12px}.theme-option.active{background:var(--primary-soft);border:2px solid var(--primary);padding:11px}.theme-option .icon{width:17px;height:17px}.info-banner{display:flex;align-items:flex-start;gap:10px;background:var(--primary-soft);padding:14px;border-radius:12px;color:var(--text);font-size:12px;margin-top:20px;line-height:1.6}.info-banner .icon{color:var(--primary);width:18px;height:18px}.mobile-nav{display:none}
+/* Dialogs / forms */
+.overlay{position:fixed;inset:0;background:var(--overlay);z-index:50;display:flex;justify-content:flex-end;align-items:stretch;animation:fadein .13s ease}.modal-panel{width:min(580px,100%);height:100%;background:var(--surface);color:var(--text);box-shadow:-20px 0 65px #0002;display:flex;flex-direction:column;overflow:hidden;animation:slidein .2s ease}.modal-panel.narrow{width:min(530px,100%)}.modal-heading{padding:20px 26px 18px;display:flex;align-items:center;gap:13px;justify-content:space-between;border-bottom:1px solid var(--line);flex:none}.modal-heading h2{font:normal 25px Georgia,serif;margin:0}.modal-heading .muted{font-size:11px}.modal-body{overflow:auto;overscroll-behavior:contain;padding:24px 26px;flex:1}.modal-footer{border-top:1px solid var(--line);padding:17px 26px;display:flex;gap:11px;justify-content:flex-end;background:var(--surface);flex:none}.modal-footer .btn{min-height:44px}.form-block{margin-bottom:24px}.form-block>h3{font-size:13px;letter-spacing:.1px;margin:0 0 13px}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field{display:flex;flex-direction:column;min-width:0;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:11px;color:var(--muted);font-weight:750}.field input,.field select,.field textarea{min-width:0;width:100%;border-radius:10px;border:1px solid var(--line);background:var(--input-bg);padding:11px 12px;color:var(--text);outline:none;min-height:44px}.field textarea{min-height:82px;resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{border-color:#73a88a;box-shadow:0 0 0 3px #73a88a20}.isbn-quick{display:flex;align-items:flex-end;gap:8px}.isbn-quick .field{flex:1}.isbn-quick .btn{min-height:44px}.form-hint{color:var(--muted);font-size:11px;margin:8px 0 0}.form-error{color:var(--danger);font-size:12px;margin:10px 0}.image-picker{display:flex;gap:12px;align-items:center}.image-picker .preview{width:75px;height:105px;background:var(--surface-3);border-radius:6px;object-fit:cover}.image-picker .picker-info{flex:1}.image-picker p{font-size:11px;color:var(--muted);margin:7px 0}.image-picker input[type=file]{max-width:100%;font-size:11px}.detail-hero{display:flex;gap:23px;margin-bottom:24px;align-items:flex-start}.detail-hero img{width:142px;aspect-ratio:7/10;object-fit:cover;flex:none;border-radius:6px;box-shadow:0 8px 22px #0002}.detail-hero h2{font:normal 29px/1.13 Georgia,serif;letter-spacing:-.5px;margin:0 0 8px}.detail-hero p{font-size:13px;color:var(--muted);margin:0 0 15px}.detail-hero .status-chip{margin-bottom:13px}.detail-tabs{display:flex;gap:7px;border-bottom:1px solid var(--line);margin-bottom:22px;overflow:auto}.detail-tabs button{border:0;border-bottom:2px solid transparent;padding:12px 17px;background:none;color:var(--muted);white-space:nowrap;font-weight:650}.detail-tabs button.active{border-color:var(--primary);color:var(--primary)}.detail-section h3{font:normal 21px Georgia,serif;margin:0 0 10px}.detail-description{color:var(--muted);line-height:1.8;font-size:13px}.metadata-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:21px 0}.metadata-label{font-size:11px;color:var(--muted);margin-bottom:4px}.metadata-value{font-size:13px;font-weight:650;overflow-wrap:anywhere}.tag-list{display:flex;flex-wrap:wrap;gap:7px}.tag-pill{padding:5px 10px;border-radius:20px;background:var(--surface-2);color:var(--muted);font-size:11px}.progress-form{display:flex;align-items:end;gap:11px;margin-top:15px}.progress-form .field{flex:1}.progress-form .btn{height:44px}.note-card{background:var(--surface-2);padding:16px;border-radius:13px;margin:12px 0}.note-card .note-meta{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:11px;margin-bottom:7px}.note-card p{margin:0;color:var(--text);line-height:1.7;white-space:pre-wrap;overflow-wrap:anywhere}.note-card button{background:none;border:0;color:var(--danger);font-size:11px}.note-entry{margin-top:17px}.note-entry textarea{width:100%;background:var(--input-bg);border:1px solid var(--line);border-radius:11px;padding:12px;resize:vertical;min-height:95px;color:var(--text)}.note-entry .btn{margin-top:9px}.scan-viewport{aspect-ratio:3/4;max-height:460px;background:#142720;position:relative;border-radius:16px;overflow:hidden;margin:15px auto}.scan-viewport video{height:100%;width:100%;object-fit:cover}.scan-guides{position:absolute;inset:20% 11%;border:2px solid #abedc2;border-radius:15px;box-shadow:0 0 0 999px #0005;pointer-events:none}.scan-guides:after{content:"Align barcode inside the frame";color:white;position:absolute;bottom:-32px;text-align:center;width:100%;font-size:12px}.scan-status{color:var(--muted);font-size:13px;margin:17px 0;line-height:1.6}.toast-root{position:fixed;bottom:30px;right:25px;z-index:90;pointer-events:none}.toast{background:#273d33;color:#fff;border-radius:12px;box-shadow:0 10px 30px #0003;padding:12px 17px;max-width:300px;font-size:12px;animation:fadein .2s;display:flex;align-items:center;gap:9px}.toast .icon{width:17px;height:17px}.empty-line{color:var(--muted);font-size:13px;padding:10px 0}.mini-heading{font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.1px}.book-placeholder{height:100%;width:100%;background:linear-gradient(135deg,#cfdace,#638671);display:grid;place-items:center;font:18px Georgia,serif;color:#fff;text-align:center;padding:10px}.secondary-info{font-size:11px;color:var(--muted);line-height:1.5}.no-wrap{white-space:nowrap}@keyframes fadein{from{opacity:0}to{opacity:1}}@keyframes slidein{from{transform:translateX(20px);opacity:.8}to{transform:translateX(0);opacity:1}}
+@media(max-width:1100px){.sidebar{width:215px;flex-basis:215px}.dashboard-main{grid-template-columns:1fr}.feature-panel{min-height:238px}.books-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.shelf-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.stats-grid{gap:10px}.stat-card{padding:18px;gap:10px}.stat-value{font-size:24px}}
+@media(max-width:760px){.sidebar{display:none}.topbar{height:65px;justify-content:space-between;padding:0 19px}.topbar-brand{display:flex;align-items:center;gap:8px}.topbar-mark{height:32px;width:32px;border-radius:10px}.topbar-mark .icon{width:19px;height:19px}.topbar-brand strong{font:700 26px Georgia,serif;letter-spacing:-1.5px}.topbar-caption,.avatar{display:none}.main-content{padding:25px 18px calc(112px + env(safe-area-inset-bottom));min-height:calc(100vh - 65px)}.mobile-nav{position:fixed;display:grid;grid-template-columns:repeat(5,1fr);bottom:0;left:0;right:0;z-index:25;min-height:69px;padding:8px 7px calc(7px + env(safe-area-inset-bottom));background:var(--surface);border-top:1px solid var(--line);box-shadow:0 -7px 28px #1528200b}.mobile-nav button{border:0;background:none;color:var(--muted);display:flex;flex-direction:column;gap:3px;align-items:center;justify-content:center;padding:3px 0;min-height:48px;font-size:10px;font-weight:600}.mobile-nav button.active{color:var(--primary)}.mobile-nav .icon{width:21px;height:21px}.mobile-nav .mobile-add{height:52px;width:52px;justify-self:center;align-self:center;border-radius:17px;background:var(--primary);color:var(--bg);transform:translateY(-13px);box-shadow:0 8px 18px #1c54332e}.mobile-nav .mobile-add .icon{width:27px;height:27px}html:not([data-theme=dark]) .mobile-add{color:#fff}.page-head{margin-bottom:23px}.page-title{font-size:33px}.page-subtitle{font-size:12px}.btn.desktop-add{display:none}.stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.stat-card{padding:16px;gap:10px}.stat-icon{height:39px;width:39px}.stat-icon .icon{width:20px;height:20px}.stat-value{font-size:23px}.stat-card:nth-child(3){grid-column:1/-1}.dashboard-main{margin-top:14px}.feature-panel{padding:26px 21px;min-height:229px}.feature-copy{max-width:58%}.feature-title{font-size:26px}.feature-books{right:15px;width:120px}.feature-books img{height:142px;width:95px}.feature-books img+img{height:125px;width:86px}.books-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.section-heading{margin-top:28px}.section-heading h2{font-size:22px}.library-controls{flex-wrap:wrap;padding:10px}.library-controls .search-field{flex-basis:100%;order:-1}.sort-select{flex:1;max-width:none}.book-list .book-card{padding:9px}.book-list .book-cover-wrap{width:56px}.settings-layout{grid-template-columns:1fr}.modal-panel{width:100%}.modal-heading{padding:16px 19px}.modal-body{padding:20px 19px}.modal-footer{padding:13px 19px calc(15px + env(safe-area-inset-bottom))}.toast-root{bottom:calc(83px + env(safe-area-inset-bottom));right:14px;left:14px}.toast{max-width:100%}}
+@media(max-width:430px){.books-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 13px}.book-card .book-title{font-size:13px}.book-card .book-author{font-size:11px}.stat-value{font-size:21px}.feature-panel{min-height:217px}.feature-title{font-size:24px}.feature-copy{max-width:62%}.feature-books{right:4px}.feature-books img{width:80px;height:121px}.feature-books img+img{width:77px;height:116px;right:2px;top:55px}.feature-panel p{font-size:11px}.shelf-grid{grid-template-columns:1fr 1fr;gap:10px}.shelf-card{padding:13px}.shelf-graphic{height:82px}.shelf-graphic img{width:49px;height:72px}.shelf-card h3{font-size:17px}.detail-hero{gap:13px}.detail-hero img{width:107px}.detail-hero h2{font-size:23px}.detail-hero p{font-size:12px}.form-grid{grid-template-columns:1fr 1fr;gap:10px}.form-grid .field.mobile-full{grid-column:1/-1}.isbn-quick{flex-wrap:wrap}.isbn-quick .field{flex-basis:100%}.isbn-quick .btn{flex:1}.detail-tabs button{padding:12px 11px;font-size:12px}.settings-panel{padding:18px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* --- v2 personalisation: accents in both light and dark modes --- */
+html[data-accent="ocean"]{--primary:#245f88;--primary-hover:#1d4d71;--primary-soft:#e4eff7;--accent:#a9d1e7;--sidebar:#193a51;--focus-ring:#5e9bc6;--feature-bg:#214966;--sidebar-focus:#315d7b}
+html[data-accent="violet"]{--primary:#674ba0;--primary-hover:#533a83;--primary-soft:#f0ebf9;--accent:#cfbcec;--sidebar:#34294e;--focus-ring:#a18ad0;--feature-bg:#483769;--sidebar-focus:#5e4c86}
+html[data-accent="terracotta"]{--primary:#a75038;--primary-hover:#883b28;--primary-soft:#faebe6;--accent:#edb7a2;--sidebar:#4f3028;--focus-ring:#db8a70;--feature-bg:#874933;--sidebar-focus:#795043}
+html[data-accent="rose"]{--primary:#9f4671;--primary-hover:#85355e;--primary-soft:#f8e9f0;--accent:#e9afc6;--sidebar:#50283e;--focus-ring:#ca88a8;--feature-bg:#7d395a;--sidebar-focus:#7c4765}
+html[data-accent="amber"]{--primary:#8a601e;--primary-hover:#6c4b15;--primary-soft:#fbf1d9;--accent:#edcf88;--sidebar:#463b24;--focus-ring:#cbad68;--feature-bg:#77602d;--sidebar-focus:#6a5935}
+html[data-theme="dark"][data-accent="ocean"]{--primary:#94c8f2;--primary-hover:#b6ddfc;--primary-soft:#223b50;--accent:#6fa8d1;--sidebar:#0f2435;--focus-ring:#94c8f2}
+html[data-theme="dark"][data-accent="violet"]{--primary:#c6b2f3;--primary-hover:#e1d5fc;--primary-soft:#39304e;--accent:#ad8ee3;--sidebar:#211a33;--focus-ring:#c6b2f3}
+html[data-theme="dark"][data-accent="terracotta"]{--primary:#f2ad90;--primary-hover:#ffd0bd;--primary-soft:#493329;--accent:#de8f72;--sidebar:#2a1e18;--focus-ring:#f2ad90}
+html[data-theme="dark"][data-accent="rose"]{--primary:#f1adc9;--primary-hover:#ffd4e4;--primary-soft:#492a39;--accent:#d686a9;--sidebar:#2c1b25;--focus-ring:#f1adc9}
+html[data-theme="dark"][data-accent="amber"]{--primary:#e8c87c;--primary-hover:#f8dba0;--primary-soft:#443b27;--accent:#d8b667;--sidebar:#292519;--focus-ring:#e8c87c}
+html[data-accent]:not([data-accent="forest"]) .feature-panel{background:var(--feature-bg)}
+html[data-accent]:not([data-accent="forest"]) .side-nav .nav-item.active{background:var(--sidebar-focus,#3d6450)}
+html[data-accent]:not([data-accent="forest"]) .sidebar-message{background:linear-gradient(130deg,var(--feature-bg),var(--sidebar-focus,#3d6450))}
+html[data-accent]:not([data-accent="forest"]) .brand-dot{color:var(--accent)}
+html[data-accent]:not([data-accent="forest"]) .mobile-nav .mobile-add{box-shadow:0 8px 18px #0002}
+:focus-visible{outline-color:var(--focus-ring,var(--primary))}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-soft)}
+.accent-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.settings-subheading{font-size:13px;margin:22px 0 11px}
+.accent-choice{display:flex;gap:8px;align-items:center;justify-content:flex-start;background:var(--surface-2);color:var(--text);border:1px solid var(--line);border-radius:11px;padding:10px;min-height:46px;font-size:12px;font-weight:600}
+.accent-choice.active{border:2px solid var(--primary);padding:9px;background:var(--primary-soft)}
+.accent-choice .icon{margin-left:auto;width:15px;height:15px;color:var(--primary)}
+.accent-dot{display:inline-block;width:18px;height:18px;min-width:18px;border-radius:50%}
+.accent-dot.forest{background:#2a5646}.accent-dot.ocean{background:#2870a0}.accent-dot.violet{background:#7655ad}.accent-dot.terracotta{background:#b45b40}.accent-dot.rose{background:#b34f7e}.accent-dot.amber{background:#b38838}
+.shelf-card-wrap{min-width:0;position:relative}.shelf-card-wrap>.shelf-card{display:block;width:100%;height:100%}.shelf-actions{display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:4px 14px 5px}.shelf-actions button{background:none;border:0;color:var(--muted);font-size:11px;padding:8px 2px}.shelf-actions button:hover{color:var(--primary)}
+.shelf-card-wrap>.shelf-card{height:auto}
+.import-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:0 0 22px}.import-summary>div{display:flex;flex-direction:column;background:var(--surface-2);border-radius:13px;padding:16px 9px;align-items:center;text-align:center}.import-summary strong{font-size:25px;color:var(--primary)}.import-summary span{font-size:11px;color:var(--muted)}
+.import-choice{display:grid;gap:9px;margin:16px 0}.import-choice label{display:flex;align-items:flex-start;gap:10px;padding:14px 12px;border:1px solid var(--line);border-radius:12px;cursor:pointer}.import-choice label:has(input:checked){border-color:var(--primary);background:var(--primary-soft)}.import-choice input{accent-color:var(--primary);margin-top:3px}.import-choice span{display:flex;flex-direction:column;gap:4px}.import-choice small{line-height:1.45;color:var(--muted)}
+.note-actions{display:flex;gap:12px}.note-actions button:first-child{color:var(--primary)}
+.loading-page{padding:60px 10px;text-align:center;color:var(--muted);font:normal 21px Georgia,serif}
+@media(max-width:430px){.accent-options{grid-template-columns:repeat(2,minmax(0,1fr))}.import-summary strong{font-size:21px}.modal-footer:has([data-action="confirm-import"]){flex-wrap:wrap}.modal-footer:has([data-action="confirm-import"])>.btn{flex:1}}
+
+  </style>
+  <script>
+/* Folio storage — browser IndexedDB, with a clearly identified localStorage fallback
+   for browsers that disable IndexedDB in local file previews / private contexts.
+   All IndexedDB writes resolve ONLY when the encompassing transaction completes. */
+(() => {
+  'use strict';
+  const DB_NAME = 'folio-personal-library';
+  const DB_VERSION = 2;
+  const FALLBACK_KEY = 'folio-library-fallback-v2';
+  let db = null;
+  let mode = 'indexeddb';
+
+  function request(req) {
+    return new Promise((resolve, reject) => {
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error || Error('Database request failed'));
+    });
+  }
+  function txDone(tx) {
+    return new Promise((resolve, reject) => {
+      tx.oncomplete = () => resolve();
+      tx.onabort = () => reject(tx.error || Error('Database transaction aborted'));
+      tx.onerror = () => reject(tx.error || Error('Database transaction failed'));
+    });
+  }
+  function connection() {
+    return new Promise((resolve, reject) => {
+      const req = indexedDB.open(DB_NAME, DB_VERSION);
+      req.onupgradeneeded = () => {
+        const d = req.result;
+        if (!d.objectStoreNames.contains('books')) {
+          const s = d.createObjectStore('books', {keyPath: 'id'});
+          s.createIndex('isbn', 'isbn', {unique:false});
+          s.createIndex('status', 'status', {unique:false});
+          s.createIndex('addedAt', 'addedAt', {unique:false});
+        }
+        if (!d.objectStoreNames.contains('shelves')) d.createObjectStore('shelves', {keyPath:'name'});
+        if (!d.objectStoreNames.contains('tombstones')) d.createObjectStore('tombstones', {keyPath:'id'});
+        if (!d.objectStoreNames.contains('meta')) d.createObjectStore('meta', {keyPath:'key'});
+      };
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error || Error('Could not open IndexedDB'));
+      req.onblocked = () => reject(Error('A different tab has the database open for upgrading.'));
+    });
+  }
+  function fallbackLoad() {
+    const str = localStorage.getItem(FALLBACK_KEY);
+    if (!str) return {initialized:false,books:[],shelves:[],tombstones:[]};
+    const data = JSON.parse(str);
+    return {initialized:true,books:data.books||[],shelves:data.shelves||[],tombstones:data.tombstones||[]};
+  }
+  function fallbackMutate(fn) {
+    const current = fallbackLoad();
+    fn(current);
+    localStorage.setItem(FALLBACK_KEY, JSON.stringify({...current,initialized:true}));
+  }
+  async function init() {
+    try {
+      if (!('indexedDB' in window)) throw Error('IndexedDB is unavailable');
+      db = await connection();
+      db.onversionchange = () => {db.close(); db=null;};
+      // Some privacy modes allow opening but not actually writing.
+      const tx = db.transaction('meta','readwrite');
+      tx.objectStore('meta').put({key:'health-check',value:true});
+      await txDone(tx);
+      mode = 'indexeddb';
+    } catch (err) {
+      if (db) db.close();
+      db = null;
+      mode = 'fallback';
+      // Do not discard the cause; the UI explains reduced storage reliability.
+      console.warn('Folio: IndexedDB unavailable, localStorage fallback in use.',err);
+    }
+    return mode;
+  }
+  async function load() {
+    if (!db) return fallbackLoad();
+    const tx = db.transaction(['books','shelves','tombstones','meta'],'readonly');
+    const completed=txDone(tx);
+    const result = await Promise.all([
+      request(tx.objectStore('books').getAll()),
+      request(tx.objectStore('shelves').getAll()),
+      request(tx.objectStore('tombstones').getAll()),
+      request(tx.objectStore('meta').get('initialized')),
+    ]);
+    await completed;
+    return {books:result[0],shelves:result[1].map(x=>x.name),tombstones:result[2],initialized:!!result[3]};
+  }
+  async function putBook(book) {
+    if (!db) return fallbackMutate(d=>{d.books=d.books.filter(x=>x.id!==book.id);d.books.push(book);});
+    const tx=db.transaction(['books','meta'],'readwrite');
+    tx.objectStore('books').put(book);
+    tx.objectStore('meta').put({key:'initialized',value:true});
+    await txDone(tx);
+  }
+  async function removeBook(id,tombstone) {
+    if (!db) return fallbackMutate(d=>{d.books=d.books.filter(x=>x.id!==id);d.tombstones=d.tombstones.filter(x=>x.id!==id);d.tombstones.push(tombstone);});
+    const tx=db.transaction(['books','tombstones'],'readwrite');
+    tx.objectStore('books').delete(id);
+    tx.objectStore('tombstones').put(tombstone);
+    await txDone(tx);
+  }
+  async function writeShelves(shelves) {
+    if (!db) return fallbackMutate(d=>{d.shelves=[...shelves]});
+    const tx=db.transaction('shelves','readwrite');
+    const store=tx.objectStore('shelves');store.clear();
+    for (const name of shelves) store.put({name});
+    await txDone(tx);
+  }
+  async function writeBooksAndShelves(books,shelves) {
+    if (!db) return fallbackMutate(d=>{d.books=books;d.shelves=shelves;});
+    const tx=db.transaction(['books','shelves'],'readwrite');
+    const b=tx.objectStore('books');const s=tx.objectStore('shelves');
+    b.clear();s.clear();
+    for (const book of books) b.put(book);
+    for (const name of shelves) s.put({name});
+    await txDone(tx);
+  }
+  async function replaceAll(books,shelves,tombstones=[]) {
+    if (!db) {
+      localStorage.setItem(FALLBACK_KEY,JSON.stringify({initialized:true,books,shelves,tombstones}));
+      return;
+    }
+    const tx=db.transaction(['books','shelves','tombstones','meta'],'readwrite');
+    const b=tx.objectStore('books'),s=tx.objectStore('shelves'),t=tx.objectStore('tombstones');
+    b.clear();s.clear();t.clear();
+    for (const book of books) b.put(book);
+    for (const name of shelves) s.put({name});
+    for (const item of tombstones) t.put(item);
+    tx.objectStore('meta').put({key:'initialized',value:true});
+    await txDone(tx);
+  }
+  window.FolioDB = {init,load,putBook,removeBook,writeShelves,writeBooksAndShelves,replaceAll,get mode(){return mode}};
+})();
+
+  </script>
+  <script>
+/* Basic zero-dependency EAN-13 scanner for camera frames.
+   Browsers with BarcodeDetector use the native implementation first.
+   This image decoder is a best-effort fallback: angled, blurred or glared
+   barcodes may still need manual ISBN entry. */
+(() => {
+  'use strict';
+  const L=['0001101','0011001','0010011','0111101','0100011','0110001','0101111','0111011','0110111','0001011'];
+  const G=['0100111','0110011','0011011','0100001','0011101','0111001','0000101','0010001','0001001','0010111'];
+  const R=['1110010','1100110','1101100','1000010','1011100','1001110','1010000','1000100','1001000','1110100'];
+  const parity=['LLLLLL','LLGLGG','LLGGLG','LLGGGL','LGLLGG','LGGLLG','LGGGLL','LGLGLG','LGLGGL','LGGLGL'];
+  const digit=(seq,patterns)=>patterns.indexOf(seq);
+  const checksum=code=>code.length===13&&[...code].reduce((sum,char,i)=>sum+Number(char)*(i%2?3:1),0)%10===0;
+  function decode(bits){
+    if(bits.length!==95||!bits.startsWith('101')||bits.slice(45,50)!=='01010'||!bits.endsWith('101'))return null;
+    let left='',right='',pattern='';
+    for(let i=0;i<6;i++){
+      const seven=bits.slice(3+i*7,10+i*7);let d=digit(seven,L);if(d>=0){left+=d;pattern+='L';continue}
+      d=digit(seven,G);if(d<0)return null;left+=d;pattern+='G';
+    }
+    for(let i=0;i<6;i++){const d=digit(bits.slice(50+i*7,57+i*7),R);if(d<0)return null;right+=d}
+    const leading=parity.indexOf(pattern);if(leading<0)return null;
+    const isbn=String(leading)+left+right;
+    return /^97[89]/.test(isbn)&&checksum(isbn)?isbn:null;
+  }
+  function sample(data,y){
+    const {width,height}=data,rgba=data.data,gray=new Float32Array(width);
+    for(let x=0;x<width;x++){
+      let g=0;
+      for(let dy=-1;dy<=1;dy++){
+        const yy=Math.max(0,Math.min(height-1,y+dy)),i=(yy*width+x)*4;
+        g+=rgba[i]*.299+rgba[i+1]*.587+rgba[i+2]*.114;
+      }
+      gray[x]=g/3;
+    }
+    return gray;
+  }
+  function scanLine(line){
+    const w=line.length,sorted=Array.from(line).sort((a,b)=>a-b);
+    const low=sorted[Math.floor(w*.12)],high=sorted[Math.floor(w*.88)];
+    if(high-low<42)return null;
+    for(const threshold of [low+(high-low)*.4,low+(high-low)*.52,low+(high-low)*.63]){
+      const runs=[];let prev=line[0]<threshold?1:0,start=0;
+      for(let i=1;i<=w;i++){
+        const curr=i<w?(line[i]<threshold?1:0):1-prev;
+        if(curr!==prev){runs.push({value:prev,start,width:i-start});start=i;prev=curr}
+      }
+      for(let i=0;i<runs.length-3;i++){
+        const a=runs[i],b=runs[i+1],c=runs[i+2];
+        if(a.value!==1||b.value!==0||c.value!==1)continue;
+        const widths=[a.width,b.width,c.width],m=widths.reduce((sum,v)=>sum+v,0)/3;
+        if(m<1.1||m>11||Math.max(...widths)>m*1.65||Math.min(...widths)<m*.45)continue;
+        if(a.start+95*m>w)continue;
+        for(const adjust of [.97,1,1.03]){
+          const moduleWidth=m*adjust;
+          if(a.start+95*moduleWidth>=w)continue;
+          let bits='';
+          for(let j=0;j<95;j++){
+            const x=Math.min(w-1,Math.max(0,Math.floor(a.start+(j+.5)*moduleWidth)));
+            bits+=line[x]<threshold?'1':'0';
+          }
+          const decoded=decode(bits);if(decoded)return decoded;
+        }
+      }
+    }
+    return null;
+  }
+  function scan(imageData){
+    if(!imageData?.data||imageData.width<120)return null;
+    for(const position of [.48,.5,.52,.44,.56,.4,.6,.35,.65]){
+      const result=scanLine(sample(imageData,Math.floor(imageData.height*position)));
+      if(result)return result;
+    }
+    return null;
+  }
+  window.FolioBarcode={scan};
+})();
+
+  </script>
+  <script>
+/* Folio v2 — offline-first personal library. HTML, CSS, and vanilla JS only. */
+(() => {
+  'use strict';
+  const STORAGE_KEY = 'folio-prototype-v1'; // legacy v1 migration only
+  const ACCENT_KEY = 'folio-accent';
+  const ACCENTS = ['forest','ocean','violet','terracotta','rose','amber'];
+  const pref=(key,def)=>{try{return localStorage.getItem(key)||def}catch{return def}};
+  const setPref=(key,value)=>{try{localStorage.setItem(key,value)}catch{}};
+  const THEME_KEY = 'folio-theme';
+  const DEFAULT_SHELVES = ['Fiction', 'Non-fiction', 'Work & study', 'Favorites', 'To buy'];
+  const STATUSES = [
+    ['to-read','To read'], ['reading','Reading'], ['completed','Finished'],
+    ['paused','On hold'], ['abandoned','Abandoned']
+  ];
+  const icon = (name, cls='') => `<svg class="icon ${cls}" aria-hidden="true"><use href="#i-${name}"></use></svg>`;
+  const h = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const plain = value => String(value ?? '').trim();
+  const id = () => (globalThis.crypto?.randomUUID?.() || `book-${Date.now()}-${Math.floor(Math.random()*1e8)}`);
+  const money = n => new Intl.NumberFormat('en-BE',{style:'currency',currency:'EUR',maximumFractionDigits:2}).format(Number(n)||0);
+  const formatDate = d => {const t=new Date(d);return Number.isNaN(t.getTime())?'Unknown date':t.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})};
+  const INLINE_COVERS = {"1984":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyODAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMjgwIDQwMCI+PHJlY3Qgd2lkdGg9IjI4MCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiMxODI3MzgiLz48cmVjdCB4PSI4IiB5PSI4IiB3aWR0aD0iMjY0IiBoZWlnaHQ9IjM4NCIgcng9IjEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZjBkNSIgc3Ryb2tlLW9wYWNpdHk9Ii4xOCIvPjxwYXRoIGQ9Ik0xOCAxOFYzODIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4yMiIgc3Ryb2tlLXdpZHRoPSIzIi8+PGVsbGlwc2UgY3g9IjE0MCIgY3k9IjIyMyIgcng9Ijk0IiByeT0iNTciIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2U4NmY1NCIgc3Ryb2tlLXdpZHRoPSI4Ii8+PGNpcmNsZSBjeD0iMTQwIiBjeT0iMjIzIiByPSIzNiIgZmlsbD0iI2U4NmY1NCIvPjxjaXJjbGUgY3g9IjE0MCIgY3k9IjIyMyIgcj0iMTMiIGZpbGw9IiNmZmYwZDUiLz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMjgwIiBoZWlnaHQ9IjEyNiIgZmlsbD0iIzE4MjczOCIgZmlsbC1vcGFjaXR5PSIuOTIiLz48dGV4dCB4PSIxNDAiIHk9Ijc1IiBmaWxsPSIjZmZmMGQ1IiBmb250LXNpemU9IjMxIiBmb250LXdlaWdodD0iODAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgbGV0dGVyLXNwYWNpbmc9IjIiPk5JTkVURUVOPC90ZXh0Pjx0ZXh0IHg9IjE0MCIgeT0iMTEyIiBmaWxsPSIjZmZmMGQ1IiBmb250LXNpemU9IjMxIiBmb250LXdlaWdodD0iODAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgbGV0dGVyLXNwYWNpbmc9IjIiPkVJR0hUWS1GT1VSPC90ZXh0PjxyZWN0IHg9IjI4IiB5PSIzMzkiIHdpZHRoPSIyMjQiIGhlaWdodD0iMSIgZmlsbD0iI2ZmZjBkNSIgb3BhY2l0eT0iLjUiLz48dGV4dCB4PSIxNDAiIHk9IjM2MyIgZmlsbD0iI2ZmZjBkNSIgZm9udC1zaXplPSIxMyIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIyIj5HRU9SR0UgT1JXRUxMPC90ZXh0Pjx0ZXh0IHg9IjE0MCIgeT0iMzgzIiBmaWxsPSIjZmZmMGQ1IiBvcGFjaXR5PSIuNSIgZm9udC1zaXplPSI4IiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgbGV0dGVyLXNwYWNpbmc9IjIiPlBFUlNPTkFMIExJQlJBUlkgRURJVElPTjwvdGV4dD48L3N2Zz4=","atomic-habits":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyODAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMjgwIDQwMCI+PHJlY3Qgd2lkdGg9IjI4MCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNlZWUzY2IiLz48cmVjdCB4PSI4IiB5PSI4IiB3aWR0aD0iMjY0IiBoZWlnaHQ9IjM4NCIgcng9IjEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzI4M2QzMyIgc3Ryb2tlLW9wYWNpdHk9Ii4xOCIvPjxwYXRoIGQ9Ik0xOCAxOFYzODIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4yMiIgc3Ryb2tlLXdpZHRoPSIzIi8+PGNpcmNsZSBjeD0iMTQwIiBjeT0iMjAzIiByPSI4NCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYjA4YzUyIiBzdHJva2Utd2lkdGg9IjMiIG9wYWNpdHk9Ii44Ii8+PGVsbGlwc2UgY3g9IjE0MCIgY3k9IjIwMyIgcng9IjkyIiByeT0iMzgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2IwOGM1MiIgc3Ryb2tlLXdpZHRoPSIzIiB0cmFuc2Zvcm09InJvdGF0ZSgtMzggMTQwIDIwMykiLz48ZWxsaXBzZSBjeD0iMTQwIiBjeT0iMjAzIiByeD0iOTIiIHJ5PSIzOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYjA4YzUyIiBzdHJva2Utd2lkdGg9IjMiIHRyYW5zZm9ybT0icm90YXRlKDM4IDE0MCAyMDMpIi8+PGNpcmNsZSBjeD0iMTQwIiBjeT0iMjAzIiByPSIxMCIgZmlsbD0iI2IwOGM1MiIvPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIyODAiIGhlaWdodD0iMTI2IiBmaWxsPSIjZWVlM2NiIiBmaWxsLW9wYWNpdHk9Ii45MiIvPjx0ZXh0IHg9IjE0MCIgeT0iNzUiIGZpbGw9IiMyODNkMzMiIGZvbnQtc2l6ZT0iMzEiIGZvbnQtd2VpZ2h0PSI4MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBsZXR0ZXItc3BhY2luZz0iMiI+QVRPTUlDPC90ZXh0Pjx0ZXh0IHg9IjE0MCIgeT0iMTEyIiBmaWxsPSIjMjgzZDMzIiBmb250LXNpemU9IjMxIiBmb250LXdlaWdodD0iODAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgbGV0dGVyLXNwYWNpbmc9IjIiPkhBQklUUzwvdGV4dD48cmVjdCB4PSIyOCIgeT0iMzM5IiB3aWR0aD0iMjI0IiBoZWlnaHQ9IjEiIGZpbGw9IiMyODNkMzMiIG9wYWNpdHk9Ii41Ii8+PHRleHQgeD0iMTQwIiB5PSIzNjMiIGZpbGw9IiMyODNkMzMiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXdlaWdodD0iNzAwIiBsZXR0ZXItc3BhY2luZz0iMiI+SkFNRVMgQ0xFQVI8L3RleHQ+PHRleHQgeD0iMTQwIiB5PSIzODMiIGZpbGw9IiMyODNkMzMiIG9wYWNpdHk9Ii41IiBmb250LXNpemU9IjgiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBsZXR0ZXItc3BhY2luZz0iMiI+UEVSU09OQUwgTElCUkFSWSBFRElUSU9OPC90ZXh0Pjwvc3ZnPg==","clean-code":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyODAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMjgwIDQwMCI+PHJlY3Qgd2lkdGg9IjI4MCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNkZWVlZTAiLz48cmVjdCB4PSI4IiB5PSI4IiB3aWR0aD0iMjY0IiBoZWlnaHQ9IjM4NCIgcng9IjEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzI0NWU0ZiIgc3Ryb2tlLW9wYWNpdHk9Ii4xOCIvPjxwYXRoIGQ9Ik0xOCAxOFYzODIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4yMiIgc3Ryb2tlLXdpZHRoPSIzIi8+PHRleHQgeD0iMTQwIiB5PSIyNDYiIGZvbnQtc2l6ZT0iMTAzIiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjN2RiNmE0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj4mIzEyMzsgJiMxMjU7PC90ZXh0PjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIyODAiIGhlaWdodD0iMTI2IiBmaWxsPSIjZGVlZWUwIiBmaWxsLW9wYWNpdHk9Ii45MiIvPjx0ZXh0IHg9IjE0MCIgeT0iNzUiIGZpbGw9IiMyNDVlNGYiIGZvbnQtc2l6ZT0iMzEiIGZvbnQtd2VpZ2h0PSI4MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBsZXR0ZXItc3BhY2luZz0iMiI+Q0xFQU48L3RleHQ+PHRleHQgeD0iMTQwIiB5PSIxMTIiIGZpbGw9IiMyNDVlNGYiIGZvbnQtc2l6ZT0iMzEiIGZvbnQtd2VpZ2h0PSI4MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBsZXR0ZXItc3BhY2luZz0iMiI+Q09ERTwvdGV4dD48cmVjdCB4PSIyOCIgeT0iMzM5IiB3aWR0aD0iMjI0IiBoZWlnaHQ9IjEiIGZpbGw9IiMyNDVlNGYiIG9wYWNpdHk9Ii41Ii8+PHRleHQgeD0iMTQwIiB5PSIzNjMiIGZpbGw9IiMyNDVlNGYiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXdlaWdodD0iNzAwIiBsZXR0ZXItc3BhY2luZz0iMiI+Uk9CRVJUIEMuIE1BUlRJTjwvdGV4dD48dGV4dCB4PSIxNDAiIHk9IjM4MyIgZmlsbD0iIzI0NWU0ZiIgb3BhY2l0eT0iLjUiIGZvbnQtc2l6ZT0iOCIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5QRVJTT05BTCBMSUJSQVJZIEVESVRJT048L3RleHQ+PC9zdmc+","deep-work":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyODAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMjgwIDQwMCI+PHJlY3Qgd2lkdGg9IjI4MCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiMxYjQwNjQiLz48cmVjdCB4PSI4IiB5PSI4IiB3aWR0aD0iMjY0IiBoZWlnaHQ9IjM4NCIgcng9IjEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2YzZTZkNiIgc3Ryb2tlLW9wYWNpdHk9Ii4xOCIvPjxwYXRoIGQ9Ik0xOCAxOFYzODIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4yMiIgc3Ryb2tlLXdpZHRoPSIzIi8+PHBhdGggZD0iTTU1IDEzNFYyOTUgTTM1IDE1MEgyNDUiIHN0cm9rZT0iIzhmYWVjMyIgc3Ryb2tlLXdpZHRoPSIxIiBvcGFjaXR5PSIuNCIvPjxwYXRoIGQ9Ik05NSAxMzRWMjk1IE0zNSAxODVIMjQ1IiBzdHJva2U9IiM4ZmFlYzMiIHN0cm9rZS13aWR0aD0iMSIgb3BhY2l0eT0iLjQiLz48cGF0aCBkPSJNMTM1IDEzNFYyOTUgTTM1IDIyMEgyNDUiIHN0cm9rZT0iIzhmYWVjMyIgc3Ryb2tlLXdpZHRoPSIxIiBvcGFjaXR5PSIuNCIvPjxwYXRoIGQ9Ik0xNzUgMTM0VjI5NSBNMzUgMjU1SDI0NSIgc3Ryb2tlPSIjOGZhZWMzIiBzdHJva2Utd2lkdGg9IjEiIG9wYWNpdHk9Ii40Ii8+PHBhdGggZD0iTTIxNSAxMzRWMjk1IE0zNSAyODVIMjQ1IiBzdHJva2U9IiM4ZmFlYzMiIHN0cm9rZS13aWR0aD0iMSIgb3BhY2l0eT0iLjQiLz48cmVjdCB4PSI5MSIgeT0iMTg0IiB3aWR0aD0iOTkiIGhlaWdodD0iODYiIGZpbGw9IiNlMWEyNWIiIG9wYWNpdHk9Ii44Ii8+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjI4MCIgaGVpZ2h0PSIxMjYiIGZpbGw9IiMxYjQwNjQiIGZpbGwtb3BhY2l0eT0iLjkyIi8+PHRleHQgeD0iMTQwIiB5PSI3NSIgZmlsbD0iI2YzZTZkNiIgZm9udC1zaXplPSIzMSIgZm9udC13ZWlnaHQ9IjgwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGxldHRlci1zcGFjaW5nPSIyIj5ERUVQPC90ZXh0Pjx0ZXh0IHg9IjE0MCIgeT0iMTEyIiBmaWxsPSIjZjNlNmQ2IiBmb250LXNpemU9IjMxIiBmb250LXdlaWdodD0iODAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgbGV0dGVyLXNwYWNpbmc9IjIiPldPUks8L3RleHQ+PHJlY3QgeD0iMjgiIHk9IjMzOSIgd2lkdGg9IjIyNCIgaGVpZ2h0PSIxIiBmaWxsPSIjZjNlNmQ2IiBvcGFjaXR5PSIuNSIvPjx0ZXh0IHg9IjE0MCIgeT0iMzYzIiBmaWxsPSIjZjNlNmQ2IiBmb250LXNpemU9IjEzIiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC13ZWlnaHQ9IjcwMCIgbGV0dGVyLXNwYWNpbmc9IjIiPkNBTCBORVdQT1JUPC90ZXh0Pjx0ZXh0IHg9IjE0MCIgeT0iMzgzIiBmaWxsPSIjZjNlNmQ2IiBvcGFjaXR5PSIuNSIgZm9udC1zaXplPSI4IiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgbGV0dGVyLXNwYWNpbmc9IjIiPlBFUlNPTkFMIExJQlJBUlkgRURJVElPTjwvdGV4dD48L3N2Zz4=","design-everyday":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyODAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMjgwIDQwMCI+PHJlY3Qgd2lkdGg9IjI4MCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNkZjY4NGYiLz48cmVjdCB4PSI4IiB5PSI4IiB3aWR0aD0iMjY0IiBoZWlnaHQ9IjM4NCIgcng9IjEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZjBkNyIgc3Ryb2tlLW9wYWNpdHk9Ii4xOCIvPjxwYXRoIGQ9Ik0xOCAxOFYzODIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4yMiIgc3Ryb2tlLXdpZHRoPSIzIi8+PGNpcmNsZSBjeD0iMTQwIiBjeT0iMjE0IiByPSI4NSIgZmlsbD0iI2Y1YWQ3MiIvPjxjaXJjbGUgY3g9IjE0MCIgY3k9IjIxNCIgcj0iNDgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZjBkNyIgc3Ryb2tlLXdpZHRoPSIxMSIgb3BhY2l0eT0iLjciLz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMjgwIiBoZWlnaHQ9IjEyNiIgZmlsbD0iI2RmNjg0ZiIgZmlsbC1vcGFjaXR5PSIuOTIiLz48dGV4dCB4PSIxNDAiIHk9Ijc1IiBmaWxsPSIjZmZmMGQ3IiBmb250LXNpemU9IjMxIiBmb250LXdlaWdodD0iODAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgbGV0dGVyLXNwYWNpbmc9IjEiPlRIRSBERVNJR048L3RleHQ+PHRleHQgeD0iMTQwIiB5PSIxMTIiIGZpbGw9IiNmZmYwZDciIGZvbnQtc2l6ZT0iMzEiIGZvbnQtd2VpZ2h0PSI4MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBsZXR0ZXItc3BhY2luZz0iMSI+T0YgRVZFUllEQVk8L3RleHQ+PHRleHQgeD0iMTQwIiB5PSIxNDkiIGZpbGw9IiNmZmYwZDciIGZvbnQtc2l6ZT0iMzEiIGZvbnQtd2VpZ2h0PSI4MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBsZXR0ZXItc3BhY2luZz0iMSI+VEhJTkdTPC90ZXh0PjxyZWN0IHg9IjI4IiB5PSIzMzkiIHdpZHRoPSIyMjQiIGhlaWdodD0iMSIgZmlsbD0iI2ZmZjBkNyIgb3BhY2l0eT0iLjUiLz48dGV4dCB4PSIxNDAiIHk9IjM2MyIgZmlsbD0iI2ZmZjBkNyIgZm9udC1zaXplPSIxMyIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIyIj5ET04gTk9STUFOPC90ZXh0Pjx0ZXh0IHg9IjE0MCIgeT0iMzgzIiBmaWxsPSIjZmZmMGQ3IiBvcGFjaXR5PSIuNSIgZm9udC1zaXplPSI4IiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgbGV0dGVyLXNwYWNpbmc9IjIiPlBFUlNPTkFMIExJQlJBUlkgRURJVElPTjwvdGV4dD48L3N2Zz4=","dune":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyODAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMjgwIDQwMCI+PHJlY3Qgd2lkdGg9IjI4MCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNiODVlM2IiLz48cmVjdCB4PSI4IiB5PSI4IiB3aWR0aD0iMjY0IiBoZWlnaHQ9IjM4NCIgcng9IjEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZjNkYiIgc3Ryb2tlLW9wYWNpdHk9Ii4xOCIvPjxwYXRoIGQ9Ik0xOCAxOFYzODIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4yMiIgc3Ryb2tlLXdpZHRoPSIzIi8+PGNpcmNsZSBjeD0iMjAyIiBjeT0iMTM4IiByPSI2MiIgZmlsbD0iI2U5YWU2NiIgb3BhY2l0eT0iLjU1Ii8+PHBhdGggZD0iTTAgMjY1IFE2NSAxOTAgMTMyIDI1MiBUMjgwIDIzOCBWNDAwIEgwIFoiIGZpbGw9IiNlOGE3NmQiLz48cGF0aCBkPSJNMCAzMDQgUTExNCAyMjUgMTk1IDI5NCBUMjgwIDI4MyBWNDAwIEgwIFoiIGZpbGw9IiM4NzNkMzIiIG9wYWNpdHk9Ii42NSIvPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIyODAiIGhlaWdodD0iMTI2IiBmaWxsPSIjYjg1ZTNiIiBmaWxsLW9wYWNpdHk9Ii45MiIvPjx0ZXh0IHg9IjE0MCIgeT0iNzUiIGZpbGw9IiNmZmYzZGIiIGZvbnQtc2l6ZT0iMzEiIGZvbnQtd2VpZ2h0PSI4MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBsZXR0ZXItc3BhY2luZz0iMiI+RFVORTwvdGV4dD48cmVjdCB4PSIyOCIgeT0iMzM5IiB3aWR0aD0iMjI0IiBoZWlnaHQ9IjEiIGZpbGw9IiNmZmYzZGIiIG9wYWNpdHk9Ii41Ii8+PHRleHQgeD0iMTQwIiB5PSIzNjMiIGZpbGw9IiNmZmYzZGIiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXdlaWdodD0iNzAwIiBsZXR0ZXItc3BhY2luZz0iMiI+RlJBTksgSEVSQkVSVDwvdGV4dD48dGV4dCB4PSIxNDAiIHk9IjM4MyIgZmlsbD0iI2ZmZjNkYiIgb3BhY2l0eT0iLjUiIGZvbnQtc2l6ZT0iOCIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5QRVJTT05BTCBMSUJSQVJZIEVESVRJT048L3RleHQ+PC9zdmc+","educated":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyODAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMjgwIDQwMCI+PHJlY3Qgd2lkdGg9IjI4MCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNjM2FmYTYiLz48cmVjdCB4PSI4IiB5PSI4IiB3aWR0aD0iMjY0IiBoZWlnaHQ9IjM4NCIgcng9IjEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzM4MmQyYiIgc3Ryb2tlLW9wYWNpdHk9Ii4xOCIvPjxwYXRoIGQ9Ik0xOCAxOFYzODIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4yMiIgc3Ryb2tlLXdpZHRoPSIzIi8+PHBhdGggZD0iTTAgMzA3TDgzIDE1NEwxMzIgMjU0TDE3OSAxODBMMjgwIDMxMFY0MDBIMFoiIGZpbGw9IiNlZmUzZGIiLz48cGF0aCBkPSJNMCAzNTBMMTI0IDIxM0wyODAgMzQ3VjQwMEgwWiIgZmlsbD0iIzM4MmQyYiIgb3BhY2l0eT0iLjMzIi8+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjI4MCIgaGVpZ2h0PSIxMjYiIGZpbGw9IiNjM2FmYTYiIGZpbGwtb3BhY2l0eT0iLjkyIi8+PHRleHQgeD0iMTQwIiB5PSI3NSIgZmlsbD0iIzM4MmQyYiIgZm9udC1zaXplPSIzMSIgZm9udC13ZWlnaHQ9IjgwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGxldHRlci1zcGFjaW5nPSIyIj5FRFVDQVRFRDwvdGV4dD48cmVjdCB4PSIyOCIgeT0iMzM5IiB3aWR0aD0iMjI0IiBoZWlnaHQ9IjEiIGZpbGw9IiMzODJkMmIiIG9wYWNpdHk9Ii41Ii8+PHRleHQgeD0iMTQwIiB5PSIzNjMiIGZpbGw9IiMzODJkMmIiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXdlaWdodD0iNzAwIiBsZXR0ZXItc3BhY2luZz0iMiI+VEFSQSBXRVNUT1ZFUjwvdGV4dD48dGV4dCB4PSIxNDAiIHk9IjM4MyIgZmlsbD0iIzM4MmQyYiIgb3BhY2l0eT0iLjUiIGZvbnQtc2l6ZT0iOCIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5QRVJTT05BTCBMSUJSQVJZIEVESVRJT048L3RleHQ+PC9zdmc+","midnight-library":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyODAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMjgwIDQwMCI+PHJlY3Qgd2lkdGg9IjI4MCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiMyMTU3NjMiLz48cmVjdCB4PSI4IiB5PSI4IiB3aWR0aD0iMjY0IiBoZWlnaHQ9IjM4NCIgcng9IjEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2YzZTlkOCIgc3Ryb2tlLW9wYWNpdHk9Ii4xOCIvPjxwYXRoIGQ9Ik0xOCAxOFYzODIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4yMiIgc3Ryb2tlLXdpZHRoPSIzIi8+PHJlY3QgeD0iNTIiIHk9IjE1NiIgd2lkdGg9IjIyIiBoZWlnaHQ9IjEzOCIgcng9IjMiIGZpbGw9IiM5M2FjYTQiIG9wYWNpdHk9Ii44NSIvPjxyZWN0IHg9Ijc5IiB5PSIxNjYiIHdpZHRoPSIyMiIgaGVpZ2h0PSIxMjgiIHJ4PSIzIiBmaWxsPSIjZjNlOWQ4IiBvcGFjaXR5PSIuODUiLz48cmVjdCB4PSIxMDYiIHk9IjE3NiIgd2lkdGg9IjIyIiBoZWlnaHQ9IjExOCIgcng9IjMiIGZpbGw9IiNiNmM1YWUiIG9wYWNpdHk9Ii44NSIvPjxyZWN0IHg9IjEzMyIgeT0iMTU2IiB3aWR0aD0iMjIiIGhlaWdodD0iMTM4IiByeD0iMyIgZmlsbD0iI2Q4YjQ4OSIgb3BhY2l0eT0iLjg1Ii8+PHJlY3QgeD0iMTYwIiB5PSIxNjYiIHdpZHRoPSIyMiIgaGVpZ2h0PSIxMjgiIHJ4PSIzIiBmaWxsPSIjOTNhY2E0IiBvcGFjaXR5PSIuODUiLz48cmVjdCB4PSIxODciIHk9IjE3NiIgd2lkdGg9IjIyIiBoZWlnaHQ9IjExOCIgcng9IjMiIGZpbGw9IiNmM2U5ZDgiIG9wYWNpdHk9Ii44NSIvPjxyZWN0IHg9IjIxNCIgeT0iMTU2IiB3aWR0aD0iMjIiIGhlaWdodD0iMTM4IiByeD0iMyIgZmlsbD0iI2I2YzVhZSIgb3BhY2l0eT0iLjg1Ii8+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjI4MCIgaGVpZ2h0PSIxMjYiIGZpbGw9IiMyMTU3NjMiIGZpbGwtb3BhY2l0eT0iLjkyIi8+PHRleHQgeD0iMTQwIiB5PSI3NSIgZmlsbD0iI2YzZTlkOCIgZm9udC1zaXplPSIzMSIgZm9udC13ZWlnaHQ9IjgwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGxldHRlci1zcGFjaW5nPSIyIj5USEUgTUlETklHSFQ8L3RleHQ+PHRleHQgeD0iMTQwIiB5PSIxMTIiIGZpbGw9IiNmM2U5ZDgiIGZvbnQtc2l6ZT0iMzEiIGZvbnQtd2VpZ2h0PSI4MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBsZXR0ZXItc3BhY2luZz0iMiI+TElCUkFSWTwvdGV4dD48cmVjdCB4PSIyOCIgeT0iMzM5IiB3aWR0aD0iMjI0IiBoZWlnaHQ9IjEiIGZpbGw9IiNmM2U5ZDgiIG9wYWNpdHk9Ii41Ii8+PHRleHQgeD0iMTQwIiB5PSIzNjMiIGZpbGw9IiNmM2U5ZDgiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXdlaWdodD0iNzAwIiBsZXR0ZXItc3BhY2luZz0iMiI+TUFUVCBIQUlHPC90ZXh0Pjx0ZXh0IHg9IjE0MCIgeT0iMzgzIiBmaWxsPSIjZjNlOWQ4IiBvcGFjaXR5PSIuNSIgZm9udC1zaXplPSI4IiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgbGV0dGVyLXNwYWNpbmc9IjIiPlBFUlNPTkFMIExJQlJBUlkgRURJVElPTjwvdGV4dD48L3N2Zz4=","pride-prejudice":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyODAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMjgwIDQwMCI+PHJlY3Qgd2lkdGg9IjI4MCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNlZWM5YzgiLz48cmVjdCB4PSI4IiB5PSI4IiB3aWR0aD0iMjY0IiBoZWlnaHQ9IjM4NCIgcng9IjEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzQ5MmMzYSIgc3Ryb2tlLW9wYWNpdHk9Ii4xOCIvPjxwYXRoIGQ9Ik0xOCAxOFYzODIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4yMiIgc3Ryb2tlLXdpZHRoPSIzIi8+PGNpcmNsZSBjeD0iMTgwIiBjeT0iMjIxIiByPSIzMyIgZmlsbD0iI2FkNzQ4MSIgb3BhY2l0eT0iLjciLz48Y2lyY2xlIGN4PSIxNjAiIGN5PSIyNTUiIHI9IjMzIiBmaWxsPSIjYWQ3NDgxIiBvcGFjaXR5PSIuNyIvPjxjaXJjbGUgY3g9IjEyMSIgY3k9IjI1NSIgcj0iMzMiIGZpbGw9IiNhZDc0ODEiIG9wYWNpdHk9Ii43Ii8+PGNpcmNsZSBjeD0iMTAxIiBjeT0iMjIxIiByPSIzMyIgZmlsbD0iI2FkNzQ4MSIgb3BhY2l0eT0iLjciLz48Y2lyY2xlIGN4PSIxMjAiIGN5PSIxODciIHI9IjMzIiBmaWxsPSIjYWQ3NDgxIiBvcGFjaXR5PSIuNyIvPjxjaXJjbGUgY3g9IjE1OSIgY3k9IjE4NyIgcj0iMzMiIGZpbGw9IiNhZDc0ODEiIG9wYWNpdHk9Ii43Ii8+PGNpcmNsZSBjeD0iMTQwIiBjeT0iMjIxIiByPSIyMCIgZmlsbD0iI2U5ZGZjNiIvPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIyODAiIGhlaWdodD0iMTI2IiBmaWxsPSIjZWVjOWM4IiBmaWxsLW9wYWNpdHk9Ii45MiIvPjx0ZXh0IHg9IjE0MCIgeT0iNzUiIGZpbGw9IiM0OTJjM2EiIGZvbnQtc2l6ZT0iMzEiIGZvbnQtd2VpZ2h0PSI4MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBsZXR0ZXItc3BhY2luZz0iMiI+UFJJREUgJmFtcDs8L3RleHQ+PHRleHQgeD0iMTQwIiB5PSIxMTIiIGZpbGw9IiM0OTJjM2EiIGZvbnQtc2l6ZT0iMzEiIGZvbnQtd2VpZ2h0PSI4MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBsZXR0ZXItc3BhY2luZz0iMiI+UFJFSlVESUNFPC90ZXh0PjxyZWN0IHg9IjI4IiB5PSIzMzkiIHdpZHRoPSIyMjQiIGhlaWdodD0iMSIgZmlsbD0iIzQ5MmMzYSIgb3BhY2l0eT0iLjUiLz48dGV4dCB4PSIxNDAiIHk9IjM2MyIgZmlsbD0iIzQ5MmMzYSIgZm9udC1zaXplPSIxMyIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIyIj5KQU5FIEFVU1RFTjwvdGV4dD48dGV4dCB4PSIxNDAiIHk9IjM4MyIgZmlsbD0iIzQ5MmMzYSIgb3BhY2l0eT0iLjUiIGZvbnQtc2l6ZT0iOCIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5QRVJTT05BTCBMSUJSQVJZIEVESVRJT048L3RleHQ+PC9zdmc+","project-hail-mary":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyODAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMjgwIDQwMCI+PHJlY3Qgd2lkdGg9IjI4MCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiMxNjI5NDIiLz48cmVjdCB4PSI4IiB5PSI4IiB3aWR0aD0iMjY0IiBoZWlnaHQ9IjM4NCIgcng9IjEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2Y2ZjFlOCIgc3Ryb2tlLW9wYWNpdHk9Ii4xOCIvPjxwYXRoIGQ9Ik0xOCAxOFYzODIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4yMiIgc3Ryb2tlLXdpZHRoPSIzIi8+PGNpcmNsZSBjeD0iNDAiIGN5PSIxMzgiIHI9IjIiIGZpbGw9IiNkYWEyNjQiIG9wYWNpdHk9Ii45Ii8+PGNpcmNsZSBjeD0iMjMwIiBjeT0iMTczIiByPSIzIiBmaWxsPSIjZGFhMjY0IiBvcGFjaXR5PSIuOSIvPjxjaXJjbGUgY3g9IjE4NCIgY3k9IjI2MyIgcj0iMiIgZmlsbD0iI2RhYTI2NCIgb3BhY2l0eT0iLjkiLz48Y2lyY2xlIGN4PSI3NSIgY3k9IjI4OCIgcj0iMiIgZmlsbD0iI2RhYTI2NCIgb3BhY2l0eT0iLjkiLz48Y2lyY2xlIGN4PSIxNDQiIGN5PSIxOTIiIHI9IjMiIGZpbGw9IiNkYWEyNjQiIG9wYWNpdHk9Ii45Ii8+PGNpcmNsZSBjeD0iMjM4IiBjeT0iMzA2IiByPSIxLjgiIGZpbGw9IiNkYWEyNjQiIG9wYWNpdHk9Ii45Ii8+PGNpcmNsZSBjeD0iMTQwIiBjeT0iMjI0IiByPSI2NSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZGFhMjY0IiBzdHJva2Utd2lkdGg9IjMiLz48cGF0aCBkPSJNNzggMjUwUTE0MiAxODEgMjA2IDIzNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZGFhMjY0IiBzdHJva2Utd2lkdGg9IjMiLz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMjgwIiBoZWlnaHQ9IjEyNiIgZmlsbD0iIzE2Mjk0MiIgZmlsbC1vcGFjaXR5PSIuOTIiLz48dGV4dCB4PSIxNDAiIHk9Ijc1IiBmaWxsPSIjZjZmMWU4IiBmb250LXNpemU9IjMxIiBmb250LXdlaWdodD0iODAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgbGV0dGVyLXNwYWNpbmc9IjIiPlBST0pFQ1Q8L3RleHQ+PHRleHQgeD0iMTQwIiB5PSIxMTIiIGZpbGw9IiNmNmYxZTgiIGZvbnQtc2l6ZT0iMzEiIGZvbnQtd2VpZ2h0PSI4MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBsZXR0ZXItc3BhY2luZz0iMiI+SEFJTCBNQVJZPC90ZXh0PjxyZWN0IHg9IjI4IiB5PSIzMzkiIHdpZHRoPSIyMjQiIGhlaWdodD0iMSIgZmlsbD0iI2Y2ZjFlOCIgb3BhY2l0eT0iLjUiLz48dGV4dCB4PSIxNDAiIHk9IjM2MyIgZmlsbD0iI2Y2ZjFlOCIgZm9udC1zaXplPSIxMyIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIyIj5BTkRZIFdFSVI8L3RleHQ+PHRleHQgeD0iMTQwIiB5PSIzODMiIGZpbGw9IiNmNmYxZTgiIG9wYWNpdHk9Ii41IiBmb250LXNpemU9IjgiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBsZXR0ZXItc3BhY2luZz0iMiI+UEVSU09OQUwgTElCUkFSWSBFRElUSU9OPC90ZXh0Pjwvc3ZnPg==","psychology-of-money":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyODAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMjgwIDQwMCI+PHJlY3Qgd2lkdGg9IjI4MCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiMxOTNlMzMiLz48cmVjdCB4PSI4IiB5PSI4IiB3aWR0aD0iMjY0IiBoZWlnaHQ9IjM4NCIgcng9IjEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZjZjFkYyIgc3Ryb2tlLW9wYWNpdHk9Ii4xOCIvPjxwYXRoIGQ9Ik0xOCAxOFYzODIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4yMiIgc3Ryb2tlLXdpZHRoPSIzIi8+PGNpcmNsZSBjeD0iMTQwIiBjeT0iMjIwIiByPSI4OCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZDNhZDY2IiBzdHJva2Utd2lkdGg9IjMiIG9wYWNpdHk9IjAuODUiLz48Y2lyY2xlIGN4PSIxNDAiIGN5PSIyMjAiIHI9IjY3IiBmaWxsPSJub25lIiBzdHJva2U9IiNkM2FkNjYiIHN0cm9rZS13aWR0aD0iMyIgb3BhY2l0eT0iMC43NCIvPjxjaXJjbGUgY3g9IjE0MCIgY3k9IjIyMCIgcj0iNDYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2QzYWQ2NiIgc3Ryb2tlLXdpZHRoPSIzIiBvcGFjaXR5PSIwLjYzIi8+PGNpcmNsZSBjeD0iMTQwIiBjeT0iMjIwIiByPSIyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZDNhZDY2IiBzdHJva2Utd2lkdGg9IjMiIG9wYWNpdHk9IjAuNTIiLz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMjgwIiBoZWlnaHQ9IjEyNiIgZmlsbD0iIzE5M2UzMyIgZmlsbC1vcGFjaXR5PSIuOTIiLz48dGV4dCB4PSIxNDAiIHk9Ijc1IiBmaWxsPSIjZmNmMWRjIiBmb250LXNpemU9IjIzIiBmb250LXdlaWdodD0iODAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgbGV0dGVyLXNwYWNpbmc9IjIiPlRIRSBQU1lDSE9MT0dZPC90ZXh0Pjx0ZXh0IHg9IjE0MCIgeT0iMTEyIiBmaWxsPSIjZmNmMWRjIiBmb250LXNpemU9IjIzIiBmb250LXdlaWdodD0iODAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgbGV0dGVyLXNwYWNpbmc9IjIiPk9GIE1PTkVZPC90ZXh0PjxyZWN0IHg9IjI4IiB5PSIzMzkiIHdpZHRoPSIyMjQiIGhlaWdodD0iMSIgZmlsbD0iI2ZjZjFkYyIgb3BhY2l0eT0iLjUiLz48dGV4dCB4PSIxNDAiIHk9IjM2MyIgZmlsbD0iI2ZjZjFkYyIgZm9udC1zaXplPSIxMyIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIyIj5NT1JHQU4gSE9VU0VMPC90ZXh0Pjx0ZXh0IHg9IjE0MCIgeT0iMzgzIiBmaWxsPSIjZmNmMWRjIiBvcGFjaXR5PSIuNSIgZm9udC1zaXplPSI4IiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgbGV0dGVyLXNwYWNpbmc9IjIiPlBFUlNPTkFMIExJQlJBUlkgRURJVElPTjwvdGV4dD48L3N2Zz4=","sapiens":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyODAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMjgwIDQwMCI+PHJlY3Qgd2lkdGg9IjI4MCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNlOWRkYzYiLz48cmVjdCB4PSI4IiB5PSI4IiB3aWR0aD0iMjY0IiBoZWlnaHQ9IjM4NCIgcng9IjEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzI4MzcyYyIgc3Ryb2tlLW9wYWNpdHk9Ii4xOCIvPjxwYXRoIGQ9Ik0xOCAxOFYzODIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4yMiIgc3Ryb2tlLXdpZHRoPSIzIi8+PGNpcmNsZSBjeD0iMTQwIiBjeT0iMjIwIiByPSI4OCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOTU3YjYyIiBzdHJva2Utd2lkdGg9IjEuNyIgb3BhY2l0eT0iMC44NSIvPjxjaXJjbGUgY3g9IjE0MCIgY3k9IjIyMCIgcj0iNjciIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzk1N2I2MiIgc3Ryb2tlLXdpZHRoPSIxLjciIG9wYWNpdHk9IjAuNzQiLz48Y2lyY2xlIGN4PSIxNDAiIGN5PSIyMjAiIHI9IjQ2IiBmaWxsPSJub25lIiBzdHJva2U9IiM5NTdiNjIiIHN0cm9rZS13aWR0aD0iMS43IiBvcGFjaXR5PSIwLjYzIi8+PGNpcmNsZSBjeD0iMTQwIiBjeT0iMjIwIiByPSIyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOTU3YjYyIiBzdHJva2Utd2lkdGg9IjEuNyIgb3BhY2l0eT0iMC41MiIvPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIyODAiIGhlaWdodD0iMTI2IiBmaWxsPSIjZTlkZGM2IiBmaWxsLW9wYWNpdHk9Ii45MiIvPjx0ZXh0IHg9IjE0MCIgeT0iNzUiIGZpbGw9IiMyODM3MmMiIGZvbnQtc2l6ZT0iMzEiIGZvbnQtd2VpZ2h0PSI4MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBsZXR0ZXItc3BhY2luZz0iMiI+U0FQSUVOUzwvdGV4dD48cmVjdCB4PSIyOCIgeT0iMzM5IiB3aWR0aD0iMjI0IiBoZWlnaHQ9IjEiIGZpbGw9IiMyODM3MmMiIG9wYWNpdHk9Ii41Ii8+PHRleHQgeD0iMTQwIiB5PSIzNjMiIGZpbGw9IiMyODM3MmMiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXdlaWdodD0iNzAwIiBsZXR0ZXItc3BhY2luZz0iMiI+WVVWQUwgTk9BSCBIQVJBUkk8L3RleHQ+PHRleHQgeD0iMTQwIiB5PSIzODMiIGZpbGw9IiMyODM3MmMiIG9wYWNpdHk9Ii41IiBmb250LXNpemU9IjgiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBsZXR0ZXItc3BhY2luZz0iMiI+UEVSU09OQUwgTElCUkFSWSBFRElUSU9OPC90ZXh0Pjwvc3ZnPg==","the-hobbit":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyODAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMjgwIDQwMCI+PHJlY3Qgd2lkdGg9IjI4MCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiM1NjcxNGMiLz48cmVjdCB4PSI4IiB5PSI4IiB3aWR0aD0iMjY0IiBoZWlnaHQ9IjM4NCIgcng9IjEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2Y4ZWNjYiIgc3Ryb2tlLW9wYWNpdHk9Ii4xOCIvPjxwYXRoIGQ9Ik0xOCAxOFYzODIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4yMiIgc3Ryb2tlLXdpZHRoPSIzIi8+PGNpcmNsZSBjeD0iMTQ1IiBjeT0iMjA0IiByPSI5NCIgZmlsbD0iI2M1YTY2ZiIgb3BhY2l0eT0iLjUiLz48cGF0aCBkPSJNMCAyNzJRNjcgMTk5IDE0MSAyNjVUMjgwIDI1MFY0MDBIMFoiIGZpbGw9IiMyNDNjMzAiLz48cGF0aCBkPSJNOTIgMzE2IFYyNDdBNDggNDggMCAwIDEgMTg4IDI0N1YzMTZaIiBmaWxsPSIjZjhlY2NiIiBvcGFjaXR5PSIuNyIvPjxjaXJjbGUgY3g9IjE3NCIgY3k9IjI3NSIgcj0iNCIgZmlsbD0iI2M1YTY2ZiIvPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIyODAiIGhlaWdodD0iMTI2IiBmaWxsPSIjNTY3MTRjIiBmaWxsLW9wYWNpdHk9Ii45MiIvPjx0ZXh0IHg9IjE0MCIgeT0iNzUiIGZpbGw9IiNmOGVjY2IiIGZvbnQtc2l6ZT0iMzEiIGZvbnQtd2VpZ2h0PSI4MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBsZXR0ZXItc3BhY2luZz0iMiI+VEhFPC90ZXh0Pjx0ZXh0IHg9IjE0MCIgeT0iMTEyIiBmaWxsPSIjZjhlY2NiIiBmb250LXNpemU9IjMxIiBmb250LXdlaWdodD0iODAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgbGV0dGVyLXNwYWNpbmc9IjIiPkhPQkJJVDwvdGV4dD48cmVjdCB4PSIyOCIgeT0iMzM5IiB3aWR0aD0iMjI0IiBoZWlnaHQ9IjEiIGZpbGw9IiNmOGVjY2IiIG9wYWNpdHk9Ii41Ii8+PHRleHQgeD0iMTQwIiB5PSIzNjMiIGZpbGw9IiNmOGVjY2IiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXdlaWdodD0iNzAwIiBsZXR0ZXItc3BhY2luZz0iMiI+Si5SLlIuIFRPTEtJRU48L3RleHQ+PHRleHQgeD0iMTQwIiB5PSIzODMiIGZpbGw9IiNmOGVjY2IiIG9wYWNpdHk9Ii41IiBmb250LXNpemU9IjgiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBsZXR0ZXItc3BhY2luZz0iMiI+UEVSU09OQUwgTElCUkFSWSBFRElUSU9OPC90ZXh0Pjwvc3ZnPg==","thinking-fast-slow":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyODAiIGhlaWdodD0iNDAwIiB2aWV3Qm94PSIwIDAgMjgwIDQwMCI+PHJlY3Qgd2lkdGg9IjI4MCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNlY2U4ZGQiLz48cmVjdCB4PSI4IiB5PSI4IiB3aWR0aD0iMjY0IiBoZWlnaHQ9IjM4NCIgcng9IjEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJkMzMzMCIgc3Ryb2tlLW9wYWNpdHk9Ii4xOCIvPjxwYXRoIGQ9Ik0xOCAxOFYzODIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4yMiIgc3Ryb2tlLXdpZHRoPSIzIi8+PHJlY3QgeD0iMjgiIHk9IjE0MiIgd2lkdGg9IjIxIiBoZWlnaHQ9IjE0NyIgZmlsbD0iI2RkODc2NCIgb3BhY2l0eT0iMC44NSIvPjxyZWN0IHg9IjY0IiB5PSIxNDIiIHdpZHRoPSIyMSIgaGVpZ2h0PSIxNDciIGZpbGw9IiNkZDg3NjQiIG9wYWNpdHk9IjAuNzYiLz48cmVjdCB4PSIxMDAiIHk9IjE0MiIgd2lkdGg9IjIxIiBoZWlnaHQ9IjE0NyIgZmlsbD0iI2RkODc2NCIgb3BhY2l0eT0iMC42Njk5OTk5OTk5OTk5OTk5Ii8+PHJlY3QgeD0iMTM2IiB5PSIxNDIiIHdpZHRoPSIyMSIgaGVpZ2h0PSIxNDciIGZpbGw9IiNkZDg3NjQiIG9wYWNpdHk9IjAuNTgiLz48cmVjdCB4PSIxNzIiIHk9IjE0MiIgd2lkdGg9IjIxIiBoZWlnaHQ9IjE0NyIgZmlsbD0iI2RkODc2NCIgb3BhY2l0eT0iMC40OSIvPjxyZWN0IHg9IjIwOCIgeT0iMTQyIiB3aWR0aD0iMjEiIGhlaWdodD0iMTQ3IiBmaWxsPSIjZGQ4NzY0IiBvcGFjaXR5PSIwLjQiLz48cmVjdCB4PSIyNDQiIHk9IjE0MiIgd2lkdGg9IjIxIiBoZWlnaHQ9IjE0NyIgZmlsbD0iI2RkODc2NCIgb3BhY2l0eT0iMC4zMDk5OTk5OTk5OTk5OTk5NCIvPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIyODAiIGhlaWdodD0iMTI2IiBmaWxsPSIjZWNlOGRkIiBmaWxsLW9wYWNpdHk9Ii45MiIvPjx0ZXh0IHg9IjE0MCIgeT0iNzUiIGZpbGw9IiMyZDMzMzAiIGZvbnQtc2l6ZT0iMzEiIGZvbnQtd2VpZ2h0PSI4MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBsZXR0ZXItc3BhY2luZz0iMSI+VEhJTktJTkcsPC90ZXh0Pjx0ZXh0IHg9IjE0MCIgeT0iMTEyIiBmaWxsPSIjMmQzMzMwIiBmb250LXNpemU9IjMxIiBmb250LXdlaWdodD0iODAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgbGV0dGVyLXNwYWNpbmc9IjEiPkZBU1QgQU5EPC90ZXh0Pjx0ZXh0IHg9IjE0MCIgeT0iMTQ5IiBmaWxsPSIjMmQzMzMwIiBmb250LXNpemU9IjMxIiBmb250LXdlaWdodD0iODAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgbGV0dGVyLXNwYWNpbmc9IjEiPlNMT1c8L3RleHQ+PHJlY3QgeD0iMjgiIHk9IjMzOSIgd2lkdGg9IjIyNCIgaGVpZ2h0PSIxIiBmaWxsPSIjMmQzMzMwIiBvcGFjaXR5PSIuNSIvPjx0ZXh0IHg9IjE0MCIgeT0iMzYzIiBmaWxsPSIjMmQzMzMwIiBmb250LXNpemU9IjEzIiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC13ZWlnaHQ9IjcwMCIgbGV0dGVyLXNwYWNpbmc9IjIiPkRBTklFTCBLQUhORU1BTjwvdGV4dD48dGV4dCB4PSIxNDAiIHk9IjM4MyIgZmlsbD0iIzJkMzMzMCIgb3BhY2l0eT0iLjUiIGZvbnQtc2l6ZT0iOCIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5QRVJTT05BTCBMSUJSQVJZIEVESVRJT048L3RleHQ+PC9zdmc+"};
+  const bookCover = slug => INLINE_COVERS[slug] || `assets/covers/${slug}.svg`;
+  const placeholderCover = title => {
+    const words = String(title||'BOOK').split(/\s+/).slice(0,3).map(w=>w.slice(0,13));
+    const body = words.map((w,i)=>`<text x="140" y="${140+i*32}" text-anchor="middle" font-family="Georgia,serif" fill="%23f7f9ef" font-size="25">${encodeURIComponent(w.replace(/[&<>]/g,''))}</text>`).join('');
+    return `data:image/svg+xml,${'%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 400"%3E%3Crect width="280" height="400" fill="%23385a4b"/%3E%3Ccircle cx="220" cy="280" r="95" fill="%23466f58"/%3E'}${body}%3C/svg%3E`;
+  };
+  const safeSrc = (value, title) => {
+    const u = plain(value);
+    if (/^assets\/covers\/[a-z0-9-]+\.svg$/i.test(u)) return bookCover(u.split('/').pop().replace(/\.svg$/i,''));
+    if (/^(https?:\/\/|data:image\/(?:png|jpeg|webp|gif|svg\+xml);base64,)/i.test(u)) return u;
+    return placeholderCover(title);
+  };
+  const cover = (b, cls='book-cover') => `<img class="${cls}" loading="lazy" src="${h(safeSrc(b.cover,b.title))}" alt="Cover illustration for ${h(b.title)}" data-cover-title="${h(b.title)}">`;
+  const statusName = s => STATUSES.find(x=>x[0]===s)?.[1] || 'To read';
+  const statusPill = s => `<span class="status-chip ${h(s)}">${h(statusName(s))}</span>`;
+  const priceText = b => b.price===null||b.price===undefined||b.price===''?'—':money(b.price);
+  const pct = b => b.pages>0 ? Math.max(0,Math.min(100,Math.round((Number(b.currentPage)||0)/b.pages*100))) : 0;
+  const splitTags = s => Array.isArray(s) ? s.map(plain).filter(Boolean) : String(s||'').split(',').map(plain).filter(Boolean);
+  const sample = [
+    {slug:'atomic-habits',title:'Atomic Habits',author:'James Clear',isbn:'9780735211292',year:2018,genre:'Self-improvement',shelf:'Non-fiction',price:18.90,status:'reading',pages:320,currentPage:201,description:'Practical ideas for building better habits through small, consistent changes.',tags:['Habits','Personal growth'],notes:['Start with a habit that takes less than two minutes.']},
+    {slug:'dune',title:'Dune',author:'Frank Herbert',isbn:'9780441172719',year:1965,genre:'Science fiction',shelf:'Fiction',price:16.50,status:'reading',pages:688,currentPage:248,description:'On the desert planet Arrakis, political intrigue and destiny collide.',tags:['Sci-fi','Classic'],notes:[]},
+    {slug:'1984',title:'1984',author:'George Orwell',isbn:'9780451524935',year:1949,genre:'Dystopia',shelf:'Fiction',price:12.20,status:'completed',pages:328,currentPage:328,description:'A classic exploration of surveillance, truth, and authoritarian power.',tags:['Classic','Politics'],notes:['The relationship between language and power is especially interesting.']},
+    {slug:'clean-code',title:'Clean Code',author:'Robert C. Martin',isbn:'9780132350884',year:2008,genre:'Programming',shelf:'Work & study',price:37.90,status:'to-read',pages:464,currentPage:0,description:'A handbook of readable, maintainable software craftsmanship.',tags:['Software','Learning'],notes:[]},
+    {slug:'sapiens',title:'Sapiens',author:'Yuval Noah Harari',isbn:'9780062316097',year:2015,genre:'History',shelf:'Non-fiction',price:22.00,status:'completed',pages:464,currentPage:464,description:'A sweeping exploration of humanity and the stories that connect us.',tags:['History'],notes:[]},
+    {slug:'deep-work',title:'Deep Work',author:'Cal Newport',isbn:'9781455586691',year:2016,genre:'Productivity',shelf:'Non-fiction',price:17.95,status:'paused',pages:304,currentPage:88,description:'How to focus without distraction on cognitively demanding work.',tags:['Focus','Study'],notes:['Try two distraction-free study blocks per day.']},
+    {slug:'the-hobbit',title:'The Hobbit',author:'J. R. R. Tolkien',isbn:'9780547928227',year:1937,genre:'Fantasy',shelf:'Fiction',price:14.99,status:'completed',pages:300,currentPage:300,description:'Bilbo Baggins leaves home for an unforgettable adventure.',tags:['Fantasy','Classic'],notes:[]},
+    {slug:'psychology-of-money',title:'The Psychology of Money',author:'Morgan Housel',isbn:'9780857197689',year:2020,genre:'Finance',shelf:'Non-fiction',price:19.99,status:'to-read',pages:256,currentPage:0,description:'Timeless lessons about wealth, behavior, and decision-making.',tags:['Finance'],notes:[]},
+    {slug:'educated',title:'Educated',author:'Tara Westover',isbn:'9780399590504',year:2018,genre:'Memoir',shelf:'Non-fiction',price:15.49,status:'completed',pages:352,currentPage:352,description:'A memoir about family, independence, and the transformative power of education.',tags:['Memoir'],notes:[]},
+    {slug:'pride-prejudice',title:'Pride and Prejudice',author:'Jane Austen',isbn:'9780141439518',year:1813,genre:'Romance',shelf:'Fiction',price:11.50,status:'to-read',pages:480,currentPage:0,description:'A witty, enduring story of class, misunderstanding, and love.',tags:['Classic'],notes:[]},
+    {slug:'project-hail-mary',title:'Project Hail Mary',author:'Andy Weir',isbn:'9780593135204',year:2021,genre:'Science fiction',shelf:'Fiction',price:21.99,status:'to-read',pages:496,currentPage:0,description:'An astronaut awakens far from Earth with the fate of humanity at stake.',tags:['Sci-fi'],notes:[]},
+    {slug:'midnight-library',title:'The Midnight Library',author:'Matt Haig',isbn:'9780525559474',year:2020,genre:'Contemporary fiction',shelf:'Fiction',price:13.90,status:'abandoned',pages:304,currentPage:77,description:'A library offers endless possible versions of a single life.',tags:['Fiction'],notes:[]},
+    {slug:'thinking-fast-slow',title:'Thinking, Fast and Slow',author:'Daniel Kahneman',isbn:'9780374533557',year:2011,genre:'Psychology',shelf:'Work & study',price:24.50,status:'reading',pages:499,currentPage:120,description:'An introduction to two powerful modes of human thinking.',tags:['Psychology','Learning'],notes:[]},
+    {slug:'design-everyday',title:'The Design of Everyday Things',author:'Don Norman',isbn:'9780465050659',year:2013,genre:'Design',shelf:'Work & study',price:19.40,status:'to-read',pages:368,currentPage:0,description:'A practical look at human-centered design and everyday usability.',tags:['Design','UX'],notes:[]}
+  ].map((b,i)=>({...b,id:`sample-${i}`,cover:bookCover(b.slug),quantity:1,notes:b.notes.map((body,j)=>({id:`note-${i}-${j}`,body,date:'2026-10-21T09:00:00.000Z'})),addedAt:new Date(Date.UTC(2026,9,28-i)).toISOString(),updatedAt:new Date(Date.UTC(2026,9,28-i)).toISOString()}));
+  function readSaved(){try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return null;const d=JSON.parse(raw);if(!Array.isArray(d.books))return null;return d}catch{return null}}
+  const existing=readSaved();
+  const state={books:[],shelves:[...DEFAULT_SHELVES],tombstones:[],pendingImport:null,editingNoteId:null,storageMode:'loading',page:'home',query:'',status:'all',sort:'newest',layout:'grid',filters:{shelf:'all',genre:'all',tag:'all',minYear:'',maxYear:'',minPrice:'',maxPrice:''},dialog:null,detailTab:'overview',formCover:'',lastFocused:null,scanner:null,scanLoop:null};
+  let theme=pref(THEME_KEY,'system');
+  let accent=pref(ACCENT_KEY,'forest');
+  if (!ACCENTS.includes(accent)) accent='forest';
+  function applyTheme(){
+    const dark=theme==='dark'||(theme==='system'&&matchMedia('(prefers-color-scheme: dark)').matches);
+    document.documentElement.dataset.theme=dark?'dark':'light';
+    document.documentElement.dataset.accent=accent;
+    document.querySelector('.theme-toggle').innerHTML=icon(dark?'sun':'moon');
+    document.querySelector('meta[name="theme-color"]').content=dark?'#141c19':'#f7f8f5';
+  }
+  async function writeBook(book) {
+    await FolioDB.putBook(book);
+    const index=state.books.findIndex(b=>b.id===book.id);
+    if (index>=0) state.books[index]=book; else state.books.unshift(book);
+  }
+  async function writeShelfSet(shelves) {
+    await FolioDB.writeShelves(shelves);
+    state.shelves=[...shelves];
+  }
+  function saveError(err){console.error('Folio storage error:',err);toast('Save failed. Export a backup and check device storage.');}
+  function importLegacyBook(b){return normalizeBook(b);}
+  async function boot() {
+    document.getElementById('view').innerHTML='<div class="loading-page">Opening your library…</div>';
+    try {
+      state.storageMode=await FolioDB.init();
+      const stored=await FolioDB.load();
+      if (stored.initialized) {
+        state.books=stored.books.map(importLegacyBook);
+        state.shelves=stored.shelves;
+        state.tombstones=stored.tombstones||[];
+      } else {
+        state.books=(existing?.books||sample).map(importLegacyBook);
+        state.shelves=existing?.shelves||DEFAULT_SHELVES;
+        state.tombstones=[];
+        await FolioDB.replaceAll(state.books,state.shelves);
+      }
+      render();
+      if (state.storageMode==='fallback') toast('Limited storage mode: use JSON backups regularly.');
+      if (false && 'serviceWorker' in navigator && location.protocol!=='file:') {
+        navigator.serviceWorker.register('./sw.js').catch(err=>console.warn('Offline cache unavailable:',err));
+      }
+      if (navigator.storage?.persist && location.protocol!=='file:') {
+        // Persist only if browser grants it; failure is not fatal.
+        navigator.storage.persist().catch(()=>{});
+      }
+    } catch(err) {
+      console.error(err);
+      document.getElementById('view').innerHTML=`<div class="empty-state"><h2>Could not open your library</h2><p>${h(err.message)}</p><p>Check browser storage permissions. Your previous JSON backups are safe.</p></div>`;
+    }
+  }
+  const totals=()=>({count:state.books.length,reading:state.books.filter(b=>b.status==='reading').length,value:state.books.reduce((s,b)=>s+(Number.isFinite(Number(b.price))&&b.price!==null&&b.price!==''?Number(b.price)*(Number(b.quantity)||1):0),0),unknown:state.books.filter(b=>b.price===null||b.price===undefined||b.price==='').length});
+  const card=b=>`<article class="book-card" data-book="${h(b.id)}" tabindex="0" role="button" aria-label="Open ${h(b.title)} details"><div class="book-cover-wrap">${cover(b)}</div><div class="book-card-body"><div class="book-title" title="${h(b.title)}">${h(b.title)}</div><div class="book-author">${h(b.author)}</div><div class="book-bottom">${statusPill(b.status)}<span class="book-price">${priceText(b)}</span></div></div></article>`;
+  function pageHead(eyebrow,title,subtitle,actions=''){return `<div class="page-head"><div><p class="eyebrow">${eyebrow}</p><h1 class="page-title">${title}</h1><p class="page-subtitle">${subtitle}</p></div>${actions}</div>`}
+  function renderHome(){
+    const t=totals();const recent=[...state.books].sort((a,b)=>String(b.addedAt).localeCompare(String(a.addedAt))).slice(0,5);
+    const curr=state.books.find(b=>b.status==='reading');
+    const featured=state.books.slice(0,2);
+    return `${pageHead('Your private little universe','Good to have you here.','Every book has a story. This is where yours live.',`<button class="btn btn-primary desktop-add" data-action="add-book">${icon('plus')} Add a book</button>`)}
+      <section class="stats-grid" aria-label="Library summary">
+       <div class="stat-card"><div class="stat-icon">${icon('library')}</div><div><div class="stat-label">Books in your library</div><div class="stat-value">${t.count}</div></div></div>
+       <div class="stat-card"><div class="stat-icon blue">${icon('book-open')}</div><div><div class="stat-label">Currently reading</div><div class="stat-value">${t.reading}</div></div></div>
+       <div class="stat-card"><div class="stat-icon alt">${icon('wallet')}</div><div><div class="stat-label">Your collection value</div><div class="stat-value">${money(t.value)}</div>${t.unknown?`<div class="secondary-info">${t.unknown} without prices</div>`:''}</div></div>
+      </section>
+      <section class="dashboard-main" aria-label="Reading highlights">
+        <div class="feature-panel"><div class="feature-copy"><span class="feature-kicker">WELCOME TO FOLIO</span><div class="feature-title">Every great story<br>deserves a place.</div><p>A calm space to keep track of the books that matter to you.</p><button class="btn" data-page="library">Explore library ${icon('arrow-right')}</button></div><div class="feature-books">${featured[0]?cover(featured[0]):''}${featured[1]?cover(featured[1]):''}</div></div>
+        <div class="reading-panel"><div class="reading-panel-head"><h3>Continue reading</h3>${icon('book-open')}</div>${curr?`<div class="reading-inline">${cover(curr)}<div style="flex:1;min-width:0"><h3>${h(curr.title)}</h3><p>${h(curr.author)}</p><div class="progress-track"><span style="width:${pct(curr)}%"></span></div><div class="progress-caption"><span>${pct(curr)}% complete</span><span>${Number(curr.currentPage)||0}/${Number(curr.pages)||0} pages</span></div><button data-book="${h(curr.id)}" class="text-link" style="margin-top:10px">Update progress ${icon('arrow-right')}</button></div></div>`:`<p class="empty-line">No books in progress yet.</p><button class="btn btn-secondary" data-page="library">Explore your books</button>`}</div>
+      </section>
+      <div class="section-heading"><div><h2>Recently added</h2><p>Your newest additions, all in one place</p></div><button class="text-link" data-page="library">View all ${icon('arrow-right')}</button></div>
+      ${recent.length?`<div class="books-grid">${recent.map(card).join('')}</div>`:emptyState('No books yet','Add your first book to get started.','add-book','Add a book')}
+    `;
+  }
+  function filterBooks(){const q=state.query.trim().toLocaleLowerCase();const f=state.filters;
+    const matches=state.books.filter(b=>{
+      if(state.status!=='all'&&b.status!==state.status)return false;
+      if(f.shelf!=='all'&&b.shelf!==f.shelf)return false;
+      if(f.genre!=='all'&&b.genre!==f.genre)return false;
+      if(f.tag!=='all'&&!(b.tags||[]).includes(f.tag))return false;
+      const year=Number(b.year)||0;const price=b.price===''||b.price==null?null:Number(b.price);
+      if(f.minYear!==''&&year<Number(f.minYear))return false;if(f.maxYear!==''&&year>Number(f.maxYear))return false;
+      if(f.minPrice!==''&&(price===null||price<Number(f.minPrice)))return false;if(f.maxPrice!==''&&(price===null||price>Number(f.maxPrice)))return false;
+      if(!q)return true;
+      return [b.title,b.author,b.isbn,b.year,b.price,b.description,b.genre,b.shelf,b.status,statusName(b.status),...(b.tags||[]),...(b.notes||[]).map(n=>typeof n==='string'?n:n.body)].join(' ').toLocaleLowerCase().includes(q);
+    });
+    matches.sort((a,b)=>{
+      switch(state.sort){case'title':return a.title.localeCompare(b.title);case'author':return a.author.localeCompare(b.author);case'year-new':return (b.year||0)-(a.year||0);case'year-old':return (a.year||0)-(b.year||0);case'price-low':return (Number(a.price)||0)-(Number(b.price)||0);case'price-high':return (Number(b.price)||0)-(Number(a.price)||0);case'progress':return pct(b)-pct(a);default:return String(b.addedAt||'').localeCompare(String(a.addedAt||''));}
+    });return matches;
+  }
+  function emptyState(title,description,action,label){return `<div class="empty-state"><span class="empty-icon">${icon('book-open')}</span><h3>${h(title)}</h3><p>${h(description)}</p>${action?`<button class="btn btn-primary" data-action="${h(action)}">${icon('plus')} ${h(label||'Add a book')}</button>`:''}</div>`}
+  const selectOption=(value,label,selected)=>`<option value="${h(value)}" ${String(value)===String(selected)?'selected':''}>${h(label)}</option>`;
+  function renderLibrary(){return `${pageHead('YOUR COLLECTION','My library','Browse your books, find a favorite, or discover what to read next.',`<button class="btn btn-primary desktop-add" data-action="add-book">${icon('plus')} Add a book</button>`)}
+     <div class="library-controls"><label class="search-field">${icon('search')}<input id="library-search" type="search" autocomplete="off" placeholder="Search title, author, ISBN, notes..." aria-label="Search books" value="${h(state.query)}"></label>
+       <button class="control-square" data-action="open-filters" title="Advanced filters" aria-label="Advanced filters">${icon('filter')}</button>
+       <select id="library-sort" class="sort-select" aria-label="Sort books">
+         ${[['newest','Recently added'],['title','Title A–Z'],['author','Author A–Z'],['year-new','Newest publication'],['year-old','Oldest publication'],['price-low','Price: low to high'],['price-high','Price: high to low'],['progress','Reading progress']].map(x=>selectOption(x[0],x[1],state.sort)).join('')}
+       </select>
+     </div>
+     <div class="chip-row" role="group" aria-label="Filter by reading status">${[['all','All books'],...STATUSES].map(([s,label])=>`<button class="filter-chip ${state.status===s?'active':''}" data-status="${h(s)}">${h(label)}</button>`).join('')}</div>
+     <div class="library-statusline"><span id="result-count"></span><div class="library-view-toggle"><button data-layout="grid" title="Grid view" aria-label="Grid view" class="${state.layout==='grid'?'active':''}">${icon('grid')}</button><button data-layout="list" title="List view" aria-label="List view" class="${state.layout==='list'?'active':''}">${icon('list')}</button></div></div>
+     <div id="library-results"></div>`}
+  function updateLibraryResults(){const results=filterBooks();const count=document.getElementById('result-count'),box=document.getElementById('library-results');if(!count||!box)return;
+    const filtersActive=state.filters.shelf!=='all'||state.filters.genre!=='all'||state.filters.tag!=='all'||Object.entries(state.filters).some(([k,v])=>k!=='shelf'&&k!=='genre'&&k!=='tag'&&v!=='');
+    count.innerHTML=`Showing <strong>${results.length}</strong> of <strong>${state.books.length}</strong> books${filtersActive?' · Advanced filters active':''}`;
+    box.innerHTML=results.length?`<div class="${state.layout==='grid'?'books-grid':'book-list'}">${results.map(card).join('')}</div>`:emptyState('No books found','Try another search or clear your filters.','clear-filters','Clear filters');
+  }
+  function renderShelves(){const all=['All books',...new Set([...state.shelves,...state.books.map(b=>b.shelf).filter(Boolean)])];return `${pageHead('STAY ORGANIZED','My shelves','A little order makes it easier to find your next story.',`<button class="btn btn-secondary" data-action="new-shelf">${icon('plus')} New shelf</button>`)}<div class="shelf-grid">${all.map((s,i)=>{const items=s==='All books'?state.books:state.books.filter(b=>b.shelf===s);return `<div class="shelf-card-wrap"><button class="shelf-card" data-shelf="${h(s)}"><div class="shelf-graphic">${items.slice(0,3).map(b=>cover(b)).join('')||icon('book-open')}</div><h3>${h(s)}</h3><p>${items.length} ${items.length===1?'book':'books'} ${icon('arrow-right','small')}</p></button>${s!=='All books'?`<div class="shelf-actions"><button data-action="rename-shelf" data-shelf-name="${h(s)}">Rename</button><button data-action="delete-shelf" data-shelf-name="${h(s)}">Remove</button></div>`:''}</div>`}).join('')}</div>`}
+  async function renameShelf(oldName){
+    const renamed=plain(prompt('Rename shelf:',oldName));if(!renamed||renamed===oldName)return;
+    if(state.shelves.some(s=>s!==oldName&&s.toLowerCase()===renamed.toLowerCase())){toast('Shelf already exists');return}
+    const shelves=state.shelves.map(s=>s===oldName?renamed:s);
+    const books=state.books.map(b=>b.shelf===oldName?{...b,shelf:renamed,updatedAt:new Date().toISOString()}:b);
+    try{await FolioDB.writeBooksAndShelves(books,shelves);state.books=books;state.shelves=shelves;render();toast('Shelf renamed')}catch(err){saveError(err)}
+  }
+  async function deleteShelf(name){
+    if(!confirm(`Remove shelf “${name}”? Books on this shelf will become unshelved; no books will be deleted.`))return;
+    const shelves=state.shelves.filter(s=>s!==name);
+    const books=state.books.map(b=>b.shelf===name?{...b,shelf:'',updatedAt:new Date().toISOString()}:b);
+    try{await FolioDB.writeBooksAndShelves(books,shelves);state.books=books;state.shelves=shelves;render();toast('Shelf removed; books preserved')}catch(err){saveError(err)}
+  }
+  function renderSettings(){return `${pageHead('MAKE IT YOURS','Settings','Your library, just the way you like it.')}
+    <div class="settings-layout">
+    <section class="settings-panel"><h2>Appearance</h2><p>Choose a comfortable look and your favorite accent colour.</p><div class="theme-options">${[['light','sun','Light'],['dark','moon','Dark'],['system','settings','System']].map(([v,i,label])=>`<button class="theme-option ${theme===v?'active':''}" data-theme-option="${v}">${icon(i)} ${label}</button>`).join('')}</div>
+      <h3 class="settings-subheading">Accent colour</h3><div class="accent-options" role="group" aria-label="Accent colour">${[['forest','Forest'],['ocean','Ocean'],['violet','Violet'],['terracotta','Terracotta'],['rose','Rose'],['amber','Amber']].map(([v,label])=>`<button class="accent-choice ${accent===v?'active':''}" data-accent-option="${v}" aria-label="${label}" aria-pressed="${accent===v}"><span class="accent-dot ${v}"></span>${label}${accent===v?icon('check'):''}</button>`).join('')}</div></section>
+    <section class="settings-panel"><h2>Backup & restore</h2><p>Transfer your collection between phone and computer using JSON. Full backups include locally uploaded covers and all your notes.</p><button class="btn btn-primary" data-action="export">${icon('download')} Export JSON</button><button class="btn btn-secondary" data-action="import">${icon('upload')} Import JSON / CSV</button><button class="btn btn-secondary" data-action="export-csv">${icon('download')} Export CSV</button><div class="info-banner">${icon('info')} Import shows a preview. Choose full restore or safely merge. No automatic sync.</div></section>
+    <section class="settings-panel"><h2>About your library</h2><p><strong>${state.books.length} titles</strong> are stored on this device. Your records and notes stay private unless you export them.</p><button class="btn btn-secondary" data-action="reset-demo">${icon('refresh')} Restore sample books</button><button class="btn btn-danger" data-action="clear-all">${icon('trash')} Clear library</button></section>
+    <section class="settings-panel"><h2>Data and offline access</h2><p><strong>${state.storageMode==='indexeddb'?'IndexedDB storage active':'Limited localStorage mode'}</strong>. ${state.storageMode==='indexeddb'?'Your collection is saved in the browser database.':'This browser does not permit IndexedDB in the current context; use HTTPS/localhost for full support.'}</p><div class="info-banner">${icon('cloud-off')} No account, server, or automatic synchronization. Book information lookup needs internet. Barcode scanning needs camera permission; compatibility differs between browsers.</div><button class="btn btn-secondary" data-action="storage-info">${icon('info')} Storage advice</button></section>
+    </div>`}
+  function render(){const view=document.getElementById('view');view.innerHTML=state.page==='home'?renderHome():state.page==='library'?renderLibrary():state.page==='shelves'?renderShelves():renderSettings();document.querySelectorAll('[data-page]').forEach(el=>el.classList.toggle('active',el.dataset.page===state.page));if(state.page==='library')updateLibraryResults();applyTheme()}
+  function navigate(page){if(!['home','library','shelves','settings'].includes(page))return;state.page=page;render();window.scrollTo(0,0)}
+  let toastTimeout;
+  function toast(msg){const root=document.getElementById('toast-root');root.innerHTML=`<div class="toast">${icon('check')}${h(msg)}</div>`;clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>root.innerHTML='',3500)}
+  function openDialog(d){state.lastFocused=document.activeElement;state.dialog=d;state.detailTab='overview';state.editingNoteId=null;state.formCover='';renderDialog()}
+  function closeDialog(){stopScan();state.dialog=null;document.getElementById('overlay-root').innerHTML='';document.body.style.overflow='';state.lastFocused?.focus?.()}
+  function dialogHeading(title,subtitle){return `<header class="modal-heading"><div><h2 id="modal-title">${h(title)}</h2>${subtitle?`<div class="muted">${h(subtitle)}</div>`:''}</div><button class="icon-btn" data-action="close-dialog" aria-label="Close dialog">${icon('x')}</button></header>`}
+  function dialogWrap(heading,body,footer='',cls=''){return `<div class="overlay" data-overlay="true"><section class="modal-panel ${cls}" role="dialog" aria-modal="true" aria-labelledby="modal-title">${heading}<div class="modal-body">${body}</div>${footer?`<footer class="modal-footer">${footer}</footer>`:''}</section></div>`}
+  function renderDialog(){const d=state.dialog;if(!d)return;let html='';
+    if(d.kind==='form')html=renderFormDialog(d.bookId,d.prefill||'');
+    if(d.kind==='detail')html=renderDetailDialog(d.bookId);
+    if(d.kind==='filters')html=renderFilterDialog();
+    if(d.kind==='scan')html=renderScanDialog();
+    if(d.kind==='import-preview')html=renderImportDialog();
+    document.getElementById('overlay-root').innerHTML=html;document.body.style.overflow='hidden';
+    const focus=document.querySelector('.modal-panel input:not([type=hidden]),.modal-panel button[data-action="close-dialog"]');focus?.focus({preventScroll:true});
+  }
+  function renderFormDialog(bookId,prefill){const b=state.books.find(b=>b.id===bookId)||{};const edit=Boolean(b.id);const val=(k,f='')=>h(b[k]??f);
+    const shelfList=[...new Set([...state.shelves,b.shelf].filter(Boolean))];
+    const genreList=[...new Set(['Fiction','Fantasy','Science fiction','Programming','History','Psychology','Memoir','Design','Self-improvement','Productivity','Other',...state.books.map(x=>x.genre).filter(Boolean),b.genre].filter(Boolean))];
+    state.formCover=b.cover||'';
+    return dialogWrap(dialogHeading(edit?'Edit book':'Add a new book',edit?'Update the details of your collection':'Fill the basics now; you can edit everything later.'),
+      `<form id="book-form">
+        <div class="form-block"><h3>Quick add with ISBN</h3><div class="isbn-quick"><div class="field"><label for="form-isbn">ISBN-10 / ISBN-13</label><input id="form-isbn" name="isbn" inputmode="numeric" placeholder="e.g. 9780735211292" value="${val('isbn',prefill)}"></div><button class="btn btn-secondary" type="button" data-action="isbn-lookup">${icon('search')} Look up</button><button class="btn btn-secondary" type="button" data-action="open-scan">${icon('camera')} Scan</button></div><p class="form-hint" id="lookup-status">Optional — lookup uses Open Library and requires internet.</p></div>
+        <div class="form-block"><h3>Book details</h3><div class="form-grid">
+         <div class="field full"><label for="form-title">Title <span aria-label="required">*</span></label><input id="form-title" name="title" required maxlength="200" placeholder="Book title" value="${val('title')}"></div>
+         <div class="field full"><label for="form-subtitle">Subtitle</label><input id="form-subtitle" name="subtitle" maxlength="240" placeholder="Optional subtitle" value="${val('subtitle')}"></div>
+         <div class="field full"><label for="form-author">Author</label><input id="form-author" name="author" maxlength="200" placeholder="Author name" value="${val('author')}"></div>
+         <div class="field mobile-full"><label for="form-publisher">Publisher</label><input id="form-publisher" name="publisher" maxlength="160" placeholder="Publisher" value="${val('publisher')}"></div>
+         <div class="field mobile-full"><label for="form-language">Language</label><input id="form-language" name="language" maxlength="60" placeholder="English, French, Ukrainian…" value="${val('language')}"></div>
+         <div class="field"><label for="form-year">Publication year</label><input id="form-year" name="year" inputmode="numeric" type="number" min="0" max="2200" placeholder="2026" value="${val('year')}"></div>
+         <div class="field"><label for="form-pages">Number of pages</label><input id="form-pages" name="pages" inputmode="numeric" type="number" min="0" max="999999" value="${val('pages')}"></div>
+         <div class="field mobile-full"><label for="form-genre">Genre</label><input id="form-genre" name="genre" list="genre-options" placeholder="e.g. Fantasy" value="${val('genre')}"><datalist id="genre-options">${genreList.map(g=>`<option value="${h(g)}"></option>`).join('')}</datalist></div>
+         <div class="field mobile-full"><label for="form-shelf">Shelf</label><input id="form-shelf" name="shelf" list="shelf-options" placeholder="e.g. Fiction" value="${val('shelf','Fiction')}"><datalist id="shelf-options">${shelfList.map(s=>`<option value="${h(s)}"></option>`).join('')}</datalist></div>
+         <div class="field full"><label for="form-tags">Tags (comma separated)</label><input id="form-tags" name="tags" placeholder="Favorite, Study, Classic" value="${h((b.tags||[]).join(', '))}"></div>
+         <div class="field full"><label for="form-description">Description</label><textarea id="form-description" name="description" placeholder="A few words about this book">${val('description')}</textarea></div>
+        </div></div>
+        <div class="form-block"><h3>Cover image</h3><div class="image-picker"><img id="form-cover-preview" class="preview" src="${h(safeSrc(b.cover,b.title||'New book'))}" alt="Selected book cover"><div class="picker-info"><div class="field"><label for="form-cover">Image URL (optional)</label><input id="form-cover" name="cover" placeholder="https://..." value="${h((b.cover||'').startsWith('data:')?'':(b.cover||''))}"></div><p>Or upload an image from your device</p><input type="file" id="cover-upload" accept="image/png,image/jpeg,image/webp" aria-label="Upload cover image"></div></div></div>
+        <div class="form-block"><h3>Reading & purchase</h3><div class="form-grid">
+          <div class="field"><label for="form-status">Reading status</label><select id="form-status" name="status">${STATUSES.map(([v,l])=>selectOption(v,l,b.status||'to-read')).join('')}</select></div>
+          <div class="field"><label for="form-current">Current page</label><input id="form-current" name="currentPage" type="number" min="0" inputmode="numeric" value="${val('currentPage',0)}"></div>
+          <div class="field"><label for="form-price">Purchase price (€)</label><input id="form-price" name="price" type="number" step="0.01" min="0" placeholder="Unknown" inputmode="decimal" value="${val('price')}"></div>
+          <div class="field"><label for="form-quantity">Copies owned</label><input id="form-quantity" name="quantity" type="number" min="1" max="99999" inputmode="numeric" value="${val('quantity',1)}"></div>
+          <div class="field"><label for="form-acquired">Date acquired</label><input id="form-acquired" name="acquiredAt" type="date" value="${val('acquiredAt')}"></div>
+          <div class="field"><label for="form-started">Started reading</label><input id="form-started" name="startedAt" type="date" value="${val('startedAt')}"></div>
+          <div class="field"><label for="form-finished">Finished reading</label><input id="form-finished" name="finishedAt" type="date" value="${val('finishedAt')}"></div>
+          <div class="field"><label for="form-favorite">Favorite</label><select name="favorite" id="form-favorite">${selectOption('no','No',b.favorite?'yes':'no')}${selectOption('yes','Yes',b.favorite?'yes':'no')}</select></div>
+          <div class="field full"><label for="form-note">Personal note</label><textarea id="form-note" name="note" placeholder="Anything you want to remember about this book...">${edit?'':h('')}</textarea><p class="form-hint">New notes are added to the book's note history. Existing notes stay intact.</p></div>
+        </div></div>
+        <p id="form-message" class="form-error" role="alert" hidden></p>
+      </form>`,
+      `<button class="btn btn-secondary" data-action="close-dialog">Cancel</button><button type="submit" form="book-form" class="btn btn-primary">${icon('check')} ${edit?'Save changes':'Add to library'}</button>`);
+  }
+  function renderDetailDialog(bookId){const b=state.books.find(b=>b.id===bookId);if(!b)return dialogWrap(dialogHeading('Book not found'),'<p>This book is no longer available.</p>');const tab=state.detailTab;
+    const headings=`<div class="detail-hero">${cover(b)}<div style="min-width:0"><div style="margin-bottom:10px">${statusPill(b.status)}</div><h2>${h(b.title)}</h2><p>by ${h(b.author||'Unknown author')}</p><div class="tag-list">${(b.tags||[]).slice(0,3).map(x=>`<span class="tag-pill">${h(x)}</span>`).join('')}</div></div></div>
+      <div class="detail-tabs" role="tablist">${[['overview','Overview'],['reading','Reading'],['notes','My notes']].map(([t,l])=>`<button role="tab" aria-selected="${tab===t}" data-detail-tab="${t}" class="${tab===t?'active':''}">${l}${t==='notes'?` (${(b.notes||[]).length})`:''}</button>`).join('')}</div>`;
+    let content='';
+    if(tab==='overview')content=`<div class="detail-section"><h3>About this book</h3><p class="detail-description">${h(b.description||'No description yet. Edit this book to add one.')}</p>
+      <div class="metadata-grid">${[['ISBN',b.isbn||'Not added'],['Publication year',b.year||'Unknown'],['Publisher',b.publisher||'Unknown'],['Language',b.language||'Not specified'],['Genre',b.genre||'Uncategorized'],['Shelf',b.shelf||'Unshelved'],['Purchase price',priceText(b)],['Copies owned',b.quantity||1],['Date acquired',b.acquiredAt||'Not recorded'],['Total paid',b.price===null?'Unknown':money(Number(b.price)*(Number(b.quantity)||1))]].map(([k,v])=>`<div><div class="metadata-label">${k}</div><div class="metadata-value">${h(v)}</div></div>`).join('')}</div></div>`;
+    if(tab==='reading')content=`<div class="detail-section"><h3>Reading progress</h3><div style="margin:16px 0"><div class="progress-track" style="height:10px"><span style="width:${pct(b)}%"></span></div><div class="progress-caption"><span>${pct(b)}% completed</span><span>Page ${Number(b.currentPage)||0} / ${Number(b.pages)||0}</span></div></div>
+      <form id="progress-form" class="progress-form"><div class="field"><label for="progress-page">Update current page</label><input id="progress-page" type="number" name="currentPage" min="0" max="${Math.max(0,Number(b.pages)||999999)}" value="${Number(b.currentPage)||0}"></div><button class="btn btn-primary" type="submit">Save progress</button></form>
+      <div class="field" style="margin-top:22px"><label for="quick-status">Reading status</label><select id="quick-status" data-quick-status="${h(b.id)}">${STATUSES.map(([v,l])=>selectOption(v,l,b.status)).join('')}</select></div></div>`;
+    if(tab==='notes')content=`<div class="detail-section"><h3>Personal notes</h3>${(b.notes||[]).length?[...(b.notes||[])].reverse().map(n=>`<div class="note-card"><div class="note-meta"><span>${h(formatDate(n.date))}</span><div class="note-actions"><button data-edit-note="${h(n.id)}" aria-label="Edit note">Edit</button><button data-delete-note="${h(n.id)}" aria-label="Delete note">Delete</button></div></div>${state.editingNoteId===n.id?`<form id="edit-note-form" data-note-id="${h(n.id)}" class="note-entry"><textarea name="note" aria-label="Edit note" required>${h(n.body)}</textarea><div class="note-actions"><button class="btn btn-primary" type="submit">Save changes</button><button class="btn btn-secondary" type="button" data-action="cancel-note-edit">Cancel</button></div></form>`:`<p>${h(n.body)}</p>`}</div>`).join(''):'<p class="empty-line">No notes yet. Capture a thought, quote, or reminder below.</p>'}
+      <form id="note-form" class="note-entry"><label for="new-note" class="mini-heading">Add a new note</label><textarea id="new-note" name="note" placeholder="What would you like to remember?" required></textarea><button class="btn btn-primary" type="submit">${icon('plus')} Save note</button></form></div>`;
+    return dialogWrap(dialogHeading('Book details','Everything about this book in one place'),`${headings}${content}`,`<button class="btn btn-danger" data-action="delete-book" data-id="${h(b.id)}">${icon('trash')} Delete</button><button class="btn btn-primary" data-action="edit-book" data-id="${h(b.id)}">${icon('edit')} Edit book</button>`);
+  }
+  function renderFilterDialog(){const f=state.filters;const genres=[...new Set(state.books.map(b=>b.genre).filter(Boolean))].sort();const tags=[...new Set(state.books.flatMap(b=>b.tags||[]))].sort();const shelves=[...new Set([...state.shelves,...state.books.map(b=>b.shelf).filter(Boolean)])].sort();
+    return dialogWrap(dialogHeading('Advanced filters','Combine different filters to narrow your collection'),`<form id="filters-form"><div class="form-grid">
+    <div class="field full"><label>Shelf</label><select name="shelf">${selectOption('all','All shelves',f.shelf)}${shelves.map(s=>selectOption(s,s,f.shelf)).join('')}</select></div>
+    <div class="field full"><label>Genre</label><select name="genre">${selectOption('all','All genres',f.genre)}${genres.map(g=>selectOption(g,g,f.genre)).join('')}</select></div>
+    <div class="field full"><label>Tag</label><select name="tag">${selectOption('all','All tags',f.tag)}${tags.map(g=>selectOption(g,g,f.tag)).join('')}</select></div>
+    <div class="field"><label>From year</label><input type="number" name="minYear" placeholder="1900" value="${h(f.minYear)}"></div><div class="field"><label>To year</label><input type="number" name="maxYear" placeholder="2026" value="${h(f.maxYear)}"></div>
+    <div class="field"><label>Minimum price (€)</label><input type="number" name="minPrice" step="0.01" min="0" placeholder="0" value="${h(f.minPrice)}"></div><div class="field"><label>Maximum price (€)</label><input type="number" name="maxPrice" step="0.01" min="0" placeholder="50" value="${h(f.maxPrice)}"></div>
+    </div><p class="form-hint">Filters work together with your keyword search and reading status.</p></form>`,
+    `<button class="btn btn-secondary" data-action="reset-advanced">Reset</button><button class="btn btn-primary" type="submit" form="filters-form">${icon('check')} Apply filters</button>`,'narrow')}
+  function renderScanDialog(){return dialogWrap(dialogHeading('Scan ISBN barcode','Place the barcode in the camera frame'),`<p class="scan-status" id="scan-status">Preparing camera… You can always enter the ISBN manually instead.</p><div class="scan-viewport"><video id="camera-preview" autoplay muted playsinline></video><div class="scan-guides"></div></div><form id="manual-isbn-form" class="isbn-quick"><div class="field"><label>Or type the ISBN</label><input name="isbn" placeholder="978..." inputmode="numeric" required></div><button class="btn btn-primary" type="submit">Use ISBN ${icon('arrow-right')}</button></form><p class="form-hint">Camera access generally needs HTTPS or localhost, plus browser barcode detection support.</p>`, `<button class="btn btn-secondary" data-action="close-dialog">Cancel</button>`,'narrow')}
+  function findBook(id){return state.books.find(b=>String(b.id)===String(id))}
+  const validISBN = raw => {
+    const isbn=plain(raw).replace(/[\s-]/g,'').toUpperCase();
+    if (/^\d{13}$/.test(isbn)) return [...isbn].reduce((sum,v,i)=>sum+Number(v)*(i%2?3:1),0)%10===0;
+    if (/^\d{9}[\dX]$/.test(isbn)) return [...isbn].reduce((sum,v,i)=>sum+(10-i)*(v==='X'?10:Number(v)),0)%11===0;
+    return false;
+  };
+  function normalizeBook(raw){
+    if(!raw || typeof raw!=='object' || !plain(raw.title)) throw Error('A book in the backup has no title.');
+    const now=new Date().toISOString();
+    const date=x=>/^\d{4}-\d{2}-\d{2}$/.test(String(x||''))?String(x):'';
+    const number=(x,def=0,max=10000000)=>x===null||x===undefined||x===''?def:Math.max(0,Math.min(max,Number.isFinite(Number(x))?Number(x):def));
+    return {id:plain(raw.id)||id(),title:plain(raw.title).slice(0,240),subtitle:plain(raw.subtitle).slice(0,240),author:plain(raw.author).slice(0,300),isbn:plain(raw.isbn).replace(/[\s-]/g,'').slice(0,13),year:raw.year==null||raw.year===''?null:Math.floor(number(raw.year,0,2200)),publisher:plain(raw.publisher).slice(0,160),language:plain(raw.language).slice(0,60),pages:Math.floor(number(raw.pages,0,999999)),currentPage:Math.floor(number(raw.currentPage,0,999999)),status:STATUSES.some(x=>x[0]===raw.status)?raw.status:'to-read',genre:plain(raw.genre).slice(0,100),shelf:plain(raw.shelf).slice(0,100),tags:splitTags(raw.tags).slice(0,100),description:plain(raw.description).slice(0,20000),price:raw.price===''||raw.price==null?null:number(raw.price,0,100000000),quantity:Math.max(1,Math.floor(number(raw.quantity,1,99999))),cover:plain(raw.cover).slice(0,3000000),notes:Array.isArray(raw.notes)?raw.notes.slice(0,10000).map(n=>({id:plain(n?.id)||id(),body:plain(typeof n==='string'?n:n?.body).slice(0,50000),date:plain(n?.date)||now})).filter(n=>n.body):[],acquiredAt:date(raw.acquiredAt),startedAt:date(raw.startedAt),finishedAt:date(raw.finishedAt),favorite:!!raw.favorite,addedAt:plain(raw.addedAt)||now,updatedAt:plain(raw.updatedAt)||now};
+  }
+  function withNote(b,body){const copy={...b,notes:[...(b.notes||[])]};if(plain(body))copy.notes.push({id:id(),body:plain(body),date:new Date().toISOString()});copy.updatedAt=new Date().toISOString();return copy}
+  async function handleBookSave(form){
+    const obj=Object.fromEntries(new FormData(form));const title=plain(obj.title);
+    if(!title){form.querySelector('#form-message').hidden=false;form.querySelector('#form-message').textContent='Please add a book title.';return}
+    const old=state.dialog?.bookId?findBook(state.dialog.bookId):null;
+    if(plain(obj.isbn)&&!validISBN(obj.isbn)){form.querySelector('#form-message').hidden=false;form.querySelector('#form-message').textContent='ISBN checksum is invalid. Check the digits or leave ISBN empty.';return}
+    const duplicate=state.books.find(b=>b.id!==old?.id && ((obj.isbn&&b.isbn===plain(obj.isbn).replace(/[\s-]/g,''))||(b.title.toLowerCase()===title.toLowerCase()&&b.author.toLowerCase()===plain(obj.author).toLowerCase())));
+    if(duplicate&&!confirm(`“${duplicate.title}” may already be in your library. Add another record anyway?`))return;
+    let image=state.formCover||old?.cover||'';
+    if(plain(obj.cover)&&plain(obj.cover)!==old?.cover)image=plain(obj.cover);
+    const now=new Date().toISOString();
+    const b=normalizeBook({...old,...obj,id:old?.id||id(),title,cover:image,notes:old?.notes||[],tags:splitTags(obj.tags),quantity:obj.quantity||1,price:obj.price===''?null:Number(obj.price),favorite:obj.favorite==='yes',addedAt:old?.addedAt||now,updatedAt:now});
+    b.currentPage=Math.min(b.pages||999999,b.currentPage);
+    if(b.status==='completed'&&b.pages)b.currentPage=b.pages;
+    if(b.status==='reading'&&!b.startedAt)b.startedAt=now.slice(0,10);
+    if(b.status==='completed'&&!b.finishedAt)b.finishedAt=now.slice(0,10);
+    const saved=withNote(b,obj.note);
+    const btn=document.querySelector('[form="book-form"][type=submit]');if(btn)btn.disabled=true;
+    try {
+      const newShelf=saved.shelf&&!state.shelves.includes(saved.shelf)?[...state.shelves,saved.shelf]:null;
+      if(newShelf) await FolioDB.writeBooksAndShelves([...state.books.filter(x=>x.id!==saved.id),saved],newShelf);
+      else await FolioDB.putBook(saved);
+      if(newShelf) state.shelves=newShelf;
+      const i=state.books.findIndex(x=>x.id===saved.id);
+      if(i>=0)state.books[i]=saved; else state.books.unshift(saved);
+      closeDialog();navigate('library');toast(old?'Book updated successfully':'Book added to your library');
+    } catch(err){saveError(err)} finally{if(btn?.isConnected)btn.disabled=false}
+  }
+  function clearFilters(){state.query='';state.status='all';state.filters={shelf:'all',genre:'all',tag:'all',minYear:'',maxYear:'',minPrice:'',maxPrice:''};render()}
+  const download=(content,filename,type)=>{
+    const url=URL.createObjectURL(new Blob([content],{type}));const a=document.createElement('a');a.href=url;a.download=filename;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);
+  };
+  function exportBackup(){
+    const payload={format:'folio-personal-library',version:2,createdAt:new Date().toISOString(),books:state.books,shelves:state.shelves,tombstones:state.tombstones};
+    download(JSON.stringify(payload,null,2),`folio-library-${new Date().toISOString().slice(0,10)}.json`,'application/json');
+    toast('Complete JSON backup downloaded');
+  }
+  const csvFields=['title','subtitle','author','isbn','year','publisher','language','genre','shelf','tags','description','price','quantity','pages','currentPage','status','acquiredAt','startedAt','finishedAt','favorite','notes','cover','id','addedAt','updatedAt'];
+  function exportCSV(){
+    const quote=x=>{let t=Array.isArray(x)?x.join(' | '):x==null?'':String(x);if(/^[\s]*[=+@-]/.test(t))t="'"+t;return '"'+t.replace(/"/g,'""')+'"'};
+    const rows=[csvFields.join(','),...state.books.map(b=>csvFields.map(f=>quote(f==='notes'?(b.notes||[]).map(n=>n.body).join(' | '):b[f])).join(','))];
+    download('﻿'+rows.join('\r\n'),`folio-library-${new Date().toISOString().slice(0,10)}.csv`,'text/csv;charset=utf-8');toast('CSV exported (JSON is the full-fidelity backup)');
+  }
+  function parseCSV(text){
+    const rows=[],row=[];let cur='',quoted=false;
+    for(let i=0;i<text.length;i++){const c=text[i];if(quoted){if(c==='"'&&text[i+1]==='"'){cur+='"';i++}else if(c==='"')quoted=false;else cur+=c}
+      else if(c==='"')quoted=true;else if(c===','){row.push(cur);cur=''}else if(c==='\n'||c==='\r'){if(c==='\r'&&text[i+1]==='\n')i++;row.push(cur);if(row.some(v=>v.length))rows.push([...row]);row.length=0;cur=''}else cur+=c}
+    if(quoted)throw Error('CSV contains an unclosed quoted value.');row.push(cur);if(row.some(v=>v.length))rows.push(row);
+    if(rows.length<2)throw Error('No book records in CSV.');const headers=rows.shift().map((x,i)=>i===0?x.replace(/^\ufeff/,'').trim():x.trim());
+    if(!headers.includes('title'))throw Error('CSV must include a title column.');
+    return rows.map(r=>{
+      const raw={};headers.forEach((key,i)=>{if(csvFields.includes(key))raw[key]=r[i]||''});
+      raw.tags=(raw.tags||'').split(/\s*\|\s*/).filter(Boolean);raw.notes=raw.notes?[{body:raw.notes.replace(/\s+\|\s+/g,'\n'),date:new Date().toISOString()}]:[];
+      raw.favorite=raw.favorite==='true';if(raw.price==='')raw.price=null;
+      return normalizeBook(raw);
+    });
+  }
+  function sameBook(a,b){
+    return a.id===b.id || (a.isbn&&b.isbn&&a.isbn===b.isbn&&a.title.toLowerCase()===b.title.toLowerCase()) || (a.title.toLowerCase()===b.title.toLowerCase()&&a.author&&b.author&&a.author.toLowerCase()===b.author.toLowerCase());
+  }
+  async function importBackup(file){
+    try {
+      if(file.size>100*1024*1024)throw Error('File is larger than 100 MB. Use a smaller backup.');
+      const source=await file.text();let data;
+      if(/\.csv$/i.test(file.name)){data={format:'folio-csv',version:1,books:parseCSV(source),shelves:[]};}
+      else {data=JSON.parse(source.replace(/^\ufeff/,''));if(data?.format!=='folio-personal-library'||![1,2].includes(data.version)||!Array.isArray(data.books))throw Error('Not a compatible Folio JSON backup.');}
+      if(data.books.length>100000)throw Error('Backup has too many books.');
+      const books=data.books.map(normalizeBook);
+      const ids=new Set();for(const b of books){if(ids.has(b.id))throw Error('Backup contains duplicate book IDs.');ids.add(b.id)}
+      const shelves=[...new Set([...(Array.isArray(data.shelves)?data.shelves:[]),...books.map(b=>b.shelf)].map(plain).filter(Boolean))].slice(0,10000);
+      const tombstones=Array.isArray(data.tombstones)?data.tombstones.filter(t=>t&&typeof t.id==='string').map(t=>({id:t.id,updatedAt:plain(t.updatedAt)})):[];
+      const duplicates=books.filter(b=>state.books.some(x=>sameBook(x,b))).length;
+      state.pendingImport={books,shelves,tombstones,source:file.name,duplicates,format:data.format};
+      openDialog({kind:'import-preview'});
+    } catch(err){alert(`Could not read import: ${err.message}`)}
+  }
+  function renderImportDialog(){
+    const p=state.pendingImport;if(!p)return '';
+    return dialogWrap(dialogHeading('Review import','No data has been changed yet'),`<div class="import-summary"><div><strong>${p.books.length}</strong><span>Books in file</span></div><div><strong>${p.duplicates}</strong><span>Potential matches</span></div><div><strong>${p.shelves.length}</strong><span>Shelves</span></div></div><p class="detail-description"><strong>File:</strong> ${h(p.source)}<br><strong>Format:</strong> ${p.format==='folio-csv'?'CSV (limited fields)':'Folio JSON (complete backup)'}</p><div class="import-choice"><label><input type="radio" name="import-mode" value="merge-keep" checked><span><strong>Merge — keep existing</strong><small>Add missing books; preserve current details when a book matches. Combine unique notes.</small></span></label><label><input type="radio" name="import-mode" value="merge-replace"><span><strong>Merge — prefer imported</strong><small>Add missing books; use imported details for matching books. Combine unique notes.</small></span></label><label><input type="radio" name="import-mode" value="replace"><span><strong>Restore entire backup</strong><small>Replace every local book with the books in this file. Existing books not in the file are removed.</small></span></label></div><div class="info-banner">${icon('info')} For safety, download your current JSON backup before restoring. Merge does not automatically apply deletions made on another device.</div>`, `<button class="btn btn-secondary" data-action="export">${icon('download')} Back up current</button><button class="btn btn-primary" data-action="confirm-import">${icon('check')} Import books</button>`);
+  }
+  function unionNotes(a,b){const out=[...a.map(n=>({...n}))];for(const n of b){if(!out.some(x=>x.id===n.id||(x.body===n.body&&x.date===n.date)))out.push({...n})}return out}
+  async function confirmImport(){
+    const data=state.pendingImport;if(!data)return;
+    const mode=document.querySelector('input[name="import-mode"]:checked')?.value||'merge-keep';
+    if(mode==='replace'&&!confirm(`Restore ${data.books.length} books and DELETE any current books not in this file? Please ensure you have exported the current collection first.`))return;
+    let books,shelves,tombs;
+    if(mode==='replace'){books=data.books;shelves=data.shelves;tombs=data.tombstones;}
+    else {
+      books=state.books.map(b=>({...b}));shelves=[...new Set([...state.shelves,...data.shelves])];tombs=[...state.tombstones];
+      for(const imported of data.books){const i=books.findIndex(local=>sameBook(local,imported));
+        if(i<0){if(!tombs.some(t=>t.id===imported.id&&String(t.updatedAt)>String(imported.updatedAt)))books.push(imported);}
+        else {const local=books[i];const preferred=mode==='merge-replace'?imported:local;books[i]={...preferred,id:local.id,notes:unionNotes(local.notes||[],imported.notes||[]),updatedAt:new Date().toISOString()};}
+      }
+      // Tombstones are preserved for future manual reconciliation; imported deletions are never silently applied.
+      for(const t of data.tombstones)if(!tombs.some(x=>x.id===t.id))tombs.push(t);
+    }
+    const btn=document.querySelector('[data-action="confirm-import"]');if(btn)btn.disabled=true;
+    try{await FolioDB.replaceAll(books,shelves,tombs);state.books=books;state.shelves=shelves;state.tombstones=tombs;state.pendingImport=null;closeDialog();clearFilters();navigate('library');toast(`${books.length} books safely imported`)}
+    catch(err){saveError(err)}finally{if(btn?.isConnected)btn.disabled=false}
+  }
+  async function lookupISBN(){
+    const isbn=plain(document.getElementById('form-isbn')?.value).replace(/[\s-]/g,'').toUpperCase();const s=document.getElementById('lookup-status');if(!s)return;
+    if(!validISBN(isbn)){s.textContent='Invalid ISBN checksum. Please check all digits.';return}
+    s.textContent='Looking up book metadata…';
+    const already=state.books.find(b=>b.isbn===isbn && b.id!==state.dialog?.bookId);if(already)s.textContent=`Already in library: ${already.title}. Looking up details…`;
+    const ctl=new AbortController();const timer=setTimeout(()=>ctl.abort(),10000);
+    try {
+      let fields={};
+      try {const res=await fetch(`https://openlibrary.org/api/books?bibkeys=ISBN:${encodeURIComponent(isbn)}&format=json&jscmd=data`,{signal:ctl.signal});if(!res.ok)throw Error('Open Library unavailable');const json=await res.json();const data=json[`ISBN:${isbn}`];if(data)fields={title:data.title||'',subtitle:data.subtitle||'',author:(data.authors||[]).map(a=>a.name).join(', '),year:(data.publish_date||'').match(/\d{4}/)?.[0]||'',publisher:(data.publishers||[]).map(p=>p.name).join(', '),pages:data.number_of_pages||'',description:typeof data.notes==='string'?data.notes:'',cover:data.cover?.large||data.cover?.medium||''};}
+      catch(err){if(err.name==='AbortError')throw err;}
+      if(!fields.title){const res=await fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${encodeURIComponent(isbn)}&maxResults=1`,{signal:ctl.signal});if(!res.ok)throw Error('Lookup services unavailable');const json=await res.json();const data=json.items?.[0]?.volumeInfo;if(data)fields={title:data.title||'',subtitle:data.subtitle||'',author:(data.authors||[]).join(', '),year:(data.publishedDate||'').match(/\d{4}/)?.[0]||'',publisher:data.publisher||'',pages:data.pageCount||'',description:data.description||'',language:data.language||'',cover:data.imageLinks?.thumbnail?.replace(/^http:/,'https:')||''};}
+      if(!fields.title){s.textContent='No book found. You can enter the details manually.';return}
+      for(const [k,v] of Object.entries(fields)){
+        if(k==='cover'){if(v&&!state.formCover){state.formCover=v;document.getElementById('form-cover').value=v;document.getElementById('form-cover-preview').src=v}continue}
+        const target=document.querySelector(`#book-form [name="${k}"]`);
+        if(target && v && !target.value)target.value=v;
+      }
+      s.textContent=`Found “${fields.title}”. Check the information before saving.${already?' Note: this ISBN is already in your library.':''}`;toast('ISBN details found');
+    }catch(err){s.textContent=err.name==='AbortError'?'Lookup timed out. Enter details manually or retry.':'Lookup unavailable. You can enter details manually.'}
+    finally{clearTimeout(timer)}
+  }
+  async function compressImage(file){return new Promise((resolve,reject)=>{if(file.size>12*1024*1024){reject(Error('Image exceeds 12 MB.'));return}const reader=new FileReader();reader.onerror=()=>reject(Error('Could not read the image'));reader.onload=()=>{const img=new Image();img.onerror=()=>reject(Error('Unsupported image'));img.onload=()=>{const scale=Math.min(1,440/Math.max(img.width,img.height));const canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(img.width*scale));canvas.height=Math.max(1,Math.round(img.height*scale));canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);resolve(canvas.toDataURL('image/jpeg',.75))};img.src=reader.result};reader.readAsDataURL(file)})}
+  function stopScan(){if(state.scanLoop){clearTimeout(state.scanLoop);state.scanLoop=null}if(state.scanner){state.scanner.getTracks().forEach(t=>t.stop());state.scanner=null}}
+  async function startScan(){const notice=document.getElementById('scan-status');if(!notice)return;
+    if(!navigator.mediaDevices?.getUserMedia){notice.textContent='Camera access requires HTTPS/localhost and permission. Enter ISBN manually below.';return}
+    let detector=null;
+    if('BarcodeDetector' in window){try {detector=new BarcodeDetector({formats:['ean_13']})}catch{}}
+    try {
+      const stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'},width:{ideal:1280},height:{ideal:720}},audio:false});
+      if(state.dialog?.kind!=='scan'){stream.getTracks().forEach(t=>t.stop());return}
+      state.scanner=stream;const video=document.getElementById('camera-preview');video.srcObject=stream;await video.play();
+      notice.textContent=detector?'Scanning ISBN-13… Keep the barcode steady.':'Scanning using built-in JavaScript EAN-13 reader… Keep barcode level and well lit.';
+      const canvas=document.createElement('canvas'),ctx=canvas.getContext('2d',{willReadFrequently:true});let misses=0;
+      const tick=async()=>{if(state.dialog?.kind!=='scan'||!state.scanner)return;let found='';
+        try {
+          if(detector){const codes=await detector.detect(video);found=codes.map(x=>x.rawValue.replace(/\D/g,'')).find(x=>validISBN(x)&&/^97[89]\d{10}$/.test(x))||'';}
+          if(!found&&video.videoWidth>0){canvas.width=640;canvas.height=Math.round(video.videoHeight*640/video.videoWidth);ctx.drawImage(video,0,0,canvas.width,canvas.height);found=window.FolioBarcode?.scan(ctx.getImageData(0,0,canvas.width,canvas.height))||'';}
+        } catch(err){if(++misses===1)console.debug('Scanner frame skipped',err)}
+        if(found){stopScan();openDialog({kind:'form',prefill:found});lookupISBN();return}
+        state.scanLoop=setTimeout(tick,detector?300:550);
+      };tick();
+    }catch(e){stopScan();notice.textContent=`Camera unavailable (${e.name||'permission denied'}). You can type the ISBN below.`}
+  }
+  async function changeStatus(bookId,status){const old=findBook(bookId);if(!old)return;const b={...old,status,updatedAt:new Date().toISOString()};if(status==='completed'&&b.pages)b.currentPage=b.pages;
+    if(status==='reading'&&!b.startedAt)b.startedAt=new Date().toISOString().slice(0,10);
+    if(status==='completed'&&!b.finishedAt)b.finishedAt=new Date().toISOString().slice(0,10);
+    try{await writeBook(b);renderDialog();render();toast('Reading status updated')}catch(err){saveError(err);renderDialog()}}
+  async function deleteBook(bookId){const b=findBook(bookId);if(!b)return;if(!confirm(`Delete “${b.title}” from your library? This cannot be undone.`))return;
+    const deleted={id:bookId,updatedAt:new Date().toISOString()};try{await FolioDB.removeBook(bookId,deleted);state.books=state.books.filter(x=>x.id!==bookId);state.tombstones.push(deleted);closeDialog();render();toast('Book deleted')}catch(err){saveError(err)}}
+  function readActionTarget(event){return event.target.closest('[data-action],[data-page],[data-book],[data-status],[data-layout],[data-shelf],[data-detail-tab],[data-theme-option],[data-accent-option],[data-delete-note],[data-edit-note]')}
+  document.addEventListener('click', async e=>{
+    if(e.target.classList.contains('overlay')){closeDialog();return}
+    const el=readActionTarget(e);if(!el)return;
+    if(el.dataset.page){e.preventDefault();navigate(el.dataset.page);return}
+    if(el.dataset.book){openDialog({kind:'detail',bookId:el.dataset.book});return}
+    if(el.dataset.status){state.status=el.dataset.status;render();return}
+    if(el.dataset.layout){state.layout=el.dataset.layout;render();return}
+    if(el.dataset.shelf){const s=el.dataset.shelf;state.filters.shelf=s==='All books'?'all':s;state.status='all';state.query='';navigate('library');return}
+    if(el.dataset.detailTab){state.detailTab=el.dataset.detailTab;renderDialog();return}
+    if(el.dataset.themeOption){theme=el.dataset.themeOption;setPref(THEME_KEY,theme);render();toast('Theme preference saved');return}
+    if(el.dataset.accentOption){accent=el.dataset.accentOption;setPref(ACCENT_KEY,accent);render();toast('Accent colour saved');return}
+    if(el.dataset.deleteNote){const old=findBook(state.dialog?.bookId);if(!old)return;const n=old.notes.find(x=>x.id===el.dataset.deleteNote);if(!n||!confirm('Delete this note?'))return;const b={...old,notes:old.notes.filter(x=>x.id!==el.dataset.deleteNote),updatedAt:new Date().toISOString()};try{await writeBook(b);renderDialog();toast('Note deleted')}catch(err){saveError(err)}return}
+    if(el.dataset.editNote){state.editingNoteId=el.dataset.editNote;renderDialog();return}
+    switch(el.dataset.action){
+      case'add-book':openDialog({kind:'form'});break;
+      case'edit-book':openDialog({kind:'form',bookId:el.dataset.id});break;
+      case'close-dialog':closeDialog();break;
+      case'open-filters':openDialog({kind:'filters'});break;
+      case'clear-filters':clearFilters();break;
+      case'reset-advanced':state.filters={shelf:'all',genre:'all',tag:'all',minYear:'',maxYear:'',minPrice:'',maxPrice:''};closeDialog();render();break;
+      case'export':exportBackup();break;
+      case'export-csv':exportCSV();break;
+      case'confirm-import':await confirmImport();break;
+      case'cancel-note-edit':state.editingNoteId=null;renderDialog();break;
+      case'storage-info':alert('IndexedDB keeps your records only in this browser profile. Clearing site data, private browsing, or device loss can delete it. Export JSON backups regularly, and use an HTTPS-hosted copy or localhost for reliable storage, offline installation and camera access.');break;
+      case'import':document.getElementById('import-input').click();break;
+      case'toggle-theme':theme=document.documentElement.dataset.theme==='dark'?'light':'dark';setPref(THEME_KEY,theme);render();break;
+      case'isbn-lookup':lookupISBN();break;
+      case'open-scan':openDialog({kind:'scan'});startScan();break;
+      case'delete-book':deleteBook(el.dataset.id);break;
+      case'new-shelf':{const name=plain(prompt('Name your new shelf:'));if(!name)return;if(state.shelves.some(s=>s.toLowerCase()===name.toLowerCase())){toast('That shelf already exists');return}try{await writeShelfSet([...state.shelves,name]);render();toast('Shelf created')}catch(err){saveError(err)}break}
+      case'reset-demo':if(confirm('Restore the sample collection? This replaces your current books. Export a backup first.')){try{await FolioDB.replaceAll(structuredClone(sample),DEFAULT_SHELVES,[]);state.books=structuredClone(sample);state.shelves=[...DEFAULT_SHELVES];state.tombstones=[];render();toast('Sample books restored')}catch(err){saveError(err)}}break;
+      case'clear-all':if(confirm('Delete ALL books stored in this browser? Export a backup first if needed.')){try{const deleted=state.books.map(b=>({id:b.id,updatedAt:new Date().toISOString()}));await FolioDB.replaceAll([],state.shelves,[...state.tombstones,...deleted]);state.books=[];state.tombstones.push(...deleted);render();toast('Library cleared')}catch(err){saveError(err)}}break;
+      case'rename-shelf':await renameShelf(el.dataset.shelfName);break;
+      case'delete-shelf':await deleteShelf(el.dataset.shelfName);break;
+    }
+  });
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&state.dialog)closeDialog();if((e.key==='Enter'||e.key===' ')&&e.target.matches('.book-card')){e.preventDefault();openDialog({kind:'detail',bookId:e.target.dataset.book})}});
+  document.addEventListener('input',e=>{if(e.target.id==='library-search'){state.query=e.target.value;updateLibraryResults()}if(e.target.id==='form-cover'&&e.target.value){const img=document.getElementById('form-cover-preview');if(img)img.src=e.target.value;state.formCover=e.target.value}});
+  document.addEventListener('change',async e=>{
+    if(e.target.id==='library-sort'){state.sort=e.target.value;updateLibraryResults()}
+    if(e.target.dataset.quickStatus)changeStatus(e.target.dataset.quickStatus,e.target.value);
+    if(e.target.id==='cover-upload'&&e.target.files?.[0]){try{state.formCover=await compressImage(e.target.files[0]);document.getElementById('form-cover-preview').src=state.formCover;document.getElementById('form-cover').value='';toast('Cover image ready')}catch(err){alert(err.message)}}
+    if(e.target.id==='import-input'&&e.target.files?.[0]){await importBackup(e.target.files[0]);e.target.value=''}
+  });
+  document.addEventListener('submit',e=>{if(!['book-form','filters-form','progress-form','note-form','edit-note-form','manual-isbn-form'].includes(e.target.id))return;e.preventDefault();const form=e.target;
+    if(form.id==='book-form')handleBookSave(form);
+    if(form.id==='filters-form'){state.filters=Object.fromEntries(new FormData(form));closeDialog();render()}
+    if(form.id==='progress-form'){const old=findBook(state.dialog?.bookId);if(!old)return;const b={...old,currentPage:Math.max(0,Math.min(Number(old.pages)||999999,Number(new FormData(form).get('currentPage'))||0)),updatedAt:new Date().toISOString()};writeBook(b).then(()=>{renderDialog();render();toast('Reading progress saved')}).catch(saveError)}
+    if(form.id==='note-form'){const old=findBook(state.dialog?.bookId);if(!old)return;const b=withNote(old,new FormData(form).get('note'));writeBook(b).then(()=>{renderDialog();render();toast('Note added')}).catch(saveError)}
+    if(form.id==='edit-note-form'){const old=findBook(state.dialog?.bookId);const noteId=form.dataset.noteId;const body=plain(new FormData(form).get('note'));if(!old||!body)return;const b={...old,notes:(old.notes||[]).map(n=>n.id===noteId?{...n,body,date:new Date().toISOString()}:n),updatedAt:new Date().toISOString()};writeBook(b).then(()=>{state.editingNoteId=null;renderDialog();render();toast('Note updated')}).catch(saveError)}
+    if(form.id==='manual-isbn-form'){const isbn=plain(new FormData(form).get('isbn')).replace(/[\s-]/g,'');stopScan();openDialog({kind:'form',prefill:isbn});lookupISBN()}
+  });
+  document.addEventListener('error',e=>{const img=e.target;if(img instanceof HTMLImageElement&&img.dataset.coverTitle&&!img.dataset.fallback){img.dataset.fallback='1';img.src=placeholderCover(img.dataset.coverTitle)}},true);
+  window.matchMedia?.('(prefers-color-scheme: dark)').addEventListener?.('change',()=>{if(theme==='system')applyTheme()});
+  boot();
+})();
+
+  </script>
+</head>
+<body>
+  <svg class="icon-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2Z"/></symbol>
+    <symbol id="i-library" viewBox="0 0 24 24"><path d="m4 19 1-15m5 15V4m5 15V4m4-1 2 16M2 22h20M3 4h17"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10Z"/><path d="M9 21v-8h6v8"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-scan" viewBox="0 0 24 24"><path d="M4 9V5a1 1 0 0 1 1-1h4m6 0h4a1 1 0 0 1 1 1v4m0 6v4a1 1 0 0 1-1 1h-4m-6 0H5a1 1 0 0 1-1-1v-4M7 10v4m3-6v8m3-6v4m4-6v8"/></symbol>
+    <symbol id="i-shelves" viewBox="0 0 24 24"><rect x="3" y="4" width="5" height="16" rx="1"/><rect x="10" y="6" width="5" height="14" rx="1"/><path d="m16 5 4-1 3 15-4 1-3-15ZM2 22h20"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h16M4 17h16M8 4v6M16 14v6"/><circle cx="8" cy="7" r="2" fill="currentColor" stroke="none"/><circle cx="16" cy="17" r="2" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.8 14.5A9 9 0 019.5 3.2a9 9 0 1011.3 11.3Z"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5m7-7-7 7 7 7"/></symbol>
+    <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-filter" viewBox="0 0 24 24"><path d="M4 7h16M7 12h10m-7 5h4M8 4v6m8 0v5"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M9 6h12M9 12h12M9 18h12M3 6h.01M3 12h.01M3 18h.01" stroke-linecap="round" stroke-width="3"/></symbol>
+    <symbol id="i-wallet" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="16" rx="3"/><path d="M16 14h6M4 5V3h15"/><circle cx="17" cy="14" r=".8" fill="currentColor"/></symbol>
+    <symbol id="i-book-open" viewBox="0 0 24 24"><path d="M12 6a9 9 0 0 0-9-2v15a9 9 0 0 1 9 2 9 9 0 0 1 9-2V4a9 9 0 0 0-9 2Zm0 0v15"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="M12 20h9M16 4l4 4L9 19l-5 1 1-5L16 4Z"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2m3 0-1 15H6L5 6m5 4v7m4-7v7"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 17V4m-5 5 5-5 5 5M4 17v4h16v-4"/></symbol>
+    <symbol id="i-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.5" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24"><path d="M3 7h5l2-3h4l2 3h5v13H3V7Z"/><circle cx="12" cy="13" r="4"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 16-5-5L5 21"/></symbol>
+    <symbol id="i-note" viewBox="0 0 24 24"><path d="M4 3h16v18H4zM8 8h8M8 12h8M8 16h5"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 10v7M12 7h.01"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 8V3l-4 4a9 9 0 1 0 4 8M20 8h-5"/></symbol>
+    <symbol id="i-tag" viewBox="0 0 24 24"><path d="M12 3H3v9l9 9 9-9-9-9Z"/><circle cx="7.5" cy="7.5" r="1.2"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.6a5.6 5.6 0 0 0-7.9 0l-.9.9-.9-.9a5.6 5.6 0 0 0-7.9 7.9l.9.9L12 21l7.9-7.6.9-.9a5.6 5.6 0 0 0 0-7.9Z"/></symbol>
+    <symbol id="i-cloud-off" viewBox="0 0 24 24"><path d="m3 3 18 18M7 7a6 6 0 0 1 11 4 5 5 0 0 1 2 8H8a5 5 0 0 1-4-8"/></symbol>
+    <symbol id="i-sort" viewBox="0 0 24 24"><path d="M8 4v16m-4-4 4 4 4-4m4-12v16m-4-12 4-4 4 4"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 2 2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5L12 2Z"/></symbol>
+  </svg>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Primary navigation">
+      <a href="#home" class="brand" data-page="home" aria-label="Folio Home">
+        <span class="brand-symbol" aria-hidden="true"><svg class="icon"><use href="#i-book-open"></use></svg></span>
+        <span><strong>folio<span class="brand-dot">.</span></strong><small>PERSONAL LIBRARY</small></span>
+      </a>
+      <div class="side-caption">YOUR SPACE</div>
+      <nav class="side-nav" id="side-nav">
+        <button type="button" class="nav-item" data-page="home"><svg class="icon"><use href="#i-home"></use></svg> Overview</button>
+        <button type="button" class="nav-item" data-page="library"><svg class="icon"><use href="#i-library"></use></svg> My library</button>
+        <button type="button" class="nav-item" data-page="shelves"><svg class="icon"><use href="#i-shelves"></use></svg> My shelves</button>
+        <button type="button" class="nav-item" data-page="settings"><svg class="icon"><use href="#i-settings"></use></svg> Settings</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="sidebar-message"><svg class="icon"><use href="#i-spark"></use></svg><p>A little world<br><em>of your own.</em></p><span>Keep every story close.</span></div>
+        <div class="privacy-indicator"><svg class="icon"><use href="#i-cloud-off"></use></svg> Stored locally on this device</div>
+      </div>
+    </aside>
+    <div class="main-pane">
+      <header class="topbar">
+        <div class="topbar-brand"><span class="topbar-mark"><svg class="icon"><use href="#i-book-open"></use></svg></span><strong>folio<span class="brand-dot">.</span></strong></div>
+        <div class="topbar-right"><span class="topbar-caption">A home for your books</span><button type="button" class="icon-btn theme-toggle" data-action="toggle-theme" aria-label="Toggle dark mode"><svg class="icon"><use href="#i-moon"></use></svg></button><button type="button" class="avatar" data-page="settings" title="Settings">F</button></div>
+      </header>
+      <main id="view" class="main-content" tabindex="-1"></main>
+    </div>
+  </div>
+  <nav class="mobile-nav" aria-label="Mobile navigation" id="mobile-nav">
+    <button type="button" data-page="home"><svg class="icon"><use href="#i-home"></use></svg><span>Home</span></button>
+    <button type="button" data-page="library"><svg class="icon"><use href="#i-library"></use></svg><span>Library</span></button>
+    <button type="button" class="mobile-add" data-action="add-book" aria-label="Add book"><svg class="icon"><use href="#i-plus"></use></svg></button>
+    <button type="button" data-page="shelves"><svg class="icon"><use href="#i-shelves"></use></svg><span>Shelves</span></button>
+    <button type="button" data-page="settings"><svg class="icon"><use href="#i-settings"></use></svg><span>Settings</span></button>
+  </nav>
+  <div id="overlay-root"></div>
+  <div id="toast-root" class="toast-root" role="status" aria-live="polite"></div>
+  <input type="file" id="import-input" accept="application/json,text/csv,.json,.csv" hidden>
+</body>
+</html>
