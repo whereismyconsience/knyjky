@@ -126,22 +126,96 @@
       ${recent.length?`<div class="books-grid">${recent.map(card).join('')}</div>`:emptyState('No books yet','Add your first book to get started.','add-book','Add a book')}
     `;
   }
-  function filterBooks(){const q=state.query.trim().toLocaleLowerCase();const f=state.filters;
-    const matches=state.books.filter(b=>{
-      if(state.status!=='all'&&b.status!==state.status)return false;
-      if(f.shelf!=='all'&&b.shelf!==f.shelf)return false;
-      if(f.genre!=='all'&&b.genre!==f.genre)return false;
-      if(f.tag!=='all'&&!(b.tags||[]).includes(f.tag))return false;
-      const year=Number(b.year)||0;const price=b.price===''||b.price==null?null:Number(b.price);
-      if(f.minYear!==''&&year<Number(f.minYear))return false;if(f.maxYear!==''&&year>Number(f.maxYear))return false;
-      if(f.minPrice!==''&&(price===null||price<Number(f.minPrice)))return false;if(f.maxPrice!==''&&(price===null||price>Number(f.maxPrice)))return false;
-      if(!q)return true;
-      return [b.title,b.author,b.isbn,b.year,b.price,b.description,b.genre,b.shelf,b.status,statusName(b.status),...(b.tags||[]),...(b.notes||[]).map(n=>typeof n==='string'?n:n.body)].join(' ').toLocaleLowerCase().includes(q);
+  function filterBooks() {
+	  
+    const input = state.query.trim().toLowerCase();
+
+    // Detect the language operator: l:French
+    const languageMatch = input.match(/(?:^|\s)l:(\S+)/);
+
+    // Extract the requested language
+    const languageQuery = languageMatch ? languageMatch[1] : "";
+
+    // Remove the language operator from normal search
+    const q = languageMatch
+        ? input.replace(languageMatch[0], "").trim()
+        : input;
+
+    const f = state.filters;
+	
+	const languageAliases = {
+		
+		fr: "french",
+		en: "english",
+		uk: "ukrainian",
+		ru: "russian",
+		de: "german",
+		es: "spanish",
+		it: "italian",
+		nl: "dutch"
+		
+		};
+
+	const normalizeLanguage = (language) => {
+	const value = String(language || "").trim().toLowerCase();
+
+		return languageAliases[value] || value;
+	};
+	
+    const matches = state.books.filter(b => {
+		
+		if (languageQuery)
+		{
+			const bookLanguage = normalizeLanguage(b.language);
+			const requestedLanguage = normalizeLanguage(languageQuery);
+			
+			//in this way searched language and book language are converted to the same format
+
+			if (bookLanguage !== requestedLanguage) {
+				return false;
+			}
+		}
+		
+        if (state.status !== 'all' && b.status !== state.status) return false;
+        if (f.shelf !== 'all' && b.shelf !== f.shelf) return false;
+        if (f.genre !== 'all' && b.genre !== f.genre) return false;
+        if (f.tag !== 'all' && !(b.tags || []).includes(f.tag)) return false;
+		
+        const year = Number(b.year) || 0;
+        const price = b.price === '' || b.price == null ? null : Number(b.price);
+		
+        if (f.minYear !== '' && year < Number(f.minYear)) return false;
+        if (f.maxYear !== '' && year > Number(f.maxYear)) return false;
+        if (f.minPrice !== '' && (price === null || price < Number(f.minPrice))) return false;
+        if (f.maxPrice !== '' && (price === null || price > Number(f.maxPrice))) return false;
+        if (!q) return true;
+		
+        return [b.title, b.author, b.isbn, b.year, b.price, b.description, b.genre, b.shelf, b.status, statusName(b.status), ...(b.tags || []), ...(b.notes || []).map(n => typeof n === 'string' ? n : n.body)].join(' ').toLocaleLowerCase().includes(q);
     });
-    matches.sort((a,b)=>{
-      switch(state.sort){case'title':return a.title.localeCompare(b.title);case'author':return a.author.localeCompare(b.author);case'year-new':return (b.year||0)-(a.year||0);case'year-old':return (a.year||0)-(b.year||0);case'price-low':return (Number(a.price)||0)-(Number(b.price)||0);case'price-high':return (Number(b.price)||0)-(Number(a.price)||0);case'progress':return pct(b)-pct(a);default:return String(b.addedAt||'').localeCompare(String(a.addedAt||''));}
-    });return matches;
-  }
+	
+    matches.sort((a, b) => {
+        switch (state.sort) {
+            case 'title':
+                return a.title.localeCompare(b.title);
+            case 'author':
+                return a.author.localeCompare(b.author);
+            case 'year-new':
+                return (b.year || 0) - (a.year || 0);
+            case 'year-old':
+                return (a.year || 0) - (b.year || 0);
+            case 'price-low':
+                return (Number(a.price) || 0) - (Number(b.price) || 0);
+            case 'price-high':
+                return (Number(b.price) || 0) - (Number(a.price) || 0);
+            case 'progress':
+                return pct(b) - pct(a);
+            default:
+                return String(b.addedAt || '').localeCompare(String(a.addedAt || ''));
+        }
+    });
+	console.log(q)
+    return matches;
+}
   function emptyState(title,description,action,label){return `<div class="empty-state"><span class="empty-icon">${icon('book-open')}</span><h3>${h(title)}</h3><p>${h(description)}</p>${action?`<button class="btn btn-primary" data-action="${h(action)}">${icon('plus')} ${h(label||'Add a book')}</button>`:''}</div>`}
   const selectOption=(value,label,selected)=>`<option value="${h(value)}" ${String(value)===String(selected)?'selected':''}>${h(label)}</option>`;
   function renderLibrary(){return `${pageHead('YOUR COLLECTION','My library','Browse your books, find a favorite, or discover what to read next.',`<button class="btn btn-primary desktop-add" data-action="add-book">${icon('plus')} Add a book</button>`)}
