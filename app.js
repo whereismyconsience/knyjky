@@ -143,38 +143,9 @@
 
     const f = state.filters;
 	
-	const languageAliases = {
-		
-		fr: "french",
-		en: "english",
-		uk: "ukrainian",
-		ru: "russian",
-		de: "german",
-		es: "spanish",
-		it: "italian",
-		nl: "dutch"
-		
-		};
-
-	const normalizeLanguage = (language) => {
-	const value = String(language || "").trim().toLowerCase();
-
-		return languageAliases[value] || value;
-	};
-	
     const matches = state.books.filter(b => {
 		
-		if (languageQuery)
-		{
-			const bookLanguage = normalizeLanguage(b.language);
-			const requestedLanguage = normalizeLanguage(languageQuery);
-			
-			//in this way searched language and book language are converted to the same format
-
-			if (bookLanguage !== requestedLanguage) {
-				return false;
-			}
-		}
+		if (languageQuery && !String(b.language || "").toLowerCase().includes(languageQuery)) return false;
 		
         if (state.status !== 'all' && b.status !== state.status) return false;
         if (f.shelf !== 'all' && b.shelf !== f.shelf) return false;
@@ -322,7 +293,7 @@
     return dialogWrap(dialogHeading('Book details','Everything about this book in one place'),`${headings}${content}`,`<button class="btn btn-danger" data-action="delete-book" data-id="${h(b.id)}">${icon('trash')} Delete</button><button class="btn btn-primary" data-action="edit-book" data-id="${h(b.id)}">${icon('edit')} Edit book</button>`);
   }
   function renderFilterDialog(){const f=state.filters;const genres=[...new Set(state.books.map(b=>b.genre).filter(Boolean))].sort();const tags=[...new Set(state.books.flatMap(b=>b.tags||[]))].sort();const shelves=[...new Set([...state.shelves,...state.books.map(b=>b.shelf).filter(Boolean)])].sort();
-    return dialogWrap(dialogHeading('Advanced filters','Combine different filters to narrow your collection'),`<form id="filters-form"><div class="form-grid">
+    return dialogWrap(dialogHeading('Advanced filters','Combine different filters to narrow your collection. For language filter, type l:LANGUAGE in the search bar.'),`<form id="filters-form"><div class="form-grid">
     <div class="field full"><label>Shelf</label><select name="shelf">${selectOption('all','All shelves',f.shelf)}${shelves.map(s=>selectOption(s,s,f.shelf)).join('')}</select></div>
     <div class="field full"><label>Genre</label><select name="genre">${selectOption('all','All genres',f.genre)}${genres.map(g=>selectOption(g,g,f.genre)).join('')}</select></div>
     <div class="field full"><label>Tag</label><select name="tag">${selectOption('all','All tags',f.tag)}${tags.map(g=>selectOption(g,g,f.tag)).join('')}</select></div>
